@@ -29,7 +29,7 @@
   <div class="card">
     <div class="card-body login-card-body">
         @if (@$email_rs[0]->status !=1)
-        <p class="login-box-msg">Check Your Email For The OTP</p>
+        <p class="login-box-msg">Check Your Email <b>{{$email_id}}</b> For The OTP</p>
         <form action="{{ route('admin.otp.verify.store',Crypt::encrypt(1)) }}" method="post">
           {{csrf_field()}}
           <div class="row">
@@ -43,13 +43,13 @@
               <input type="submit"  class="form-control btn btn-info" value="Verify"> 
             </div>
             <div class="col-lg-6 form-group">
-              <a href="#"  class="form-control btn btn-warning">Resend</a> 
+              <a href="{{ route('admin.otp.resend',[@$user_id,1]) }}" class="btn  btn-warning">Resend OTP</a>
             </div> 
           </div>
         </form> 
         @endif
         @if (@$mobile_rs[0]->status !=1)
-        <p class="login-box-msg">Check Your Mobile For The OTP</p>
+        <p class="login-box-msg">Check Your Mobile <b>****{{substr($mobile_no, 6)}}</b> For The OTP</p>
         <form action="{{ route('admin.otp.verify.store',Crypt::encrypt(2)) }}" method="post">
           {{csrf_field()}}
           <div class="row">
@@ -63,7 +63,7 @@
               <input type="submit"  class="form-control btn btn-info" value="Verify"> 
             </div>
             <div class="col-lg-6 form-group">
-              <a href="#"  class="form-control btn btn-warning">Resend</a> 
+              <a href="{{ route('admin.otp.resend',[@$user_id,2]) }}" class="btn  btn-warning">Resend OTP</a>
             </div> 
           </div>
         </form> 
