@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Admin\Auth;
+use App\Events\SmsEvent;
 use App\Http\Controllers\Controller;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 class LoginController extends Controller
 {
    
@@ -90,6 +91,7 @@ class LoginController extends Controller
   public function registerStore(Request $request)
   {
     try {
+       
         $this->validate($request, [ 
          "name" => 'required|string|min:2|max:50',             
          "email_id" => 'required|email|unique:users|max:100|min:5', 
@@ -110,7 +112,7 @@ class LoginController extends Controller
         $user_id=$new_user_id[0]->id;
         $email_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$email_otp',1,0);"));
         $mobile_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$mobile_otp',2,0);")); 
-       
+       event(new SmsEvent($request->mobile_no,$mobile_otp));
         return redirect()->route('admin.otp.verify',Crypt::encrypt($user_id))->with(['message'=>'Registration Successfully','class'=>'success']); 
         
         }catch (Exception $e){ 

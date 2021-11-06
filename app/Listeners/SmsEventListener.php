@@ -28,16 +28,17 @@ class SmsEventListener
      * @return void
      */
   public function handle(SmsEvent $event)
-  {   Log::info('message sent');
+  {   
 
-        $url = "http://smsdealnow.com/api/pushsms?user=eageskool&authkey=92OnWW5BqI2&sender=EXCNET&mobile=7903436369&text=Dear kumar, You have successfully registered for an account with your userid : kumar, password : pass. EXCELNET&entityid=1701161891809058634&templateid=1707162253528439997&rpt=1";
+        $url = "http://smsdealnow.com/api/pushsms?user=eageskool&authkey=92OnWW5BqI2&sender=EXCNET&mobile=$event->mobile&text=Dear kumar, You have successfully registered for an account with your userid : kumar, password : $event->message. EXCELNET&entityid=1701161891809058634&templateid=1707162253528439997&rpt=1";
         // $response = file_get_contents($url);
 
         // $url = "http://smsdealnow.com/api/pushsms?user=eageskool&authkey=  92OnWW5BqI2&sender=EXCNET&mobile=7903436369&text=Dear kumar, You have successfully registered for an account with your userid : kumar, password : pass. EXCELNET&entityid=  1701161891809058634&templateid=1707162253528439997&rpt=1";
-        
+        $url = str_replace(" ", '%20', $url);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $curl_scraped_page = curl_exec($ch);
+        \Log::info( $curl_scraped_page);
         curl_close($ch); 
          \Log::info($url); 
         //     return $response; 
@@ -54,6 +55,6 @@ class SmsEventListener
          // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
          // $curl_scraped_page = curl_exec($ch);
          // curl_close($ch); 
-          Log::info($url); 
+          // Log::info($url); 
   }
 }
