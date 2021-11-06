@@ -26,16 +26,21 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
 	Route::get('add-new-user', 'DashboardController@addNewUser')->name('admin.add.new.user');
 	Route::post('add-new-user-store', 'DashboardController@addNewUserStore')->name('admin.add.new.user.store');
-	Route::get('user list', 'DashboardController@userList')->name('admin.user.list');
+	Route::get('user-list', 'DashboardController@userList')->name('admin.user.list');
 	Route::get('booking', 'DashboardController@booking')->name('admin.booking'); 
-	Route::post('booking-store', 'DashboardController@bookingStore')->name('admin.booking.store'); 
+	Route::get('check-amount', 'DashboardController@checkAmount')->name('admin.check.amount'); 
+	
 	Route::get('payment-option', 'DashboardController@paymentOption')->name('admin.payment.option'); 
-	Route::get('payment-option-form', 'DashboardController@paymentOptionForm')->name('admin.payment.option.form'); 
-	Route::post('payment-option-store', 'DashboardController@paymentOptionStore')->name('admin.payment.option.store'); 
-	Route::get('payment-option-status/{id}', 'DashboardController@paymentOptionStatus')->name('admin.payment.option.status'); 
-	Route::get('payment', 'DashboardController@payment')->name('admin.payment'); 
+	 
+	
+	
+	Route::get('payment-status', 'DashboardController@paymentStatus')->name('admin.payment.status'); 
+	Route::get('pay-again/{bookin_id}', 'OnlinePaymentController@payAgain')->name('admin.pay.again'); 
 	Route::get('qrcode', 'DashboardController@qrcode')->name('admin.qrcode'); 
 	Route::get('qrcode-show/{path}', 'DashboardController@qrcodeShow')->name('admin.qrcode.show'); 
+	Route::get('attendance', 'DashboardController@attendance')->name('admin.attendance'); 
+	Route::get('attendance barcode', 'DashboardController@attendanceBarcode')->name('admin.attendance.barcode'); 
+	Route::get('print-ticket', 'DashboardController@printTicket')->name('admin.print.ticket'); 
 
 });
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Mail;
 class LoginController extends Controller
 {
    
@@ -138,7 +139,7 @@ class LoginController extends Controller
               $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
               return redirect()->route('admin.login')->with(['class'=>'success','message'=>'EMail Otp Verified Successfully']);
             }
-              return redirect()->back()->with(['class'=>'success','message'=>'EMail Otp Verified Successfully']);      
+              return redirect()->back()->with(['class'=>'success','message'=>'EMail Code Verified Successfully']);      
           }
       }
       if ($otp_type==2) {
@@ -155,7 +156,7 @@ class LoginController extends Controller
               $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
               return redirect()->route('admin.login')->with(['class'=>'success','message'=>'Mobile Otp Verified Successfully']);
             }
-            return redirect()->back()->with(['class'=>'success','message'=>'Mobile Otp Verified Successfully']);      
+            return redirect()->back()->with(['class'=>'success','message'=>'Mobile Code Verified Successfully']);      
           }
         } 
        
@@ -166,8 +167,22 @@ class LoginController extends Controller
   {
     $rs_otp = random_int(100000, 999999);
     $update_rs = DB::select(DB::raw("update `user_otp` set `otp` =$rs_otp where `user_id` = $user_id and `otp_type`=$otp_type limit 1;"));
-    
-    return redirect()->back()->with(['message'=>'OTP Resend Successfully.','class'=>'success']); 
+    $user_rs = DB::select(DB::raw("select * from `users` where `id`=$user_id limit 1 ")); 
+    if ($otp_type==1) {
+      $data = array( 'email' => $user_rs[0]->email_id, 'otp' => $rs_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
+      // Mail::send([],['name','Ripon Uddin Arman'],function($message){
+      //         $message->to('rislam252@gmail.com')->subject("Email Testing with Laravel");
+      //         $message->from('clhg52@gmail.com','Creative Losser Hopeless Genius');
+      //     });
+      Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
+      {
+          $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
+      });
+      
+    }else{
+      event(new SmsEvent($user_rs[0]->mobile_no,$rs_otp));
+    }
+    return redirect()->back()->with(['message'=>'Code Resend Successfully.','class'=>'success']); 
   }
     
   

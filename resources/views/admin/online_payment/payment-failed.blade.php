@@ -24,11 +24,7 @@
                      <button  class="btn btn-primary">Pay Again </button>
                      </a>
                    </div>
-                   <div class="col-xs-4 pull-left">
-                    	<a href="http://bmiet.in" title="">
-                     <button  class="btn btn-primary">Home</button>
-                     </a>
-                   </div> 
+                  
                  </div>
               </div> 
             </div>  

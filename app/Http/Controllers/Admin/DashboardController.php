@@ -84,57 +84,7 @@ class DashboardController extends Controller
         
         }
     }
-    public function bookingStore(Request $request)
-    {
-        try {
-            $rules=[
-            'booking_type' => 'required',             
-            'booking_date' => 'required',             
-            'adults' => 'required',             
-            'children' => 'required',
-            "senior_citizens" => 'required',
-            "head_name" => 'required',
-            "team_leader_name" => 'required', 
-            "head_mobile_no" => 'required', 
-            ];
-            $validator = Validator::make($request->all(),$rules);
-            if ($validator->fails()) {
-                $errors = $validator->errors()->all();
-                $response=array();
-                $response["status"]=0;
-                $response["msg"]=$errors[0];
-                return response()->json($response);// response as json
-            }
-            $admin=Auth::guard('user')->user(); 
-            DB::select(DB::raw("Insert Into `booking` (`user_id`,`booking_type_id`, `booking_date`, `adults`, `children`,`senior_citizens`, `head_name`,`team_leader_name`,`head_mobile_no`,`head_email_id`) Values ($admin->id,'$request->booking_type', '$request->booking_date', '$request->adults', '$request->children',$request->senior_citizens,'$request->head_name','$request->team_leader_name','$request->head_mobile_no','$request->head_email_id');"));
-            $path=Storage_path('fonts/');
-            $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
-            $fontDirs = $defaultConfig['fontDir']; 
-            $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
-            $fontData = $defaultFontConfig['fontdata']; 
-            $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [55, 35],
-                 'fontDir' => array_merge($fontDirs, [
-                     __DIR__ . $path,
-                 ]),
-                 'fontdata' => $fontData + [
-                     'frutiger' => [
-                         'R' => 'FreeSans.ttf',
-                         'I' => 'FreeSansOblique.ttf',
-                     ]
-                 ],
-                 'default_font' => 'freesans'
-             ]);
-            $dirpath = Storage_path() . '/app/qrcode/1';
-            $vpath = 'app/qrcode/1';
-            @mkdir($dirpath, 0755, true);; 
-            $mpdf->WriteHTML('admin.booking.barcode');
-            $mpdf->Output($vpath.'/filename.pdf', 'F'); 
-            return redirect()->route('admin.payment')->with(['message'=>'Booking Successfully','class'=>'success']); 
-        }catch (Exception $e) {
-            
-        }
-        
-    }
+    
     public function paymentOption()
     {
         $user=Auth::guard('user')->user();
@@ -147,69 +97,12 @@ class DashboardController extends Controller
     {
         $paymentmodeid=$request->id;
        return view('admin.booking.payment_option_form',compact('paymentmodeid'));
-    }
-    public function paymentOptionStore(Request $request)
-    { 
-      if ($request->payment_mode!=1) {
-           $rules=[  
-            "payment_mode" => 'required', 
-            "account_name" => 'required', 
-            "qr_code" => 'required', 
-          ];  
-      }else{
-          $rules=[  
-          "payment_mode" => 'required', 
-          "account_no" => 'required', 
-          "ifsc_code" => 'required', 
-          "account_name" => 'required', 
-          "bank_name" => 'required', 
-          "branch_name" => 'required', 
-        ];
-      }  
-      $validator = Validator::make($request->all(),$rules);
-      if ($validator->fails()) {
-          $errors = $validator->errors()->all();
-          $response=array();
-          $response["status"]=0;
-          $response["msg"]=$errors[0];
-          return response()->json($response);// response as json
-      }
-       $user=Auth::guard('user')->user();
-       $PaymentOption=DB::select(DB::raw("Insert Into `payment_option` (`user_id`, `payment_mode_id`, `account_no`, `ifsc_code`,`account_name`, `bank_name`,`branch_name`,`status`) Values ('$user->id', '$request->payment_mode', '$request->account_no', '$request->ifsc_code','$request->account_name','$request->bank_name','$request->branch_name',0);"));
-       $PaymentOption=DB::select(DB::raw("SELECT `id` FROM payment_option ORDER BY `id` DESC LIMIT 1"));  
-       //--start-image-save
-       if ($request->payment_mode!=1) { 
-            $dirpath = Storage_path() . '/app/qrcode/'.$PaymentOption[0]->id;
-            $vpath = '/qrcode/'.$PaymentOption[0]->id;
-            @mkdir($dirpath, 0755, true);
-            $file =$request->qr_code;
-            $imagedata = file_get_contents($file);
-            $encode = base64_encode($imagedata);
-            $image=base64_decode($encode);
-            $id=$PaymentOption[0]->id; 
-            $image= \Storage::disk('local')->put($vpath.'/'.$id.'.jpg',$image);
-            $fullpath=$vpath.'/'.$id.'.jpg';
-            $update_rs = DB::select(DB::raw("update `payment_option` set `qr_code` ='$fullpath' where `id` = $id limit 1;")); 
-       }
-        //--end-image-save 
-       $response=['status'=>1,'msg'=>'Submit Successfully'];
-            return response()->json($response);
-    }
-    public function paymentOptionStatus($id)
+    } 
+    public function paymentStatus()
     {
-      $PaymentOptions = DB::select(DB::raw("select `id`,`status` from `payment_option` where `id` = $id limit 1;"));
-      if ($PaymentOptions[0]->status==1) {
-          $PaymentOptions = DB::select(DB::raw("update `payment_option` set `status` =0 where `id` = $id limit 1;"));
-       }
-      elseif ($PaymentOptions[0]->status==0) {
-          $PaymentOptions = DB::select(DB::raw("update `payment_option` set `status` =1 where `id` = $id limit 1;"));
-       } 
-       return redirect()->back()->with(['message'=>'Successfully','class'=>'success']); 
-    }
-    public function payment()
-    {
-        $paymentModes = DB::select(DB::raw("select * from `payment_mode` order by `id`"));
-        return view('admin.booking.payment',compact('paymentModes'));
+      $user=Auth::guard('user')->user(); 
+      $paymentStatus = DB::select(DB::raw("select `op`.`order_id`,`op`.`booking_id`,`op`.`amount`,`op`.`status`,`book`.`adults`,`book`.`children`,`book`.`booking_date` from `online_payments` `op` inner join `booking` `book` on `book`.`user_id`=$user->id ")); 
+      return view('admin.booking.payment',compact('paymentStatus'));
     }
     public function qrcode(Request $request)
     {
@@ -232,6 +125,18 @@ class DashboardController extends Controller
         'Content-Disposition' => 'inline; '
       );            
       return Response::make(file_get_contents($storagePath), 200, $headers);     
+    }
+    public function printTicket($value='')
+    {
+      return view('admin.booking.print_ticket',compact('paymentModes'));
+    }
+    public function attendance()
+    {
+      return view('admin.booking.attendance',compact('paymentModes'));
+    }
+    public function attendanceBarcode(Request $request)
+    {
+      return $request;
     }
     
 }

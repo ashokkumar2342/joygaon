@@ -6,8 +6,7 @@
    <style type="text/css">
    	@page{margin:10;} 
    </style>
-<body>
-   
+<body> 
 <div class="barcode"> 
     <p class="price">Price: 100000</p>
     <p><barcode code="1000001" height="0.8" type="C39" size = "0.8" class="barcode"/></p>

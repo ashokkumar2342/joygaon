@@ -13,64 +13,81 @@
         </div> 
         <div class="card card-info"> 
             <div class="card-body">
-                <form action="{{ route('payment.store') }}" method="post"  >
+                <form action="{{ route('payment.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="row"> 
                         <div class="col-lg-6 form-group"> 
                             <label for="exampleInputEmail1">Booking Type</label>
                             <span class="fa fa-asterisk"></span>
                             <select class="form-control" name="booking_type">
+                            <option selected disabled>Select Booking Type</option>
                             @foreach ($bookingTypes as $bookingType)
                                 <option value="{{$bookingType->id}}">{{$bookingType->code}}-{{$bookingType->name}}</option>
                             @endforeach 
                              </select>                    
+                        <p class="text-danger">{{ $errors->first('booking_type') }}</p>
                         </div>
                         <div class="col-lg-6 form-group">
                             <label>Booking Date</label>
                             <span class="fa fa-asterisk"></span> 
                             <input type="date" name="booking_date" class="form-control" id="exampleInputEmail1" maxlength="50" min="{{ date('Y-m-d',strtotime(date('d-m-Y'))) }}"> 
-                        </div> 
-                        <div class="col-lg-4 form-group">
+                        <p class="text-danger">{{ $errors->first('booking_date') }}</p> 
+                        </div>
+                        <div class="col-lg-3 form-group">
                             <label>Adults</label>
                             <span class="fa fa-asterisk"></span> 
-                            <input type="text" name="adults" class="form-control" id="exampleInputEmail1" maxlength="50"> 
+                            <input type="text" name="adults" class="form-control section" id="adult_div" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57;amontAdd()'> 
+                        <p class="text-danger">{{ $errors->first('adults') }}</p> 
                         </div>
-                        <div class="col-lg-4 form-group">
+                        <div class="col-lg-3 form-group">
                             <label>Children</label>
                             <span class="fa fa-asterisk"></span> 
-                            <input type="text" name="children" class="form-control" id="exampleInputEmail1" maxlength="50"> 
-                        </div>
-                        <div class="col-lg-4 form-group">
-                            <label>Senior Citizens</label>
-                            <span class="fa fa-asterisk"></span> 
-                            <input type="text" name="senior_citizens" class="form-control" id="exampleInputEmail1" maxlength="50"> 
-                        </div> 
-                        <div class="col-lg-3 form-group">
-                            <label>Head Name</label> 
-                            <span class="fa fa-asterisk"></span>
-                            <input type="text" name="head_name" class="form-control" id="exampleInputEmail1" maxlength="50"> 
+                            <input type="text" name="children" class="form-control section" id="children_div" maxlength="3" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
+                        <p class="text-danger">{{ $errors->first('children') }}</p>
                         </div>
                         <div class="col-lg-3 form-group">
                             <label>Team Leader Name</label>
                             <span class="fa fa-asterisk"></span> 
                             <input type="text" name="team_leader_name" class="form-control" id="exampleInputEmail1" maxlength="50"> 
+                        <p class="text-danger">{{ $errors->first('team_leader_name') }}</p>
                         </div>
                         <div class="col-lg-3 form-group">
-                            <label>Head Mobile No.</label>
+                            <label>Leader Mobile No.</label>
                             <span class="fa fa-asterisk"></span> 
-                            <input type="text" name="head_mobile_no" class="form-control" id="exampleInputEmail1" maxlength="50"> 
+                            <input type="text" name="leader_mobile_no" class="form-control" id="exampleInputEmail1"maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
+                        <p class="text-danger">{{ $errors->first('leader_mobile_no') }}</p> 
                         </div>
-                        <div class="col-lg-3 form-group">
-                            <label>Head Email ID</label> 
-                            <input type="text" name="head_email_id" class="form-control" id="exampleInputEmail1" maxlength="50"> 
-                        </div> 
-                    </div>   
-                    <div class="box-footer text-center" style="margin-top: 30px">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div> 
+                        <div class="col-lg-4 form-group" style="margin-top: 30px"> 
+                            <div class="card bg-gray"> 
+                              <div class="form-group clearfix">
+                                <div class="icheck-primary d-inline"> 
+                                  <input type="hidden" name="total_amount" class="hidden" value="1">
+                                  <span style="margin: 15px"> <b>Total Amount : 1</b></span>
+                                </div> 
+                              </div>
+                            </div> 
+                        </div>
+                        <div class="col-lg-8 form-group" style="margin-top: 30px">
+                          <input type="submit" class="form-control btn btn-info" value="Booking">
+                        </div>   
+                    </div>
+                     
               </form>  
             </div> 
         </div>
     </section>
-    @endsection 
+    @endsection
+@push('scripts')
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script>
+     var totalPoints = 0;
+    function amontAdd() {
+        
+         adult_div = $('#adult_div').val()
+         children_div = $('#children_div').val() 
+          totalPoints += adult_div 
+    }
+       
+   </script>
+@endpush 
 

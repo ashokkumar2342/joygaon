@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Log in</title>
+  <title>Joy Gaon | Verification</title>
 
   <!-- Google Font: Source Sans Pro -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,18 +23,18 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Enter OTP</b></a>
+    <a href="../../index2.html"><b>Enter Verification Code</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
         @if (@$email_rs[0]->status !=1)
-        <p class="login-box-msg">Check Your Email <b>{{$email_id}}</b> For The OTP</p>
+        <p class="login-box-msg">Check Your Email <b>{{$email_id}}</b> For The Verification Code</p>
         <form action="{{ route('admin.otp.verify.store',Crypt::encrypt(1)) }}" method="post">
           {{csrf_field()}}
           <div class="row">
             <div class="col-lg-12 form-group">
-              <input type="text" name="email_otp" class="form-control" placeholder="Email OTP"> 
+              <input type="text" name="email_otp" class="form-control" placeholder="Email Verification Code"> 
             </div>
             <div class="col-lg-12 form-group">
               <input type="hidden" name="user_id" class="form-control hidden" value="{{@$user_id}}"> 
@@ -43,13 +43,13 @@
               <input type="submit"  class="form-control btn btn-info" value="Verify"> 
             </div>
             <div class="col-lg-6 form-group">
-              <a href="{{ route('admin.otp.resend',[@$user_id,1]) }}" class="btn  btn-warning">Resend OTP</a>
+              <a href="{{ route('admin.otp.resend',[@$user_id,1]) }}" class="btn  btn-warning">Resend Code</a>
             </div> 
           </div>
         </form> 
         @endif
         @if (@$mobile_rs[0]->status !=1)
-        <p class="login-box-msg">Check Your Mobile <b>****{{substr($mobile_no, 6)}}</b> For The OTP</p>
+        <p class="login-box-msg">Check Your Mobile <b>****{{substr($mobile_no, 6)}}</b> For The Verification Code</p>
         <form action="{{ route('admin.otp.verify.store',Crypt::encrypt(2)) }}" method="post">
           {{csrf_field()}}
           <div class="row">
@@ -57,13 +57,13 @@
               <input type="hidden" name="user_id" class="form-control hidden" value="{{@$user_id}}"> 
             </div>
             <div class="col-lg-12 form-group">
-              <input type="text" name="mobile_otp" class="form-control" placeholder="Mobile OTP"> 
+              <input type="text" name="mobile_otp" class="form-control" placeholder="Mobile Verification Code"> 
             </div>
             <div class="col-lg-6 form-group">
               <input type="submit"  class="form-control btn btn-info" value="Verify"> 
             </div>
             <div class="col-lg-6 form-group">
-              <a href="{{ route('admin.otp.resend',[@$user_id,2]) }}" class="btn  btn-warning">Resend OTP</a>
+              <a href="{{ route('admin.otp.resend',[@$user_id,2]) }}" class="btn  btn-warning">Resend Code</a>
             </div> 
           </div>
         </form> 
