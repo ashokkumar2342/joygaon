@@ -4,6 +4,13 @@ Route::get('/', function () {
 	return redirect()->route('admin.login');
 
 });
+Route::group(['prefix' => 'online-pay'], function() {
+   Route::get('/', 'OnlinePaymentController@index')->name('payment.form');  
+   Route::get('completed/{id}', 'OnlinePaymentController@completed')->name('payment.completed');  
+   Route::get('failed', 'OnlinePaymentController@paymentFailed')->name('payment.failed');  
+   Route::post('payment-store', 'OnlinePaymentController@store')->name('payment.store');  
+   Route::post('/paytm-callback', 'OnlinePaymentController@paytmCallback');
+});
 Route::get('login', 'Auth\LoginController@login')->name('admin.login'); 
 Route::get('refresh-captcha', 'Auth\LoginController@refreshCaptcha')->name('admin.refresh.captcha'); 
 Route::post('login', 'Auth\LoginController@logout')->name('admin.logout.post'); 

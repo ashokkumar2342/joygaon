@@ -6,6 +6,7 @@ namespace App\Helper;
 use Illuminate\Support\Facades\Auth;
 use Route;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class MyFuncs {
 
@@ -25,6 +26,19 @@ class MyFuncs {
     $user =Auth::guard('user')->user();
     $routeName= Route::currentRouteName();
     return true;
+  }
+  public static function sendsms($mobile,$message,$tempateid){ 
+    
+
+     
+     // $url = "http://smsdealnow.com/api/pushsms?user=eageskool&authkey=92OnWW5BqI2&sender=EXCNET&mobile=$mobile&text=$message EXCELNET&entityid=1701161891809058634&templateid=1707162253528439997&rpt=1";
+     $url = "http://smsdealnow.com/api/pushsms?user=eageskool&authkey=  92OnWW5BqI2&sender=EXCNET&mobile=7903436369&text=Dear kumar, You have successfully registered for an account with your userid : kumar, password : pass. EXCELNET&entityid=  1701161891809058634&templateid=1707162253528439997&rpt=1";
+     
+     $ch = curl_init($url);
+     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+     $curl_scraped_page = curl_exec($ch);
+     curl_close($ch); 
+      \Log::info($url); 
   }
 
     

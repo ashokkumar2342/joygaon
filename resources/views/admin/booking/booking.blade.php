@@ -13,7 +13,7 @@
         </div> 
         <div class="card card-info"> 
             <div class="card-body">
-                <form action="{{ route('admin.booking.store') }}" method="post"  >
+                <form action="{{ route('payment.store') }}" method="post"  >
                     {{ csrf_field() }}
                     <div class="row"> 
                         <div class="col-lg-6 form-group"> 
