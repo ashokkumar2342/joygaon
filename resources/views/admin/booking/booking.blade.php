@@ -19,8 +19,7 @@
                         <div class="col-lg-6 form-group"> 
                             <label for="exampleInputEmail1">Booking Type</label>
                             <span class="fa fa-asterisk"></span>
-                            <select class="form-control" name="booking_type" required>
-                            <option selected disabled>Select Booking Type</option>
+                            <select class="form-control" name="booking_type" id="booking_type" required onchange="amontAdd()">
                             @foreach ($bookingTypes as $bookingType)
                                 <option value="{{$bookingType->id}}">{{$bookingType->code}}-{{$bookingType->name}}</option>
                             @endforeach 
@@ -82,16 +81,34 @@
    <script>
      var totalPoints = 0;
     function amontAdd() {
-         adult_div = parseInt($('#adult_div').val());
-         adult_div = adult_div * 100;
+        booking_type = $('#booking_type').val();
+        ad_am =0;
+        if(booking_type==1){
+            ad_am ={{ $t1_ad_amount }}; 
+        }if(booking_type==2){
+            ad_am ={{ $t2_ad_amount }}; 
+        }if(booking_type==3){
+            ad_am ={{ $t3_ad_amount }}; 
+        }
+        ch_am =0;
+        if(booking_type==1){
+            ch_am ={{$t1_ch_amount}}; 
+        }if(booking_type==2){
+            ch_am ={{$t2_ch_amount}}; 
+        }if(booking_type==3){
+            ch_am ={{$t3_ch_amount}}; 
+        }
 
-         children_div = parseInt($('#children_div').val());
-         children_div = children_div * 50
-         totalPoints = adult_div+children_div 
+        adult_div = parseInt($('#adult_div').val());
+        adult_div = adult_div * ad_am;
 
-        $('#total_amount_show').html(totalPoints)
-        $('#total_amount_hidden').val(totalPoints)
-          console.log(totalPoints)
+        children_div = parseInt($('#children_div').val());
+        children_div = children_div * ch_am;
+        totalPoints = adult_div+children_div;
+
+        $('#total_amount_show').html(totalPoints);
+        $('#total_amount_hidden').val(totalPoints);
+          console.log(totalPoints);
     }
        
    </script>

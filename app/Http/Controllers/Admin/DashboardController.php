@@ -78,8 +78,14 @@ class DashboardController extends Controller
     {
       try{  
           $bookingTypes = DB::select(DB::raw("select * from `booking_type` order by `id`"));
-          $paymentModes = DB::select(DB::raw("select * from `payment_mode` order by `id`"));
-          return view('admin.booking.booking',compact('bookingTypes','paymentModes')); 
+          // dd($bookingTypes);
+          $t1_ad_amount=$bookingTypes[0]->ad_amount;
+          $t2_ad_amount=$bookingTypes[1]->ad_amount;
+          $t3_ad_amount=$bookingTypes[2]->ad_amount;
+          $t1_ch_amount=$bookingTypes[0]->ch_amount;
+          $t2_ch_amount=$bookingTypes[1]->ch_amount;
+          $t3_ch_amount=$bookingTypes[2]->ch_amount;
+          return view('admin.booking.booking',compact('bookingTypes','t1_ad_amount','t2_ad_amount','t3_ad_amount','t1_ch_amount','t2_ch_amount','t3_ch_amount')); 
         }catch (Exception $e) {
         
         }
@@ -87,16 +93,16 @@ class DashboardController extends Controller
     
     public function paymentOption()
     {
-        $user=Auth::guard('user')->user();
-        $user_id=$user->id;
-        $paymentModes=DB::select(DB::raw("select * from `payment_mode` order by `id`")); 
-        $paymentOptions = DB::select(DB::raw("select `po`.`id`,`po`.`qr_code`,`po`.`status`,`po`.`account_no`,`po`.`ifsc_code`,`po`.`account_name`, `pm`.`name` from `payment_option` `po` inner join `payment_mode` `pm` on `pm`.`id` = `po`.`payment_mode_id` where `po`.`user_id` = $user_id;"));  
+      $user=Auth::guard('user')->user();
+      $user_id=$user->id;
+      $paymentModes=DB::select(DB::raw("select * from `payment_mode` order by `id`")); 
+      $paymentOptions = DB::select(DB::raw("select `po`.`id`,`po`.`qr_code`,`po`.`status`,`po`.`account_no`,`po`.`ifsc_code`,`po`.`account_name`, `pm`.`name` from `payment_option` `po` inner join `payment_mode` `pm` on `pm`.`id` = `po`.`payment_mode_id` where `po`.`user_id` = $user_id;"));  
         return view('admin.booking.payment_option',compact('paymentModes','paymentOptions'));
     }
     public function paymentOptionForm(Request $request)
     {
-        $paymentmodeid=$request->id;
-       return view('admin.booking.payment_option_form',compact('paymentmodeid'));
+      $paymentmodeid=$request->id;
+      return view('admin.booking.payment_option_form',compact('paymentmodeid'));
     } 
     public function paymentStatus()
     {
@@ -104,29 +110,9 @@ class DashboardController extends Controller
       $paymentStatus = DB::select(DB::raw("select `op`.`order_id`,`op`.`booking_id`,`op`.`amount`,`op`.`status`,`book`.`adults`,`book`.`children`,`book`.`booking_date` from `online_payments` `op` inner join `booking` `book` on `book`.`user_id`=$user->id ")); 
       return view('admin.booking.payment',compact('paymentStatus'));
     }
-    public function qrcode(Request $request)
-    {
-        $payment_mode_id =$request->id;
-        $user=Auth::guard('user')->user(); 
-        $paymentOptions = DB::select(DB::raw("select `po`.`id`,`po`.`qr_code`,`po`.`status`,`po`.`account_no`,`po`.`ifsc_code`,`po`.`account_name`, `pm`.`name` from `payment_option` `po` inner join `payment_mode` `pm` on `pm`.`id` = `po`.`payment_mode_id` where `po`.`user_id` = $user->created_by and  `po`.`payment_mode_id` =$payment_mode_id and `status` =1;")); 
-       return view('admin.booking.payment_option_show',compact('paymentOptions','payment_mode_id'));
-    }
-    public function qrcodeShow(Request $request,$path)
-    {  
-      $path=Crypt::decrypt($path);
-      $storagePath = storage_path('app/'.$path);              
-      $mimeType = mime_content_type($storagePath); 
-      if( ! \File::exists($storagePath)){
-
-        return view('error.home');
-      }
-      $headers = array(
-        'Content-Type' => $mimeType,
-        'Content-Disposition' => 'inline; '
-      );            
-      return Response::make(file_get_contents($storagePath), 200, $headers);     
-    }
-    public function printTicket($value='')
+    
+    
+    public function printTicket()
     {
       return view('admin.booking.print_ticket',compact('paymentModes'));
     }
@@ -136,7 +122,7 @@ class DashboardController extends Controller
     }
     public function attendanceBarcode(Request $request)
     {
-      return $request;
+      $attendance=DB::select(DB::raw("select * from `payment_mode` order by `id`")); 
     }
     
 }

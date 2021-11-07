@@ -38,18 +38,25 @@ class OnlinePaymentController extends Controller
       */
     public function store(Request $request)
     { 
+
     	$this->validate($request, [
         'booking_type' => 'required',             
         'booking_date' => 'required',             
         'adults' => 'required',             
         'children' => 'required',  
         "team_leader_name" => 'required', 
-        "leader_mobile_no" => 'required',  
+        "leader_mobile_no" => 'required|numeric|digits:10',  
         ]);
     	
-        $admin=Auth::guard('user')->user(); 
-        DB::select(DB::raw("Insert Into `booking` (`user_id`,`booking_type_id`, `booking_date`, `adults`, `children`,`team_leader_name`,`head_mobile_no`,`amount`) Values ($admin->id,'$request->booking_type', '$request->booking_date', '$request->adults', '$request->children','$request->team_leader_name','$request->leader_mobile_no','$request->total_amount');"));
-        $booking_id=DB::select(DB::raw("SELECT `id` FROM `booking` ORDER BY `id` DESC LIMIT 1")); 
+        $admin=Auth::guard('user')->user();
+        $booking_type=DB::select(DB::raw("SELECT `ad_amount`,`ch_amount` FROM `booking_type` where `id`=$request->booking_type LIMIT 1"));
+        $ad_amount=$booking_type[0]->ad_amount;
+        $ch_amount=$booking_type[0]->ch_amount;
+        $total_amount=($ad_amount*$request->adults)+($ch_amount*$request->children); 
+        DB::select(DB::raw("Insert Into `booking` (`user_id`,`booking_type_id`, `booking_date`, `adults`, `children`,`team_leader_name`,`head_mobile_no`,`amount`) Values ($admin->id,'$request->booking_type', '$request->booking_date', '$request->adults', '$request->children','$request->team_leader_name','$request->leader_mobile_no','$total_amount');"));
+        $booking_id=DB::select(DB::raw("SELECT `id` FROM `booking` ORDER BY `id` DESC LIMIT 1"));
+        
+        
     	$user_id =Auth::guard('user')->user(); 
         $booking_id = $booking_id[0]->id;; 
         $order = new OnlinePayment(); 
@@ -57,10 +64,10 @@ class OnlinePaymentController extends Controller
         $order->user_id =$user_id->id;
         $order->order_id =$order_id;
         $order->booking_id =$booking_id;
-        $order->amount =$request->total_amount;
+        $order->amount =$total_amount;
         $order->status = 0; 
         $order->save();
-        $data_for_request = $this->handlePaytmRequest( $order_id, $request->total_amount );
+        $data_for_request = $this->handlePaytmRequest( $order_id, $total_amount );
         $paytm_txn_url = env('PAYTM_TXN_URL');
         $paramList = $data_for_request['paramList'];
         $checkSum = $data_for_request['checkSum'];
