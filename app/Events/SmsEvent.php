@@ -21,10 +21,12 @@ class SmsEvent
      */
   public $mobile;
   public $message;
-  public function __construct($mobile, $message)
+  public $tempid;
+  public function __construct($mobile, $message, $tempid)
   {
       $this->mobile = $mobile;
       $this->message = $message;
+      $this->tempid = $tempid;
   }
 
     /**

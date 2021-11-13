@@ -114,7 +114,16 @@ class LoginController extends Controller
         $user_id=$new_user_id[0]->id;
         $email_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$email_otp',1,0);"));
         $mobile_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$mobile_otp',2,0);")); 
-       event(new SmsEvent($request->mobile_no,$mobile_otp));
+        $message = $mobile_otp.' is the Verification code for registration on joygaon. EXCELNET';
+        $tempid ='1707163663440740652'; 
+        event(new SmsEvent($request->mobile_no,$message,$tempid));
+        #send email
+        $data = array( 'email' => $request->email_id, 'otp' =>  $email_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
+        Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
+        {
+            $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
+        });
+
         return redirect()->route('admin.otp.verify',Crypt::encrypt($user_id))->with(['message'=>'Registration Successfully','class'=>'success']); 
         
         }catch (Exception $e){ 
@@ -181,7 +190,9 @@ class LoginController extends Controller
       });
       
     }else{
-      event(new SmsEvent($user_rs[0]->mobile_no,$rs_otp));
+      $message = $rs_otp.' is the Verification code for registration on joygaon. EXCELNET';
+        $tempid ='1707163663440740652';
+      event(new SmsEvent($user_rs[0]->mobile_no,$message,$tempid));
     }
     return redirect()->back()->with(['message'=>'Code Resend Successfully.','class'=>'success']); 
   }

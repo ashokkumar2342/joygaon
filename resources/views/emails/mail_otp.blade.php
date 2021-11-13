@@ -38,7 +38,7 @@ body{
 </div>
 	<br>
 	<p>Dear User,</p>
-	<p>verification code for registration on joygaon is  {{$otp}}.</p>
+	<p><b>{{$otp}}</b> is the verification code for registration on joygaon.</p>
 	
 </div>
 		 
