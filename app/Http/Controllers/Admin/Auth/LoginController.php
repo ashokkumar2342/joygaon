@@ -121,7 +121,7 @@ class LoginController extends Controller
         $data = array( 'email' => $request->email_id, 'otp' =>  $email_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
         Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
         {
-            $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
+            $message->to( $data['email'] )->from( $data['from'], 'Joygaon' )->subject( 'Code Verification!' );
         });
 
         return redirect()->route('admin.otp.verify',Crypt::encrypt($user_id))->with(['message'=>'Registration Successfully','class'=>'success']); 
@@ -186,7 +186,7 @@ class LoginController extends Controller
       //     });
       Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
       {
-          $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
+          $message->to( $data['email'] )->from( $data['from'], 'Joygaon')->subject( 'Code Verification!' );
       });
       
     }else{
