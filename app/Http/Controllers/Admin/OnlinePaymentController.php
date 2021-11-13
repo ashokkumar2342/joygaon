@@ -389,8 +389,9 @@ class OnlinePaymentController extends Controller
              }
          }
         public function completed(Request $request,$id) {
-
+            $admin=Auth::guard('user')->user();
          	$order = OnlinePayment::where('id', Crypt::decrypt($id))->first();
+            event(new SmsEvent($admin[0]->mobile_no,'Booking Successfully'));
               return view('admin.online_payment.order-complete',compact('order'));
               
         }

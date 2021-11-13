@@ -66,8 +66,9 @@ class LoginController extends Controller
     'password' => $request['password'],
     'status' => 1,
     ];  
+    
     if(auth()->guard('user')->attempt($credentials)) {
-      
+        // $result_rs = DB::select(DB::raw("update * from `users` where `email_id` = '$email' and `status` = 0 limit 1;"));
         return redirect()->route('admin.dashboard');
                
     } 

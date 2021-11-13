@@ -56,7 +56,7 @@ class DashboardController extends Controller
     		}
 	        $admin=Auth::guard('user')->user(); 
 	        $en_password = bcrypt($request['password']);
-	        DB::select(DB::raw("Insert Into `users` (`name`, `email_id`, `mobile_no`, `password`,`role_id`, `created_by`,`status`) Values ('$request->name', '$request->email_id', '$request->mobile_no', '$en_password',$request->role_id,$admin->id,0);"));
+	        DB::select(DB::raw("Insert Into `users` (`name`, `email_id`, `mobile_no`, `password`,`role_id`, `created_by`,`approved_by`,`status`) Values ('$request->name', '$request->email_id', '$request->mobile_no', '$en_password',$request->role_id,$admin->id,$admin->id,1);"));
 
 	        $response=['status'=>1,'msg'=>'Account Created Successfully'];
 	        return response()->json($response);   
@@ -89,21 +89,7 @@ class DashboardController extends Controller
         }catch (Exception $e) {
         
         }
-    }
-    
-    public function paymentOption()
-    {
-      $user=Auth::guard('user')->user();
-      $user_id=$user->id;
-      $paymentModes=DB::select(DB::raw("select * from `payment_mode` order by `id`")); 
-      $paymentOptions = DB::select(DB::raw("select `po`.`id`,`po`.`qr_code`,`po`.`status`,`po`.`account_no`,`po`.`ifsc_code`,`po`.`account_name`, `pm`.`name` from `payment_option` `po` inner join `payment_mode` `pm` on `pm`.`id` = `po`.`payment_mode_id` where `po`.`user_id` = $user_id;"));  
-        return view('admin.booking.payment_option',compact('paymentModes','paymentOptions'));
-    }
-    public function paymentOptionForm(Request $request)
-    {
-      $paymentmodeid=$request->id;
-      return view('admin.booking.payment_option_form',compact('paymentmodeid'));
-    } 
+    }  
     public function paymentStatus()
     {
       $user=Auth::guard('user')->user(); 
@@ -114,7 +100,37 @@ class DashboardController extends Controller
     
     public function printTicket()
     {
-      return view('admin.booking.print_ticket',compact('paymentModes'));
+        $path=Storage_path('fonts/');
+        $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
+        $fontDirs = $defaultConfig['fontDir']; 
+        $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
+        $fontData = $defaultFontConfig['fontdata']; 
+         
+            $card_width =90;
+            $card_height =55;
+        
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [$card_width, $card_height],
+             'fontDir' => array_merge($fontDirs, [
+                 __DIR__ . $path,
+             ]),
+             'fontdata' => $fontData + [
+                 'frutiger' => [
+                     'R' => 'FreeSans.ttf',
+                     'I' => 'FreeSansOblique.ttf',
+                 ]
+             ],
+             'default_font' => 'freesans',
+             'pagenumPrefix' => '',
+            'pagenumSuffix' => '',
+            'nbpgPrefix' => ' कुल ',
+            'nbpgSuffix' => ' पृष्ठों का पृष्ठ'
+         ]); 
+         $html = view('admin.booking.ticket_pdf'); 
+         $mpdf->WriteHTML($html); 
+         $documentUrl = Storage_path() . '/app/ticket/10001';   
+        @mkdir($documentUrl, 0755, true);  
+        $mpdf->Output($documentUrl.'.pdf', 'F');
+        // return view('admin.booking.print_ticket',compact('paymentModes'));
     }
     public function attendance()
     {

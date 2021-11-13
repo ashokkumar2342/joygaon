@@ -29,11 +29,6 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::get('user-list', 'DashboardController@userList')->name('admin.user.list');
 	Route::get('booking', 'DashboardController@booking')->name('admin.booking'); 
 	Route::get('check-amount', 'DashboardController@checkAmount')->name('admin.check.amount'); 
-	
-	Route::get('payment-option', 'DashboardController@paymentOption')->name('admin.payment.option'); 
-	 
-	
-	
 	Route::get('payment-status', 'DashboardController@paymentStatus')->name('admin.payment.status'); 
 	Route::get('pay-again/{bookin_id}', 'OnlinePaymentController@payAgain')->name('admin.pay.again'); 
 	Route::get('qrcode', 'DashboardController@qrcode')->name('admin.qrcode'); 
