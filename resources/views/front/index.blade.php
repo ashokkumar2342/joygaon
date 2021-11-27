@@ -36,25 +36,27 @@
         <div class="gt_top3_wrap default_width">
             <div class="container">
                 <div class="gt_top3_scl_icon">
-                    <ul class="gt_hdr3_scl_icon">
-                        
-                         
+                    <ul class="gt_hdr3_scl_icon" style="color: #fff;margin-top: 2px">
+                    	<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    	<li><i class="icon fa fa-phone"></i> Mobile No. : +91-8397068001</li>
+                    	<li><a href="#"><i class="fa fa-envelope-o"></i> Email : Info@joygaon.in </a></li> 
                     </ul>
                 </div>
                 <div class="gt_hdr_3_ui_element">
                     <ul> 
-                       <li><a class="btn btn-primary btn-sm" href="{{ route('admin.login') }}" title="">Sign In</a></li>
+                       <li><a class="btn btn-primary btn-sm" href="{{ route('admin.login') }}" title=""><i class="fa fa-user"></i>Sign In</a></li>
 
-                       <li><a class="btn btn-info btn-sm" href="{{ route('admin.register') }}" title="">Register</a></li> 
+                       <li><a class="btn btn-info btn-sm" href="{{ route('admin.register') }}" title=""> <i class="fa fa-user"></i>Register</a></li> 
                     </ul>
                 </div>
               
             </div>
         </div>
+        
         <div class="gt_top3_menu default_width">
             <div class="container">
                 <div class="gt-logo">
-                    <a href="#"><img src="{{asset('front_asset/images/logo.png')}}" alt=""></a>
+                    {{-- <a href="#"><img src="{{asset('front_asset/images/logo.png')}}" alt=""></a> --}}
                 </div>
                 <nav class="gt_hdr3_navigation">
                     <!-- Responsive Buttun -->
@@ -88,7 +90,7 @@
         <div class="swiper-container" id="swiper-container">
              <ul class="swiper-wrapper">
                 <li class="swiper-slide" style="height: 750px">
-                    <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt="">
+                    {{-- <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt=""> --}}
                     <div class="gt_banner_text gt_slide_3">
                         
                     </div>
