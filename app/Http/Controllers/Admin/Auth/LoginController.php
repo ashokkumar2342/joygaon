@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Mail;
+use App\Helper\MyFuncs;
 class LoginController extends Controller
 {
    
@@ -35,50 +36,117 @@ class LoginController extends Controller
       $this->middleware('admin.guest')->except('logout');
   }
 
-  
-  
-  public function login(){
-      return view('admin.login');
+
+
+
+  public function reSendOtp(Request $request,$user_id,$otp_type)
+  {
+    $rs_otp = random_int(100000, 999999);
+    $update_rs = DB::select(DB::raw("update `user_otp` set `otp` = $rs_otp where `user_id` = $user_id and `otp_type`= $otp_type limit 1;"));
+    $user_rs = DB::select(DB::raw("select * from `users` where `id`= $user_id limit 1 ")); 
+    if ($otp_type==1) {
+      $data = array( 'email' => $user_rs[0]->email_id, 'otp' => $rs_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
+      Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
+      {
+        $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
+      });
+      
+    }else{
+      $message = $rs_otp.' is the Verification code for registration on joygaon. EXCELNET';
+      $tempid ='1707163663440740652';
+      event(new SmsEvent($user_rs[0]->mobile_no,$message,$tempid));
+    }
+    return redirect()->back()->with(['message'=>'Code Resend Successfully.','class'=>'success']); 
   }
-  public function refreshCaptcha()
-  {  
-      return  captcha_img('flat');
-  }
+  
+
   public function loginPost(Request $request)
   { 
     $this->validate($request, [
-    'email' => 'required', 
+    'email_or_phone' => 'required', 
     'password' => 'required',
     'captcha' => 'required|captcha',
               
     ]);
-    $email = str_replace("'", "", trim($request->email));
 
-    $result_rs = DB::select(DB::raw("select * from `users` where `email_id` = '$email' and `status` = 0 limit 1;"));
-    $rs_count = count($result_rs);
-    if (!empty($rs_count)) {
-      if ($result_rs[0]->status!=1) {
-        return redirect()->route('admin.otp.verify',Crypt::encrypt($result_rs[0]->id));
+    $email_mobile = MyFuncs::removeSpacialChr($request->email_or_phone);
+    $date=date('Y-m-d'); 
+    $email_rs = DB::select(DB::raw("select * from `users` where `email_id` = '$email_mobile' or `mobile_no` = '$email_mobile' limit 1;"));
+    if (!empty($email_rs)) {
+      if ($email_rs[0]->status==0) {
+        return redirect()->route('admin.otp.verify',Crypt::encrypt($email_rs[0]->id));
+      }
+
+      $credentials = [
+        'email_id' => $request['email_or_phone'],
+        'password' => $request['password'],
+        'status' => 1,
+      ]; 
+      if(auth()->guard('user')->attempt($credentials)) {
+        $result_rs = DB::select(DB::raw("update `users` set `last_login` = '$date' where `email_id` ='$email_mobile' limit 1;"));
+        return redirect()->route('admin.dashboard');        
+      }
+
+      $credentials = [
+        'mobile_no' => $request['email_or_phone'],
+        'password' => $request['password'],
+        'status' => 1,
+      ]; 
+      if(auth()->guard('user')->attempt($credentials)) {
+        $result_rs = DB::select(DB::raw("update `users` set `last_login` = '$date' where `mobile_no` ='$email_mobile' limit 1;"));
+        return redirect()->route('admin.dashboard');        
       } 
-    }
-    $credentials = [
-    'email_id' => $request['email'],
-    'password' => $request['password'],
-    'status' => 1,
-    ];  
-    
-    if(auth()->guard('user')->attempt($credentials)) {
-        // $result_rs = DB::select(DB::raw("update * from `users` where `email_id` = '$email' and `status` = 0 limit 1;"));
-        return redirect()->route('admin.dashboard');
-               
-    } 
-
+    }  
     return Redirect()->back()->with(['message'=>'Invalid User or Password','class'=>'error']); 
+  }
+  
+
+  public function OtpVerifyStore(Request $request ,$otp_type)
+  {
+    $otp_type = Crypt::decrypt($otp_type);
+    $user_id = $request->user_id;
+    if ($otp_type==1) { 
+      $this->validate($request,[                
+        'email_otp' => 'required|numeric',  
+      ]);
+
+      $email_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` = 1 and `otp` = $request->email_otp limit 1;"));
+      $count_rs = count($email_rs); 
+      if ($count_rs >= 1) {
+        $update_rs = DB::select(DB::raw("update `user_otp` set `status` = 1 where `user_id` = $user_id and `otp_type` = 1 limit 1;")); 
+            
+        $result_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `status` = 1 limit 2;"));
+        $count_rs = count($result_rs); 
+        if($count_rs == 2){
+          $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
+          return redirect()->route('admin.login')->with(['class'=>'success','message'=>'EMail Otp Verified Successfully']);
+        }
+        return redirect()->back()->with(['class'=>'success','message'=>'EMail Code Verified Successfully']);      
+      }
+    }
     
+    if ($otp_type==2) {
+      $this->validate($request,[                
+        'mobile_otp' => 'required|numeric',  
+      ]);
+      $email_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` = 2 and `otp` = $request->mobile_otp limit 1;"));
+      $count_rs = count($email_rs); 
+      if ($count_rs >= 1) {
+        $update_rs = DB::select(DB::raw("update `user_otp` set `status` = 1 where `user_id` = $user_id and `otp_type` = 2 limit 1;")); 
+        
+        $result_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `status` = 1 limit 2;"));
+        $count_rs = count($result_rs); 
+        if($count_rs == 2){
+          $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
+          return redirect()->route('admin.login')->with(['class'=>'success','message'=>'Mobile Otp Verified Successfully']);
+        }
+        return redirect()->back()->with(['class'=>'success','message'=>'Mobile Code Verified Successfully']);      
+      }
+    } 
+    return redirect()->back()->with(['class'=>'error','message'=>'Invalid OTP, Please Try Again']);
   }
-  public function register(){
-      return view('admin.register');
-  }
+  
+
   public function OtpVerify($user_id)
   {
     $user_id = Crypt::decrypt($user_id);
@@ -87,121 +155,129 @@ class LoginController extends Controller
     $email_id = $result_rs->email_id;
     $mobile_no = $result_rs->mobile_no;
     $email_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` = 1 limit 1;"));
-    $mobile_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` =2 limit 1;"));
-    return view('admin.otp_verify',compact('mobile_rs','email_rs', 'user_id','email_id','mobile_no'));
+    $mobile_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` = 2 limit 1;"));
+    return view('admin.otp_verify',compact('mobile_rs', 'email_rs', 'user_id', 'email_id', 'mobile_no'));
   }
+  
   public function registerStore(Request $request)
   {
     try {
-       
-        $this->validate($request, [ 
-         "name" => 'required|string|min:2|max:50',             
-         "email_id" => 'required|email|unique:users|max:100|min:5', 
-         "mobile_no" => 'required|unique:users|numeric|digits:10',
-         "password" => 'required|min:6|max:15', 
-         "retype_password" => 'required|min:6|max:15',
-         'captcha' => 'required|captcha',
-        ]);
-        $email_otp = random_int(100000, 999999); 
-        $mobile_otp = random_int(100000, 999999); 
-        if($request->password != $request->retype_password){
-          return Redirect()->back()->with(['message'=>'Passwords Not Match','class'=>'error']); 
-        }
-        $en_password = bcrypt($request['password']);
-        DB::select(DB::raw("Insert Into `users` (`name`, `email_id`, `mobile_no`, `password`,`role_id`, `created_by`,`status`) Values ('$request->name', '$request->email_id', '$request->mobile_no', '$en_password',4,0,0);"));
+      $this->validate($request, [ 
+        "name" => 'required|string|min:2|max:100',             
+        "email_id" => 'required|email|unique:users|max:100|min:5', 
+        "mobile_no" => 'required|unique:users|numeric|digits:10',
+        "password" => 'required|min:6|max:15', 
+        "confirm_password" => 'required|min:6|max:15|same:password',
+        'captcha' => 'required|captcha',
+      ]);
 
-        $new_user_id=DB::select(DB::raw("select `status`,`id` from `users` where `mobile_no`='$request->mobile_no'"));
-        $user_id=$new_user_id[0]->id;
-        $email_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$email_otp',1,0);"));
-        $mobile_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$mobile_otp',2,0);")); 
-        $message = $mobile_otp.' is the Verification code for registration on joygaon. EXCELNET';
-        $tempid ='1707163663440740652'; 
-        event(new SmsEvent($request->mobile_no,$message,$tempid));
-        #send email
-        $data = array( 'email' => $request->email_id, 'otp' =>  $email_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
-        Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
-        {
-            $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
-        });
+      if($request->password != $request->confirm_password){
+        return Redirect()->back()->with(['message'=>'Passwords|Confirm Password Not Match','class'=>'error']); 
+      }
+      
+      $en_password = bcrypt($request['password']);
+      $new_name = MyFuncs::removeSpacialChr($request->name);
+      $new_email = MyFuncs::removeSpacialChr($request->email_id);
 
-        return redirect()->route('admin.otp.verify',Crypt::encrypt($user_id))->with(['message'=>'Registration Successfully','class'=>'success']); 
+      DB::select(DB::raw("Insert Into `users` (`name`, `email_id`, `mobile_no`, `password`, `role_id`, `created_by`, `status`) Values ('$new_name', '$new_email', '$request->mobile_no', '$en_password', 4, 0, 0);"));
+
+
+      //Code To Genderate and save verification Code
+      $email_otp = random_int(100000, 999999); 
+      $mobile_otp = random_int(100000, 999999); 
         
-        }catch (Exception $e){ 
-      }
-    
-  }
-  public function OtpVerifyStore(Request $request ,$otp_type)
-  {
-      $otp_type = Crypt::decrypt($otp_type);
-      $user_id = $request->user_id;
-      if ($otp_type==1) { 
-          $this->validate($request,[                
-         'email_otp' => 'required|numeric',  
-          ]);
-
-          $email_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` = 1 and `otp` = $request->email_otp limit 1;"));
-          $count_rs = count($email_rs); 
-          if ($count_rs >= 1) {
-            $update_rs = DB::select(DB::raw("update `user_otp` set `status` = 1 where `user_id` = $user_id and `otp_type` = 1 limit 1;")); 
-            $result_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `status` = 1 limit 2;"));
-            $count_rs = count($result_rs); 
-            if($count_rs == 2){
-              $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
-              return redirect()->route('admin.login')->with(['class'=>'success','message'=>'EMail Otp Verified Successfully']);
-            }
-              return redirect()->back()->with(['class'=>'success','message'=>'EMail Code Verified Successfully']);      
-          }
-      }
-      if ($otp_type==2) {
-          $this->validate($request,[                
-          'mobile_otp' => 'required|numeric',  
-          ]);
-          $email_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` = 2 and `otp` = $request->mobile_otp limit 1;"));
-          $count_rs = count($email_rs); 
-          if ($count_rs >= 1) {
-            $update_rs = DB::select(DB::raw("update `user_otp` set `status` = 1 where `user_id` = $user_id and `otp_type` = 2 limit 1;")); 
-            $result_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `status` = 1 limit 2;"));
-            $count_rs = count($result_rs); 
-            if($count_rs == 2){
-              $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
-              return redirect()->route('admin.login')->with(['class'=>'success','message'=>'Mobile Otp Verified Successfully']);
-            }
-            return redirect()->back()->with(['class'=>'success','message'=>'Mobile Code Verified Successfully']);      
-          }
-        } 
-       
-    
-    return redirect()->back()->with(['class'=>'error','message'=>'Invalid OTP, Please Try Again']);
-  }
-  public function reSendOtp(Request $request,$user_id,$otp_type)
-  {
-    $rs_otp = random_int(100000, 999999);
-    $update_rs = DB::select(DB::raw("update `user_otp` set `otp` =$rs_otp where `user_id` = $user_id and `otp_type`=$otp_type limit 1;"));
-    $user_rs = DB::select(DB::raw("select * from `users` where `id`=$user_id limit 1 ")); 
-    if ($otp_type==1) {
-      $data = array( 'email' => $user_rs[0]->email_id, 'otp' => $rs_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
-      // Mail::send([],['name','Ripon Uddin Arman'],function($message){
-      //         $message->to('rislam252@gmail.com')->subject("Email Testing with Laravel");
-      //         $message->from('clhg52@gmail.com','Creative Losser Hopeless Genius');
-      //     });
+      $new_user_id=DB::select(DB::raw("select `status`,`id` from `users` where `mobile_no`='$request->mobile_no'"));
+      $user_id=$new_user_id[0]->id;
+        
+      $email_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$email_otp',1,0);"));
+      $mobile_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$mobile_otp',2,0);")); 
+        
+      //Code To Send Mobile Verification Code
+      $message = $mobile_otp.' is the Verification code for registration on joygaon. EXCELNET';
+      $tempid ='1707163663440740652'; 
+      event(new SmsEvent($request->mobile_no,$message,$tempid));
+        
+      #send email
+      $data = array( 'email' => $request->email_id, 'otp' =>  $email_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
       Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
       {
-          $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
+        $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
       });
-      
-    }else{
-      $message = $rs_otp.' is the Verification code for registration on joygaon. EXCELNET';
-        $tempid ='1707163663440740652';
-      event(new SmsEvent($user_rs[0]->mobile_no,$message,$tempid));
-    }
-    return redirect()->back()->with(['message'=>'Code Resend Successfully.','class'=>'success']); 
+
+      return redirect()->route('admin.otp.verify',Crypt::encrypt($user_id))->with(['message'=>'Registration Successfully','class'=>'success']); 
+        
+    }catch (Exception $e){ }
+  }
+  
+  public function refreshCaptcha()
+  {  
+    return  captcha_img('flat');
+  }
+
+  public function register(){
+    return view('admin.register');
   }
     
   
-  public function logout(){
-    Session::flush();
-    return redirect()->route('admin.login');
+  public function login(){
+    return view('admin.login');
   }
+
+
+
+
+
+  
+  
+  // public function forgotPassword()
+  // {
+  //  return view('admin.forgot_password');
+  // }
+  // public function forgotPasswordSendLink(Request $request)
+  // {
+  //   $this->validate($request, [
+  //   'email_or_phone' => 'required', 
+  //   ]);
+  //   $email = str_replace("'", "", trim($request->email_or_phone));
+  //   $mobile = str_replace("'", "", trim($request->email_or_phone)); 
+  //   $email_rs = DB::select(DB::raw("select * from `users` where `email_id` = '$email' and `status` < 2 limit 1;"));
+  //   $mobile_rs = DB::select(DB::raw("select * from `users` where `mobile_no` = '$mobile' and `status` < 2 limit 1;"));
+  //   if (!empty($email_rs)) {
+  //     if ($email_rs[0]->status==0) {
+  //         return redirect()->route('admin.otp.verify',Crypt::encrypt($email_rs[0]->id));
+  //     }
+  //     else{
+  //       $pathToFile =\Storage_path('app/ticket/10001.pdf');
+  //       $data = array( 'email' => $email, 'link' =>'$email', 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
+  //       Mail::send('emails.email_send_link', $data, function( $message ) use ($data)
+  //       {
+  //         $message->attach($pathToFile);
+  //       }); 
+  //     }
+  //       return redirect()->back()->with(['message'=>'Link Send Successfully','class'=>'success']);
+  //   } 
+  //   elseif(!empty($mobile_rs)){
+  //     if ($mobile_rs[0]->status==0) {
+  //         return redirect()->route('admin.otp.verify',Crypt::encrypt($mobile_rs[0]->id));
+  //     }else{
+  //       $pathToFile  =\Storage_path('app/ticket/10001.pdf');
+  //       $data = array( 'email' => $request->email, 'link' =>'$request->email', 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
+  //       Mail::send('emails.email_send_link', $data, function( $message ) use ($data)
+  //       {
+  //         $message->attach($pathToFile);
+  //       }); 
+  //     }
+  //       return redirect()->back()->with(['message'=>'Link Send Successfully','class'=>'success']);
+  //   } 
+      
+  //   return Redirect()->back()->with(['message'=>'Invalid User or Password','class'=>'error']); 
+    
+  // }
+  
+  // public function logout(){
+  //   Session::flush();
+  //   return redirect()->route('admin.login');
+  // }
 
     
     

@@ -31,7 +31,7 @@
       <form action="{{ route('admin.register.store') }}" method="post" no-reset="true">
         {{csrf_field()}}
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Full name" required>
+          <input type="text" class="form-control" name="name" placeholder="Full name" required maxlength="100" minlength="2">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -39,8 +39,9 @@
           </div>
         </div>
         <p class="text-danger">{{ $errors->first('name') }}</p>
+
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email_id" placeholder="Email" required>
+          <input type="email" class="form-control" name="email_id" placeholder="Email" required maxlength="100">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -48,8 +49,9 @@
           </div>
         </div>
         <p class="text-danger">{{ $errors->first('email_id') }}</p>
+
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="mobile_no" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Mobile No." required maxlength="10">
+          <input type="text" class="form-control" name="mobile_no" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Mobile No." required maxlength="10" minlength = "10">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-phone"></span>
@@ -57,8 +59,9 @@
           </div>
         </div>
         <p class="text-danger">{{ $errors->first('mobile_no') }}</p>
+
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="password" placeholder="Password" required>
+          <input type="password" class="form-control" name="password" id="password" placeholder="Password" required minlength="6" maxlength="15" onchange="onChange()">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -67,7 +70,7 @@
         </div>
         <p class="text-danger">{{ $errors->first('password') }}</p>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="retype_password" placeholder="Retype Password" required>
+          <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required minlength="6" maxlength="15" onchange="onChange()">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -75,6 +78,7 @@
           </div>
         </div>
         <p class="text-danger">{{ $errors->first('retype_password') }}</p>
+
           <div class="captcha">
             <span>{!! captcha_img('flat') !!}</span>
             <button type="button" class="btn btn-warning" onclick="refresh()"><i class="fas fa-1x fa-sync-alt" ></i></button>
@@ -116,6 +120,7 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('admin_asset/dist/js/adminlte.min.js') }}"></script>
 <script src="{{ asset('admin_asset/dist/js/toastr.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 @include('admin.include.message')
 <script type="text/javascript">
   function refresh(){
@@ -127,9 +132,18 @@
      }
   });
   }
+  function onChange() {
+  const password = document.querySelector('input[name=password]');
+  const confirm = document.querySelector('input[name=confirm_password]');
+  if (confirm.value === password.value) {
+    confirm.setCustomValidity('');
+  } else {
+    confirm.setCustomValidity('Passwords do not match');
+  }
+}
  
 </script> 
-<script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{{-- <script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
 
 </body>
 </html>

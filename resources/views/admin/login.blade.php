@@ -32,14 +32,14 @@
         <form action="{{ route('admin.login.post') }}" method="post" class="add_form">
           {{csrf_field()}}
           <div class="input-group mb-3">
-            <input type="email" class="form-control" name="email" placeholder="Email">
+            <input type="text" class="form-control" name="email_or_phone" placeholder="Email or phone" maxlength="100">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
               </div>
             </div>
           </div>
-          <p class="text-danger">{{ $errors->first('email') }}</p>
+          <p class="text-danger">{{ $errors->first('email_or_phone') }}</p>
           <div class="input-group mb-3">
             <input type="password" name="password" class="form-control" placeholder="Password">
             <div class="input-group-append">
@@ -67,7 +67,8 @@
               <button type="submit" class="btn btn-primary btn-block">Sign In</button>
             </div> 
             <div class="col-12 form-group">
-              <a href="{{ route('admin.register') }}" title="">Register a new membership</a>
+              <a href="{{ route('admin.register') }}" title="">Register for new membership</a><br>
+              <a href="{{ route('admin.forgot.password') }}" title="">Forgot Password</a>
             </div>
           </div>
         </form>   

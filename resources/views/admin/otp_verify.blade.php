@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Enter Verification Code</b></a>
+    <a href="#"><b>Enter Verification Code</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -34,7 +34,7 @@
           {{csrf_field()}}
           <div class="row">
             <div class="col-lg-12 form-group">
-              <input type="text" name="email_otp" class="form-control" placeholder="Email Verification Code"> 
+              <input type="text" name="email_otp" class="form-control" placeholder="Email Verification Code" required minlength="6" maxlength="6" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
             </div>
             <div class="col-lg-12 form-group">
               <input type="hidden" name="user_id" class="form-control hidden" value="{{@$user_id}}"> 
@@ -57,7 +57,7 @@
               <input type="hidden" name="user_id" class="form-control hidden" value="{{@$user_id}}"> 
             </div>
             <div class="col-lg-12 form-group">
-              <input type="text" name="mobile_otp" class="form-control" placeholder="Mobile Verification Code"> 
+              <input type="text" name="mobile_otp" class="form-control" placeholder="Mobile Verification Code"  required minlength="6" maxlength="6" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
             </div>
             <div class="col-lg-6 form-group">
               <input type="submit"  class="form-control btn btn-info" value="Verify"> 
@@ -90,7 +90,7 @@
   
  
 </script> 
-<script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+{{-- <script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
 
 </body>
 </html>
