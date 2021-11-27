@@ -120,49 +120,45 @@
         <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
     </div>
     <!--Banner Wrap End-->
+   <!-- About Start here -->
+   <section class="about about-two" style="margin-top:-250px">
+       <div class="container">
+           <div class="row">
+       <div class="col-md-12">
+           <div class="about-content">
+             <h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon</h4>
+            {{--  <img src="{{ asset('front_asset/extra-images/about_us_img.jpg') }}" align="right" alt="about image" class="img-responsive" style="height: 250px;"> --}}
 
+             <p>Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area. Joygaon shares an experience of an ethnic village culture, activities, hygienic food, dance, music along with Modern indoor/outdoor games and activities spread in an area of 12 acres.</p>
+             <p>Joygaon is situated on Haryana State Highway #22 which is about 35kms from Peeragarhi Chowk, Delhi, 40 kms from Gurgaon, 9 kms from Jhajjar, and 15 kms from Bahadurgarh, and 40 kms from Rohtak, turning out to be best weekend getaways in Delhi/NCR with Picnic & Luxurious Stay Facility. Joygaon is a one stop location to a perfect weekend getaway to spend with your family and friends.</p>
+           
+           </div><!-- about content -->
+         </div>
+                
+        
+               
+           </div><!-- row -->
+       </div><!-- container -->
+   </section><!-- about -->
+    <!-- About End here -->      
     <!--Main Content Wrap Start-->
     <div class="gt_main_content_wrap">
-        <!--Banner Services Wrap Start-->
-        <div class="gt_servicer">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3">
-                        <div class="gt_main_services bg_1">
-                            <i class="icon-write-board"></i>
-                            <h5>Unlimited Users</h5>
-                            <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. </p>
-                            <a  class="bg_1" href="#"> <i class="fa fa-arrow-right"></i></a>
-                        </div>
+                    <div class="col-md-6">                            
+                        <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjoygaon12%2Fvideos%2F808253496291964%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
                     </div>
+                    <div class="col-md-6">                            
+                        <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://www.facebook.com/100004830724819/videos/798624393641911%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                    </div>
+                    <div class="col-md-6">                            
+                        <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://fb.watch/9oAVmPwQUF/&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                    </div>
+                     <div class="col-md-6">                            
+                        <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://fb.watch/9xJ2dnivj3/&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+                    </div> 
                     
-                    <div class="col-md-3">
-                        <div class="gt_main_services bg_2">
-                            <i class="icon-teacher-showing-on-whiteboard"></i>
-                            <h5>Unlimited Courses & Batches</h5>
-                            <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. </p>
-                             <a class="bg_2" href="#"> <i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <div class="gt_main_services bg_3">
-                            <i class="icon-compass"></i>
-                            <h5>Free Hosting</h5>
-                            <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. </p>
-                             <a class="bg_3" href="#"> <i class="fa fa-arrow-right"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-3">
-                        <div class="gt_main_services bg_4">
-                            <i class="icon-number-blocks"></i>
-                            <h5>Easy import and export of data</h5>
-                            <p>Our fully functional software offers successful export and import of the data. </p>
-                              <a class="bg_4" href="#"> <i class="fa fa-arrow-right"></i></a>
-                            
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
