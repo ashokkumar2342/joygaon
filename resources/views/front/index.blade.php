@@ -55,8 +55,9 @@
         
         <div class="gt_top3_menu default_width">
             <div class="container">
-                <div class="gt-logo">
-                    {{-- <a href="#"><img src="{{asset('front_asset/images/logo.png')}}" alt=""></a> --}}
+
+                <div class="gt-logo" style="padding: 2px 0px;">
+                    <a href="#"><img src="{{asset('front_asset/images/logo.png')}}" alt=""></a>
                 </div>
                 <nav class="gt_hdr3_navigation">
                     <!-- Responsive Buttun -->
@@ -90,7 +91,25 @@
         <div class="swiper-container" id="swiper-container">
              <ul class="swiper-wrapper">
                 <li class="swiper-slide" style="height: 750px">
-                    {{-- <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt=""> --}}
+                    <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt="">
+                    <div class="gt_banner_text gt_slide_1">
+                        
+                    </div>
+                </li>
+                <li class="swiper-slide" style="height: 750px">
+                    <img src="{{asset('front_asset/extra-images/banner-02.jpg')}}" alt="">
+                    <div class="gt_banner_text gt_slide_2">
+                        
+                    </div>
+                </li>
+                <li class="swiper-slide" style="height: 750px">
+                    <img src="{{asset('front_asset/extra-images/banner-03.jpg')}}" alt="">
+                    <div class="gt_banner_text gt_slide_3">
+                        
+                    </div>
+                </li>
+                 <li class="swiper-slide" style="height: 750px">
+                    <img src="{{asset('front_asset/extra-images/banner-04.jpg')}}" alt=""> 
                     <div class="gt_banner_text gt_slide_3">
                         
                     </div>
