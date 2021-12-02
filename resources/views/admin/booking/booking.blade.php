@@ -31,7 +31,7 @@
                         <div class="col-lg-6 form-group">
                             <label>Trip Date</label>
                             <span class="fa fa-asterisk"></span> 
-                            <input type="date" name="trip_date" class="form-control"  max="{{ date('Y-m-d',strtotime(date('d-m-Y'))) }}" required> 
+                            <input type="date" name="trip_date" class="form-control"  min="{{ date('Y-m-d',strtotime(date('d-m-Y'))) }}" required> 
                         <p class="text-danger">{{ $errors->first('trip_date') }}</p> 
                         </div>
                         <div class="col-lg-6 form-group">

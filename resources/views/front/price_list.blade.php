@@ -42,7 +42,7 @@
                     </div>
                     <div class="gt_hdr_3_ui_element">
                         <ul>
-                            <li><i class="fa fa-phone"></i>+91 7404452902</li>
+                            <li><i class="fa fa-phone"></i>+124 456 7858</li>
                             <li><i class="fa fa-envelope-o"></i><a href="#">info@joygaon.in</a></li> 
                             <li><a class="btn-primary btn-sm" href="{{ route('admin.login') }}" title=""><i class="fa fa-user"></i>Sign In</a></li> 
                             <li><a class="btn-info btn-sm" href="{{ route('admin.register') }}" title=""> <i class="fa fa-user"></i>Register</a></li> 
@@ -64,11 +64,10 @@
                         </a>   
                         <!-- Responsive Buttun -->
                         <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <li class="active"><a href="{{ route('front.index') }}">Home</a> 
-                            </li>
+                            <li><a href="{{ route('front.index') }}">Home</a></li>
                             <li><a href="{{ route('front.about') }}">About Us</a></li>
                             <li><a href="{{ route('front.gallery') }}">Gallery</a> 
-                            <li><a href="{{ route('front.price.list') }}">Price List</a></li> 
+                            <li class="active"><a href="{{ route('front.price.list') }}">Price List</a></li> 
                             <li><a href="{{ route('front.cotactus') }}">Contact Us</a></li>
                             </ul>
                         </nav>
@@ -76,46 +75,35 @@
                 </div>
             </header>
             <!--Header Wrap End--> 
-            <!--Banner Wrap Start-->
-            <div class="gt_banner default_width">
-                <div class="swiper-container" id="swiper-container">
-                    <ul class="swiper-wrapper">
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_1"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-02.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_2"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-03.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_3"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-04.jpg')}}" alt=""> 
-                            <div class="gt_banner_text gt_slide_3"> 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
-                <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
-            </div>
-            <!--Banner Wrap End-->
+            
             <!-- About Start here -->
-            <section class="about about-two" style="margin-top:-200px">
+            <section class="about about-two">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="about-content">
                                 <h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon</h4>
-                                {{--  <img src="{{ asset('front_asset/extra-images/about_us_img.jpg') }}" align="right" alt="about image" class="img-responsive" style="height: 250px;"> --}} 
-                                <p>Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area. Joygaon shares an experience of an ethnic village culture, activities, hygienic food, dance, music along with Modern indoor/outdoor games and activities spread in an area of 12 acres.</p>
-                                <p>Joygaon is situated on Haryana State Highway #22 which is about 35kms from Peeragarhi Chowk, Delhi, 40 kms from Gurgaon, 9 kms from Jhajjar, and 15 kms from Bahadurgarh, and 40 kms from Rohtak, turning out to be best weekend getaways in Delhi/NCR with Picnic & Luxurious Stay Facility. Joygaon is a one stop location to a perfect weekend getaway to spend with your family and friends.</p>
+                                    <table class="table" style="margin-top: 20px">
+                                        <thead style="background-color: #605f6a;color: #fff">
+                                            <tr>
+                                                <th>Sr.No.</th>
+                                                <th>Booking Type</th>
+                                                <th>Adults</th>
+                                                <th>Children</th>
+                                            </tr>
+                                        </thead> 
+                                        <tbody>
+                                            @foreach ($priceLists as $priceList) 
+                                            <tr>
+                                                <td>{{$priceList->id}}</td>
+                                                <td>{{$priceList->name}}</td>
+                                                <td>{{$priceList->ad_amount}}</td>
+                                                <td>{{$priceList->ch_amount}}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                        
+                                    </table>
 
                             </div><!-- about content -->
                         </div> 
@@ -124,79 +112,8 @@
             </section><!-- about -->
             <!-- About End here -->      
             <!--Main Content Wrap Start-->
-            <div class="gt_main_content_wrap">
-                <div class="gt_hdg_1">
-                    <h3>Gallery</h3>
-
-                    <span><img src="{{asset('front_asset/images/hdg-01.png')}}" alt=""></span>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjoygaon12%2Fvideos%2F808253496291964%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://www.facebook.com/100004830724819/videos/798624393641911%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://fb.watch/9oAVmPwQUF/&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://fb.watch/9xJ2dnivj3/&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>  
-                    </div>
-                </div>
-            </div> 
-            <!--Banner Services Wrap End-->
-            <!--Our Gallery Wrap Start-->
-            <section class="gt_gallery_bg">
-                <!--Main Heading Wrap Start-->
-                <div class="gt_hdg_1">
-                    <h3>Our Gallery</h3>
-
-                </div>
-                <!--Main Heading Wrap End--> 
-                <!--Gallery List Wrap Start-->
-                <div class="gt_gallery_slider" id="gt_gallery_slider">
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/1.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/2.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/3.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/4.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/5.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/6.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/7.jpg')}}" alt="">
-                        </div>
-                    </div>
-                </div>
-                <!--Gallery List Wrap End-->
-            </section>
-            <!--Our Gallery Wrap End--> 
+            
+            
             <!--Footer Wrap Start-->
             <footer> 
                 <!--Footer Wrap Start-->
@@ -264,7 +181,7 @@
                                                 <h5>Our Address</h5>
                                                 <ul class="gt_team1_contact_info">
                                                     <li><i class="fa fa-map-marker"></i>Village Kablana, 9 Milestone, Jhajjar Bahadurgarh Road, Jhajjar, Haryana, 124104, INDIA </li>
-                                                    <li><i class="fa fa-phone"></i>+91 7404452902</li>
+                                                    <li><i class="fa fa-phone"></i>1-677-124-44227 </li>
                                                     <li><i class="fa fa-envelope"></i> <a href="#">info@joygaon.in</a> </li>
                                                 </ul>
                                             </div>

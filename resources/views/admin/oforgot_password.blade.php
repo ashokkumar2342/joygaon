@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JoyGaon | Forgot Password</title>
+  <title>Welcome To Joygaon| Forgot Password</title>
 
  <link rel="stylesheet" href="{{ asset('admin_asset/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Ionicons -->

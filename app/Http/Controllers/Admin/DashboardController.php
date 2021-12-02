@@ -15,8 +15,10 @@ class DashboardController extends Controller
 
   public function index()
   {   	
-    try{ 
-      return view('admin.dashboard'); 
+    try{
+        $admin=Auth::guard('user')->user();
+        $booking = DB::select(DB::raw("select count(id) as count_rs from `booking` where `user_id` =$admin->id and `status` =1 ")); 
+        return view('admin.dashboard',compact('booking')); 
     }catch (Exception $e) { }
   }
     
@@ -113,47 +115,48 @@ class DashboardController extends Controller
     // }
     
     
-    // public function printTicket()
-    // {
-    //     $path=Storage_path('fonts/');
-    //     $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
-    //     $fontDirs = $defaultConfig['fontDir']; 
-    //     $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
-    //     $fontData = $defaultFontConfig['fontdata']; 
-         
-    //         $card_width =90;
-    //         $card_height =55;
+  
+    public function attendance()
+    {
+      return view('admin.booking.attendance');
+    } 
+    public function attendanceBarcode(Request $request)
+    {
         
-    //     $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [$card_width, $card_height],
-    //          'fontDir' => array_merge($fontDirs, [
-    //              __DIR__ . $path,
-    //          ]),
-    //          'fontdata' => $fontData + [
-    //              'frutiger' => [
-    //                  'R' => 'FreeSans.ttf',
-    //                  'I' => 'FreeSansOblique.ttf',
-    //              ]
-    //          ],
-    //          'default_font' => 'freesans',
-    //          'pagenumPrefix' => '',
-    //         'pagenumSuffix' => '',
-    //         'nbpgPrefix' => ' कुल ',
-    //         'nbpgSuffix' => ' पृष्ठों का पृष्ठ'
-    //      ]); 
-    //      $html = view('admin.booking.ticket_pdf'); 
-    //      $mpdf->WriteHTML($html); 
-    //      $documentUrl = Storage_path() . '/app/ticket/10001';   
-    //     @mkdir($documentUrl, 0755, true);  
-    //     $mpdf->Output($documentUrl.'.pdf', 'F');
-    //     // return view('admin.booking.print_ticket',compact('paymentModes'));
-    // }
-    // public function attendance()
-    // {
-    //   return view('admin.booking.attendance',compact('paymentModes'));
-    // }
-    // public function attendanceBarcode(Request $request)
-    // {
-    //   $attendance=DB::select(DB::raw("select * from `payment_mode` order by `id`")); 
-    // }
+        $bookings=DB::select(DB::raw("select * from `booking` where  `id` = $request->ticket_no and `status` = 1 limit 1"));
+        $checkin_details=DB::select(DB::raw("select * from `checkin_detail` where  `booking_id` = $request->ticket_no "));
+        if (empty($bookings)) {
+            $response=['status'=>0,'msg'=>'Invalid Ticket No.'];
+            return response()->json($response);
+        } 
+        return view('admin.booking.attendance_form',compact('bookings','checkin_details')); 
+    }
+    public function attendanceStore(Request $request)
+    {   
+        if ($request->adults_count == 0 && $request->children_count == 0) {
+        $response=['status'=>0,'msg'=>'Could Not Check in, Plz check again'];
+        return response()->json($response);
+        } 
+       
+        $admin=Auth::guard('user')->user();
+        $booking_id = $request->booking_id;
+        $book_ad = 0;
+        $book_ch = 0;
+        $booking=DB::select(DB::raw("select * from `booking` where  `id` = '$booking_id' and `status` = 1 limit 1"));
+        if(count($booking)>=1){
+            $book_ad =  $booking[0]->adults;
+            $book_ch = $booking[0]->children;
+        }
+        $checkin=DB::select(DB::raw("select ifnull(sum(`adults_count`),0) as `checkin_ad`, ifnull(sum(`children_count`),0) as `checkin_ch` from `checkin_detail` where `booking_id` = '$booking_id';"));
+        $checkin_ad = $checkin[0]->checkin_ad + $request->adults_count;
+        $checkin_ch = $checkin[0]->checkin_ch + $request->children_count;
+        if ($checkin_ad <= $book_ad && $checkin_ch <= $book_ch) {
+          $bookings=DB::select(DB::raw("Insert  Into `checkin_detail` (`user_id` ,`booking_id` ,`adults_count` , `children_count`) Values ($admin->id , '$request->booking_id' , '$request->adults_count' , '$request->children_count');"));
+          $response=['status'=>1,'msg'=>'Save Successfully'];
+        return response()->json($response);  
+        } 
+        $response=['status'=>0,'msg'=>'Could Not Check in, Plz check again'];
+        return response()->json($response); 
+    }
     
 }

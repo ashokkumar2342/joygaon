@@ -64,10 +64,10 @@
                         </a>   
                         <!-- Responsive Buttun -->
                         <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <li class="active"><a href="{{ route('front.index') }}">Home</a> 
+                            <li><a href="{{ route('front.index') }}">Home</a> 
                             </li>
                             <li><a href="{{ route('front.about') }}">About Us</a></li>
-                            <li><a href="{{ route('front.gallery') }}">Gallery</a> 
+                            <li class="active"><a href="{{ route('front.gallery') }}">Gallery</a> 
                             <li><a href="{{ route('front.price.list') }}">Price List</a></li> 
                             <li><a href="{{ route('front.cotactus') }}">Contact Us</a></li>
                             </ul>
@@ -76,53 +76,6 @@
                 </div>
             </header>
             <!--Header Wrap End--> 
-            <!--Banner Wrap Start-->
-            <div class="gt_banner default_width">
-                <div class="swiper-container" id="swiper-container">
-                    <ul class="swiper-wrapper">
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_1"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-02.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_2"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-03.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_3"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-04.jpg')}}" alt=""> 
-                            <div class="gt_banner_text gt_slide_3"> 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
-                <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
-            </div>
-            <!--Banner Wrap End-->
-            <!-- About Start here -->
-            <section class="about about-two" style="margin-top:-200px">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="about-content">
-                                <h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon</h4>
-                                {{--  <img src="{{ asset('front_asset/extra-images/about_us_img.jpg') }}" align="right" alt="about image" class="img-responsive" style="height: 250px;"> --}} 
-                                <p>Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area. Joygaon shares an experience of an ethnic village culture, activities, hygienic food, dance, music along with Modern indoor/outdoor games and activities spread in an area of 12 acres.</p>
-                                <p>Joygaon is situated on Haryana State Highway #22 which is about 35kms from Peeragarhi Chowk, Delhi, 40 kms from Gurgaon, 9 kms from Jhajjar, and 15 kms from Bahadurgarh, and 40 kms from Rohtak, turning out to be best weekend getaways in Delhi/NCR with Picnic & Luxurious Stay Facility. Joygaon is a one stop location to a perfect weekend getaway to spend with your family and friends.</p>
-
-                            </div><!-- about content -->
-                        </div> 
-                    </div><!-- row -->
-                </div><!-- container -->
-            </section><!-- about -->
-            <!-- About End here -->      
             <!--Main Content Wrap Start-->
             <div class="gt_main_content_wrap">
                 <div class="gt_hdg_1">

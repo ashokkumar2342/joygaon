@@ -64,9 +64,9 @@
                         </a>   
                         <!-- Responsive Buttun -->
                         <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <li class="active"><a href="{{ route('front.index') }}">Home</a> 
+                            <li ><a href="{{ route('front.index') }}">Home</a> 
                             </li>
-                            <li><a href="{{ route('front.about') }}">About Us</a></li>
+                            <li class="active"><a href="{{ route('front.about') }}">About Us</a></li>
                             <li><a href="{{ route('front.gallery') }}">Gallery</a> 
                             <li><a href="{{ route('front.price.list') }}">Price List</a></li> 
                             <li><a href="{{ route('front.cotactus') }}">Contact Us</a></li>
@@ -75,39 +75,9 @@
                     </div>
                 </div>
             </header>
-            <!--Header Wrap End--> 
-            <!--Banner Wrap Start-->
-            <div class="gt_banner default_width">
-                <div class="swiper-container" id="swiper-container">
-                    <ul class="swiper-wrapper">
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_1"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-02.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_2"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-03.jpg')}}" alt="">
-                            <div class="gt_banner_text gt_slide_3"> 
-                            </div>
-                        </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-04.jpg')}}" alt=""> 
-                            <div class="gt_banner_text gt_slide_3"> 
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
-                <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
-            </div>
-            <!--Banner Wrap End-->
+            <!--Header Wrap End-->
             <!-- About Start here -->
-            <section class="about about-two" style="margin-top:-200px">
+            <section class="about about-two">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -122,81 +92,7 @@
                     </div><!-- row -->
                 </div><!-- container -->
             </section><!-- about -->
-            <!-- About End here -->      
-            <!--Main Content Wrap Start-->
-            <div class="gt_main_content_wrap">
-                <div class="gt_hdg_1">
-                    <h3>Gallery</h3>
-
-                    <span><img src="{{asset('front_asset/images/hdg-01.png')}}" alt=""></span>
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjoygaon12%2Fvideos%2F808253496291964%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://www.facebook.com/100004830724819/videos/798624393641911%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://fb.watch/9oAVmPwQUF/&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>
-                        <div class="col-md-6">                            
-                            <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://fb.watch/9xJ2dnivj3/&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
-                        </div>  
-                    </div>
-                </div>
-            </div> 
-            <!--Banner Services Wrap End-->
-            <!--Our Gallery Wrap Start-->
-            <section class="gt_gallery_bg">
-                <!--Main Heading Wrap Start-->
-                <div class="gt_hdg_1">
-                    <h3>Our Gallery</h3>
-
-                </div>
-                <!--Main Heading Wrap End--> 
-                <!--Gallery List Wrap Start-->
-                <div class="gt_gallery_slider" id="gt_gallery_slider">
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/1.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/2.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/3.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/4.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/5.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/6.jpg')}}" alt="">
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="gt_gallery_wrap">
-                            <img src="{{asset('front_asset/gallery/7.jpg')}}" alt="">
-                        </div>
-                    </div>
-                </div>
-                <!--Gallery List Wrap End-->
-            </section>
-            <!--Our Gallery Wrap End--> 
+            <!-- About End here --> 
             <!--Footer Wrap Start-->
             <footer> 
                 <!--Footer Wrap Start-->
@@ -204,7 +100,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="default_width">
+                                <div class="g default_width">
                                     <div class="gt_office_time widget">
                                         <h5>Opening Hour</h5>
                                         <ul>

@@ -48,7 +48,7 @@ class LoginController extends Controller
       $data = array( 'email' => $user_rs[0]->email_id, 'otp' => $rs_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
       Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
       {
-        $message->to( $data['email'] )->from( $data['from'], $data['otp'] )->subject( 'Code Verification!' );
+        $message->to( $data['email'] )->from( $data['from'], 'Joygaon' )->subject( 'Code Verification!' );
       });
       
     }else{
@@ -161,65 +161,18 @@ class LoginController extends Controller
   
   public function registerStore(Request $request)
   {
-    try { 
-        $this->validate($request, [ 
-         "name" => 'required|string|min:2|max:50',             
-         "email_id" => 'required|email|unique:users|max:100|min:5', 
-         "mobile_no" => 'required|unique:users|numeric|digits:10',
-         "password" => 'required|min:6|max:15', 
-         "retype_password" => 'required|min:6|max:15',
-         'captcha' => 'required|captcha',
-        ]);
-        $email_otp = random_int(100000, 999999); 
-        $mobile_otp = random_int(100000, 999999); 
-        if($request->password != $request->retype_password){
-          return Redirect()->back()->with(['message'=>'Passwords Not Match','class'=>'error']); 
-        }
-        $en_password = bcrypt($request['password']);
-        DB::select(DB::raw("Insert Into `users` (`name`, `email_id`, `mobile_no`, `password`,`role_id`, `created_by`,`status`) Values ('$request->name', '$request->email_id', '$request->mobile_no', '$en_password',4,0,0);"));
+    try {
+      $this->validate($request, [ 
+        "name" => 'required|string|min:2|max:100',             
+        "email_id" => 'required|email|unique:users|max:100|min:5', 
+        "mobile_no" => 'required|unique:users|numeric|digits:10',
+        "password" => 'required|min:6|max:15', 
+        "confirm_password" => 'required|min:6|max:15|same:password',
+        'captcha' => 'required|captcha',
+      ]);
 
-        $new_user_id=DB::select(DB::raw("select `status`,`id` from `users` where `mobile_no`='$request->mobile_no'"));
-        $user_id=$new_user_id[0]->id;
-        $email_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$email_otp',1,0);"));
-        $mobile_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$mobile_otp',2,0);")); 
-        $message = $mobile_otp.' is the Verification code for registration on joygaon. EXCELNET';
-        $tempid ='1707163663440740652'; 
-        event(new SmsEvent($request->mobile_no,$message,$tempid));
-        #send email
-        $data = array( 'email' => $request->email_id, 'otp' =>  $email_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
-        Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
-        {
-            $message->to( $data['email'] )->from( $data['from'], 'Joygaon' )->subject( 'Code Verification!' );
-        });
-
-        return redirect()->route('admin.otp.verify',Crypt::encrypt($user_id))->with(['message'=>'Registration Successfully','class'=>'success']); 
-        
-        }catch (Exception $e){ 
-      }
-    
-  }
-  public function OtpVerifyStore(Request $request ,$otp_type)
-  {
-      $otp_type = Crypt::decrypt($otp_type);
-      $user_id = $request->user_id;
-      if ($otp_type==1) { 
-          $this->validate($request,[                
-         'email_otp' => 'required|numeric',  
-          ]);
-
-          $email_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `otp_type` = 1 and `otp` = $request->email_otp limit 1;"));
-          $count_rs = count($email_rs); 
-          if ($count_rs >= 1) {
-            $update_rs = DB::select(DB::raw("update `user_otp` set `status` = 1 where `user_id` = $user_id and `otp_type` = 1 limit 1;")); 
-            $result_rs = DB::select(DB::raw("select * from `user_otp` where `user_id` = $user_id and `status` = 1 limit 2;"));
-            $count_rs = count($result_rs); 
-            if($count_rs == 2){
-              $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
-              return redirect()->route('admin.login')->with(['class'=>'success','message'=>'EMail Otp Verified Successfully']);
-            }
-              return redirect()->back()->with(['class'=>'success','message'=>'EMail Code Verified Successfully']);      
-          }
-
+      if($request->password != $request->confirm_password){
+        return Redirect()->back()->with(['message'=>'Passwords|Confirm Password Not Match','class'=>'error']); 
       }
       
       $en_password = bcrypt($request['password']);
@@ -248,7 +201,7 @@ class LoginController extends Controller
       $data = array( 'email' => $request->email_id, 'otp' =>  $email_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
       Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
       {
-        $message->to( $data['email'] )->from( $data['from'], 'Joygaon')->subject( 'Code Verification!' );
+        $message->to( $data['email'] )->from( $data['from'], 'Joygaon' )->subject( 'Code Verification!' );
       });
 
       return redirect()->route('admin.otp.verify',Crypt::encrypt($user_id))->with(['message'=>'Registration Successfully','class'=>'success']); 

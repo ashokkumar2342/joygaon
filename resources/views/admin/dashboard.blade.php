@@ -8,9 +8,9 @@
       </div><!-- /.col -->
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"></li>
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard v1</li>
+          {{-- <li class="breadcrumb-item"></li>
+          <li class="breadcrumb-item"><a href="#">Home</a></li> --}}
+          <li class="breadcrumb-item active">Dashboard</li>
         </ol>
       </div><!-- /.col -->
     </div><!-- /.row -->
@@ -25,14 +25,14 @@
 
               <div class="info-box-content">
                 <span class="info-box-text">Total Booking</span>
-                <span class="info-box-number">1410</span>
+                <span class="info-box-number"><h3><b>{{$booking[0]->count_rs}}</b></h3></span>
               </div>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
-          <div class="col-md-4 col-sm-6 col-12">
+          {{-- <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-success"><i class="fa fa-rupee"></i></span>
 
@@ -43,9 +43,9 @@
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-          </div>
+          </div> --}}
           <!-- /.col -->
-          <div class="col-md-4 col-sm-6 col-12">
+          {{-- <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
               <span class="info-box-icon bg-warning"><i class="fa fa-rupee"></i></span>
 
@@ -56,7 +56,7 @@
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-          </div>
+          </div> --}}
           <!-- /.col --> 
         </div>
         

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\OnlinePayment; 
 use Auth;
+use App\Events\SmsEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Validator;
@@ -40,6 +41,7 @@ class OnlinePaymentController extends Controller
         $order_id = $request['ORDERID'];  
         if ( 'TXN_SUCCESS' === $request['STATUS'] ) {
             $transaction_id = $request['TXNID'];
+            $TXNDATE=$request['TXNDATE'];
             $order = OnlinePayment::where('order_id', $order_id)->first();
             $order->status = 1;
             $order->transaction_id = $transaction_id;
@@ -49,6 +51,32 @@ class OnlinePaymentController extends Controller
             $order->bankname = $request['BANKNAME'];
             $order->txndate = $request['TXNDATE']; 
             $order->save();
+            $result_rs = DB::select(DB::raw("update `booking` set `status` = '1' , `transation_no` ='$transaction_id' , `transation_date` ='$TXNDATE' where `order_id` ='$order_id' limit 1;"));
+            //--start--pdf-generate
+            $this->printTicket($order_id);
+            $downloadTicket = DB::select(DB::raw("select `email_id`, `booking_date` , `order_id` ,`mobile_no`  from `booking` where `order_id` = '$order_id'  limit 1;"));
+            //--end-pdf-generate
+            //--start-sms
+            $tempid ='1707163663440740652';
+            event(new SmsEvent($downloadTicket[0]->mobile_no,'Booking Successfully',$tempid));
+            //--end-sms
+            //--start-email 
+            
+            $booking_date=$downloadTicket[0]->booking_date;
+            $order_id=$downloadTicket[0]->order_id;
+            $email_id=$downloadTicket[0]->email_id;
+            $downloadTicket = reset($downloadTicket);
+            $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id; 
+            $files =$documentUrl.'.pdf';
+            $data["email"] = $email_id;
+            $data["title"] = "Joygaon.in";
+            $data["body"] = "This is test mail with attachment";
+            \Mail::send('emails.attachment', $data, function($message)use($data, $files) {
+            $message->to($data["email"])->subject($data["title"]); 
+            $message->attach($files); 
+            });
+             //--end-email 
+            return redirect()->route('admin.booking.status')->with(['message'=>'Payment Successfully','class'=>'success']);
             return view('admin.online_payment.order-complete',compact('order'));
         } else if( 'TXN_FAILURE' === $request['STATUS'] ){
             return redirect()->route('admin.booking.status')->with(['message'=>'Payment Failed','class'=>'error']);
@@ -87,20 +115,31 @@ class OnlinePaymentController extends Controller
     {   
         $booking_id=Crypt::decrypt($booking_id);
         $admin=Auth::guard('user')->user();
-        $amount=DB::select(DB::raw("SELECT `amount` FROM `booking` where `id`=$booking_id LIMIT 1"));
-        $order = new OnlinePayment(); 
-        $order_id = uniqid();
-        $order->user_id =$admin->id;
-        $order->order_id =$order_id;
-        $order->booking_id =$booking_id;
-        $order->amount =$amount[0]->amount;
-        $order->status =0; 
-        $order->save();
-        $data_for_request = $this->handlePaytmRequest( $order_id, $amount[0]->amount );
+        $booking=DB::select(DB::raw("SELECT `amount` , `order_id` FROM `booking` where `id`=$booking_id LIMIT 1"));
+        $old_order_id=$booking[0]->order_id;
+        
+        // $order = new OnlinePayment(); 
+
+        $new_order_id = uniqid();
+        DB::select(DB::raw("UPDATE `booking` SET `order_id` = '$new_order_id' where `id`=$booking_id LIMIT 1"));
+        DB::select(DB::raw("UPDATE `online_payments` SET `order_id` = '$new_order_id' where `booking_id`=$booking_id LIMIT 1"));
+
+        // $order->user_id =$admin->id;
+        // $order->order_id =$order_id;
+        // $order->booking_id =$booking_id;
+        // $order->amount =$amount[0]->amount;
+        // $order->status =0; 
+        // $order->save();
+        // $order_id=$booking[0]->order_id;
+        $amount=$booking[0]->amount;
+        $data_for_request = $this->handlePaytmRequest( $new_order_id, $amount);
         $paytm_txn_url = env('PAYTM_TXN_URL');
         $paramList = $data_for_request['paramList'];
         $checkSum = $data_for_request['checkSum'];
         return view( 'admin.online_payment.paytm-merchant-form', compact( 'paytm_txn_url', 'paramList', 'checkSum' ) );
+
+
+        
     }
      
 
@@ -361,17 +400,62 @@ class OnlinePaymentController extends Controller
     }
     
 
-    public function completed(Request $request,$id) {
-        $admin=Auth::guard('user')->user();
-     	$order = OnlinePayment::where('id', Crypt::decrypt($id))->first();
-        event(new SmsEvent($admin[0]->mobile_no,'Booking Successfully'));
-          return view('admin.online_payment.order-complete',compact('order'));
+    // public function completed(Request $request,$id) {
+    //     $admin=Auth::guard('user')->user();
+    //  	$order = OnlinePayment::where('id', Crypt::decrypt($id))->first();
+    //     $order_id = $order->order_id;
+    //     $this->printTicket($order_id);
+    //     // event(new SmsEvent($admin[0]->mobile_no,'Booking Successfully'));
+    //     // $data = array( 'email' => $request->email_id, 'otp' =>  $email_otp, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
+    //     // Mail::send('emails.mail_otp', $data, function( $message ) use ($data)
+    //     // {
+    //     // $message->to( $data['email'] )->from( $data['from'], 'Joygaon' )->subject( 'Code Verification!' );
+    //     // });
+    //     return redirect()->route('admin.booking.status')->with(['message'=>'Payment Successfully','class'=>'success']);
           
+    // }
+
+
+    public function printTicket($order_id)
+    {
+        $path=Storage_path('fonts/');
+        $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
+        $fontDirs = $defaultConfig['fontDir']; 
+        $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
+        $fontData = $defaultFontConfig['fontdata'];
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [150, 100],
+            'fontDir' => array_merge($fontDirs, [
+                __DIR__ . $path,
+            ]),
+            'fontdata' => $fontData + [
+                'frutiger' => [
+                    'R' => 'FreeSans.ttf',
+                    'I' => 'FreeSansOblique.ttf',
+                ]
+            ],
+            'default_font' => 'freesans',
+            'pagenumPrefix' => '',
+            'pagenumSuffix' => '',
+            'nbpgPrefix' => ' कुल ',
+            'nbpgSuffix' => ' पृष्ठों का पृष्ठ'
+        ]);
+        $bimage1  =\Storage_path('app/image/front_1.jpg');
+        $date=date('Y-m-d');
+        $order_id=$order_id;
+        $booking_id=DB::select(DB::raw("SELECT * FROM `booking` where  `order_id` = '$order_id' and `status` = 1 LIMIT 1")); 
+        $html = view('admin.booking.ticket_pdf',compact('bimage1','booking_id')); 
+        $mpdf->WriteHTML($html); 
+        $documentUrl = Storage_path() . '/app/ticket/'.$date;   
+        @mkdir($documentUrl, 0755, true);  
+        $mpdf->Output($documentUrl.'/'.$order_id.'.pdf', 'F');
+        // return view('admin.booking.print_ticket',compact('paymentModes'));
     }
 
-    public function paymentFailed(Request $request) {     	 
-        return redirect()->route('admin.booking.status')->with(['message'=>'Payment Failed','class'=>'error']);
-    }
+
+
+    // public function paymentFailed(Request $request) {     	 
+    //     return redirect()->route('admin.booking.status')->with(['message'=>'Payment Failed','class'=>'error']);
+    // }
 
 
     

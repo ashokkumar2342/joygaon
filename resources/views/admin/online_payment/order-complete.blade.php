@@ -48,8 +48,8 @@
         </tbody>
       </table> 
       <div class="text-center">
-        <a href="{{ route('admin.payment.status') }}">Go to Booking History</a>
-        <a href="{{ route('admin.payment.status') }}" class="btn btn-sm btn-default">Print Ticket</a>
+        <a href="{{ route('admin.booking.status') }}">Go to Booking History</a>
+        <a href="{{ route('admin.booking.status') }}" class="btn btn-sm btn-default">Print Ticket</a>
       </div> 
     </div> 
 <script src="{{ asset('admin_asset/plugins/jQuery/jquery.min.js') }}"></script>

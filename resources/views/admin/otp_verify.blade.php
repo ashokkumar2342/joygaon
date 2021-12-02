@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Joy Gaon | Verification</title>
+  <title>Welcome To Joygaon| Verification</title>
 
   <!-- Google Font: Source Sans Pro -->
   <meta name="viewport" content="width=device-width, initial-scale=1">

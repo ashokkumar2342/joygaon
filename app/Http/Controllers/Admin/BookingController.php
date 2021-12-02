@@ -19,7 +19,7 @@ class BookingController extends Controller
     public function BookingStatus()
     {
         $user=Auth::guard('user')->user(); 
-        $paymentStatus = DB::select(DB::raw("select `op`.`order_id`,`op`.`booking_id`,`op`.`amount`,`op`.`status`,`book`.`adults`,`book`.`children`,`book`.`booking_date` from `online_payments` `op` inner join `booking` `book` on `book`.`user_id`=$user->id ")); 
+        $paymentStatus = DB::select(DB::raw("select `bk`.`order_id`, `bk`.`id`, `bk`.`adults`, `bk`.`children`, `bk`.`booking_date`, `bk`.`trip_date`, `bk`.`school_company_name`, `bk`.`school_company_city`, `bk`.`person_name`, `bk`.`mobile_no`, `bk`.`email_id`, `bk`.`remarks`, `op`.`status`, `bt`.`name`, `op`.`amount`, `op`.`transaction_id`, `op`.`txndate` from `booking` `bk` inner join `booking_type` `bt` on `bt`.`id` = `bk`.`booking_type_id` inner join `online_payments` `op` on `op`.`order_id` = `bk`.`order_id` where `bk`.`user_id` = $user->id order by `bk`.`id` desc;")); 
         return view('admin.booking.booking_status',compact('paymentStatus'));
     }
     
@@ -59,10 +59,10 @@ class BookingController extends Controller
         $user_id =Auth::guard('user')->user(); 
         $booking_id = $booking_id[0]->id;
         $order = new OnlinePayment(); 
-        $order->user_id =$user_id->id;
-        $order->order_id =$order_id;
-        $order->booking_id =$booking_id;
-        $order->amount =$total_amount;
+        $order->user_id = $user_id->id;
+        $order->order_id = $order_id;
+        $order->booking_id = $booking_id;
+        $order->amount = $total_amount;
         $order->status = 0; 
         $order->save();
         $data_for_request = $objOnlinepaymentClass->handlePaytmRequest( $order_id, $total_amount );
@@ -79,5 +79,16 @@ class BookingController extends Controller
             $bookingTypes = DB::select(DB::raw("select * from `booking_type` order by `id`"));
             return view('admin.booking.booking',compact('bookingTypes','users')); 
         }catch (Exception $e) { }
+    }
+    public function downloadTicket($order_id)
+    {
+       
+        $order_id=Crypt::decrypt($order_id);
+        $downloadTicket = DB::select(DB::raw("select `booking_date` , `order_id` from `booking` where `order_id` = '$order_id'  limit 1;"));
+        $booking_date=$downloadTicket[0]->booking_date;
+        $order_id=$downloadTicket[0]->order_id;
+        $downloadTicket = reset($downloadTicket);
+        $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id;
+        return response()->file($documentUrl.'.pdf');
     }  
 }

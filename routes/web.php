@@ -8,6 +8,10 @@ Route::get('/', function () {
 
 
 Route::get('index', 'Front\FrontController@index')->name('front.index'); //OK-------
+Route::get('about', 'Front\FrontController@about')->name('front.about'); //OK-------
+Route::get('gallery', 'Front\FrontController@gallery')->name('front.gallery'); //OK-------
+Route::get('price-list', 'Front\FrontController@priceList')->name('front.price.list'); //OK-------
+Route::get('cotact-us', 'Front\FrontController@cotactus')->name('front.cotactus'); //OK-------
 Route::get('login', 'Auth\LoginController@login')->name('admin.login'); //OK-------
 Route::get('refresh-captcha', 'Auth\LoginController@refreshCaptcha')->name('admin.refresh.captcha'); 	//OK----
 
@@ -39,12 +43,12 @@ Route::group(['middleware' => 'admin'], function() {
 
 	Route::get('payment-status', 'BookingController@BookingStatus')->name('admin.booking.status'); 	//OK--------------
 	
-	Route::get('pay-again/{bookin_id}', 'OnlinePaymentController@payAgain')->name('admin.pay.again'); 
-	Route::get('qrcode', 'DashboardController@qrcode')->name('admin.qrcode'); 
-	Route::get('qrcode-show/{path}', 'DashboardController@qrcodeShow')->name('admin.qrcode.show'); 
-	Route::get('attendance', 'DashboardController@attendance')->name('admin.attendance'); 
-	Route::get('attendance barcode', 'DashboardController@attendanceBarcode')->name('admin.attendance.barcode'); 
-	Route::get('print-ticket', 'DashboardController@printTicket')->name('admin.print.ticket'); 
+	Route::get('pay-again/{bookin_id}', 'OnlinePaymentController@payAgain')->name('admin.pay.again');//OK------
+	Route::get('attendance', 'DashboardController@attendance')->name('admin.attendance'); 		//OK--------
+	Route::get('attendance-barcode', 'DashboardController@attendanceBarcode')->name('admin.attendance.barcode'); 	//OK--------
+	Route::post('attendance-store', 'DashboardController@attendanceStore')->name('admin.attendance.store'); 	//OK--------
+	Route::get('print-ticket/{order_id?}', 'OnlinePaymentController@printTicket')->name('admin.print.ticket'); 
+	Route::get('download-ticket/{order_id?}', 'BookingController@downloadTicket')->name('admin.download.ticket'); 
 
 
 
