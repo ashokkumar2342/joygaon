@@ -75,8 +75,9 @@ class OnlinePaymentController extends Controller
             $data["user_name"] = $user_name;
             $data["ticket_no"] = $ticket_no;
             $data["subject"] = "Joygaon Ticket Booking";
+            $data["from"] = "info@joygaon.in";
             \Mail::send('emails.attachment', $data, function($message)use($data, $files) {
-            $message->to($data["email"])->subject($data["subject"]); 
+            $message->to($data["email"])->from( $data['from'], 'Joygaon' )->subject($data["subject"]); 
             $message->attach($files); 
             });
              //--end-email 
