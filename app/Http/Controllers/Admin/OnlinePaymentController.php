@@ -57,22 +57,26 @@ class OnlinePaymentController extends Controller
             $downloadTicket = DB::select(DB::raw("select `email_id`, `booking_date` , `order_id` ,`mobile_no`  from `booking` where `order_id` = '$order_id'  limit 1;"));
             //--end-pdf-generate
             //--start-sms
-            $tempid ='1707163663440740652';
-            event(new SmsEvent($downloadTicket[0]->mobile_no,'Booking Successfully',$tempid));
+            $message = $downloadTicket[0]->id.' is the Verification code for registration on joygaon. EXCELNET';
+            $tempid ='1707163663440740652'; 
+            event(new SmsEvent($request->mobile_no,$message,$tempid));
             //--end-sms
             //--start-email 
             
             $booking_date=$downloadTicket[0]->booking_date;
             $order_id=$downloadTicket[0]->order_id;
             $email_id=$downloadTicket[0]->email_id;
+            $user_name=$downloadTicket[0]->person_name;
+            $ticket_no=$downloadTicket[0]->id;
             $downloadTicket = reset($downloadTicket);
             $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id; 
             $files =$documentUrl.'.pdf';
             $data["email"] = $email_id;
-            $data["title"] = "Joygaon.in";
-            $data["body"] = "This is test mail with attachment";
+            $data["user_name"] = $user_name;
+            $data["ticket_no"] = $ticket_no;
+            $data["subject"] = "Joygaon Ticket Booking";
             \Mail::send('emails.attachment', $data, function($message)use($data, $files) {
-            $message->to($data["email"])->subject($data["title"]); 
+            $message->to($data["email"])->subject($data["subject"]); 
             $message->attach($files); 
             });
              //--end-email 

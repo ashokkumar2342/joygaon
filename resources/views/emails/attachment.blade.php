@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Joygaon Ticket Booking</title>
 </head>
 <body>
-<h1>{{ $title }}</h1>
-    <p>{{ $body }}</p>
+<p>Dear {{ $user_name }},</p> 
+<p>Joygaon Ticket Number: {{ $ticket_no }} is Successfully. </p>
      
     <p>Thank you</p>
 </body>
