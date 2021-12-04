@@ -49,6 +49,8 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::post('attendance-store', 'DashboardController@attendanceStore')->name('admin.attendance.store'); 	//OK--------
 	Route::get('print-ticket/{order_id?}', 'OnlinePaymentController@printTicket')->name('admin.print.ticket'); 
 	Route::get('download-ticket/{order_id?}', 'BookingController@downloadTicket')->name('admin.download.ticket'); 
+	Route::get('report', 'BookingController@report')->name('admin.report'); 
+	Route::post('report-post', 'BookingController@reportPost')->name('admin.report.post'); 
 
 
 

@@ -24,6 +24,16 @@
     .gt_gallery_wrap{
         width: 140%;
     }
+    table,th,td{
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+
+    }
+    table tr td{
+       border-collapse: separate;
+       color: #0c0909;
+    }
 </style>
 <body> 
     <!--gt Wrapper Start-->  
@@ -42,7 +52,7 @@
                     </div>
                     <div class="gt_hdr_3_ui_element">
                         <ul>
-                            <li><i class="fa fa-phone"></i>+124 456 7858</li>
+                            <li><i class="fa fa-phone"></i>+91 7404452902</li>
                             <li><i class="fa fa-envelope-o"></i><a href="#">info@joygaon.in</a></li> 
                             <li><a class="btn-primary btn-sm" href="{{ route('admin.login') }}" title=""><i class="fa fa-user"></i>Sign In</a></li> 
                             <li><a class="btn-info btn-sm" href="{{ route('admin.register') }}" title=""> <i class="fa fa-user"></i>Register</a></li> 
@@ -83,28 +93,69 @@
                         <div class="col-md-12">
                             <div class="about-content">
                                 <h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon</h4>
-                                    <table class="table" style="margin-top: 20px">
+
+                                    <table class="table" style="margin-top: 20px;">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="4" style="font-size: 26px;color:black;text-align: center;">PACKAGES OF JOYGAON (TILL 31-03-2022) <BR> RATE CARD FOR BUSINESS ASSOCIATES</th> 
+                                            </tr>
+                                        </thead>
                                         <thead style="background-color: #605f6a;color: #fff">
                                             <tr>
                                                 <th>Sr.No.</th>
-                                                <th>Booking Type</th>
-                                                <th>Adults</th>
-                                                <th>Children</th>
+                                                <th>Packages For</th>
+                                                <th>Joygaon Rate</th>
+                                                <th>Remarks</th>
                                             </tr>
                                         </thead> 
-                                        <tbody>
-                                            @foreach ($priceLists as $priceList) 
+                                        <tbody> 
                                             <tr>
-                                                <td>{{$priceList->id}}</td>
-                                                <td>{{$priceList->name}}</td>
-                                                <td>{{$priceList->ad_amount}}</td>
-                                                <td>{{$priceList->ch_amount}}</td>
+                                                <td>1</td>
+                                                <td><H5>School Picnic <br> (On Every 10 student , 1 Teacher is Complimentary)</H5></td>
+                                                <td>Rs. 500/- per Student + Gst</td>
+                                                <td></td>
                                             </tr>
-                                            @endforeach
+                                            <tr>
+                                                <td>2</td>
+                                                <td><H5>Teacher's Picnic</H5></td>
+                                                <td>Rs. 700/- per Teacher + Gst</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td><H5>College Student's Picnic</H5></td>
+                                                <td>Rs. 700/- per Student + Gst</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td><H5>Family Picnic</H5></td>
+                                                <td>Rs. 1050/- Above 10 Years <br><br>Rs. 600/- 5-10 Years </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td><H5>Corporate Picnic <br> (Minimum Group Size 30)</H5></td>
+                                                <td>Rs. 1050/- Above 10 Years <br><br>Rs. 600/- 5-10 Years </td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td><br><br><br>6</td>
+                                                <td class="_cent"><H5><br><br><br>Stay With Picnic</H5></td>
+                                                <td>@ Rs. 2000/-P.P.<br>(Double Sharing)<br><br>@ Rs. 1800/-P.P.<br>(Triple Sharing)<br><br>@ Rs. 1650/-P.P.<br>(Quad Sharing)<br><br>@ Rs. 1200/-Per Child<br>(5-10 Years)<br><br></td>
+                                                <td><br><br><br>18 % TAC</td>
+                                            </tr> 
                                         </tbody>
-                                        
-                                    </table>
-
+                                        <tfoot>
+                                            <tr>
+                                              <td colspan="4" style="color: #0c0909;text-align: justify;"><h3><b>1. Paid Activities: Zipline & 7D Movie Will Be Charged Extra Rs. 100/- Per Person Per Ride. <br><br>2. Paid Activities: Zipline & 7D Movie Will Be Charged Extra For Student Rs. 70/- Per Student Per Ride.</b></h3></td>
+                                              
+                                           
+                                             
+                                              
+                                            </tr>
+                                          </tfoot> 
+                                    </table> 
                             </div><!-- about content -->
                         </div> 
                     </div><!-- row -->
@@ -181,7 +232,7 @@
                                                 <h5>Our Address</h5>
                                                 <ul class="gt_team1_contact_info">
                                                     <li><i class="fa fa-map-marker"></i>Village Kablana, 9 Milestone, Jhajjar Bahadurgarh Road, Jhajjar, Haryana, 124104, INDIA </li>
-                                                    <li><i class="fa fa-phone"></i>1-677-124-44227 </li>
+                                                    <li><i class="fa fa-phone"></i>+91 7404452902 </li>
                                                     <li><i class="fa fa-envelope"></i> <a href="#">info@joygaon.in</a> </li>
                                                 </ul>
                                             </div>

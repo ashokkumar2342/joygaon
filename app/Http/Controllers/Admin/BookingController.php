@@ -20,7 +20,7 @@ class BookingController extends Controller
     {
         $user=Auth::guard('user')->user(); 
         $paymentStatus = DB::select(DB::raw("select `bk`.`order_id`, `bk`.`id`, `bk`.`adults`, `bk`.`children`, `bk`.`booking_date`, `bk`.`trip_date`, `bk`.`school_company_name`, `bk`.`school_company_city`, `bk`.`person_name`, `bk`.`mobile_no`, `bk`.`email_id`, `bk`.`remarks`, `op`.`status`, `bt`.`name`, `op`.`amount`, `op`.`transaction_id`, `op`.`txndate` from `booking` `bk` inner join `booking_type` `bt` on `bt`.`id` = `bk`.`booking_type_id` inner join `online_payments` `op` on `op`.`order_id` = `bk`.`order_id` where `bk`.`user_id` = $user->id order by `bk`.`id` desc;")); 
-        return view('admin.booking.booking_status',compact('paymentStatus'));
+        return view('admin.booking.booking_status',compact('paymentStatus','user'));
     }
     
 
@@ -90,5 +90,24 @@ class BookingController extends Controller
         $downloadTicket = reset($downloadTicket);
         $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id;
         return response()->file($documentUrl.'.pdf');
-    }  
+    }
+    public function report($value='')
+    {
+        try{
+            $users=Auth::guard('user')->user();  
+            $bookingTypes = DB::select(DB::raw("select * from `booking_type` order by `id`"));
+            return view('admin.booking.report',compact('bookingTypes','users')); 
+        }catch (Exception $e) { }
+    }
+    public function reportPost(Request $request)
+    {
+        try{
+            $users=Auth::guard('user')->user();  
+            $bookings = DB::select(DB::raw("select * from `booking`;"));
+            $response=array();
+            $response["status"]=1;
+            $response["data"]=view('admin.booking.report_table',compact('bookings'))->render();
+            return response()->json($response); 
+        }catch (Exception $e) { } 
+    } 
 }
