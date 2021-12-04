@@ -59,7 +59,7 @@ class OnlinePaymentController extends Controller
             //--start-sms
             $message = $downloadTicket[0]->id.' is the Verification code for registration on joygaon. EXCELNET';
             $tempid ='1707163663440740652'; 
-            event(new SmsEvent($request->mobile_no,$message,$tempid));
+            event(new SmsEvent($downloadTicket[0]->mobile_no,$message,$tempid));
             //--end-sms
             //--start-email 
             

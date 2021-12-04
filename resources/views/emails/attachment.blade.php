@@ -5,7 +5,7 @@
 </head>
 <body>
 <p>Dear {{ $user_name }},</p> 
-<p>Joygaon Ticket Number: {{ $ticket_no }} is Successfully. </p>
+<p>Joygaon Ticket Number: {{ $ticket_no }} is Booking Successfully. </p>
      
     <p>Thank you</p>
 </body>
