@@ -16,7 +16,7 @@ Route::get('login', 'Auth\LoginController@login')->name('admin.login'); //OK----
 Route::get('refresh-captcha', 'Auth\LoginController@refreshCaptcha')->name('admin.refresh.captcha'); 	//OK----
 
 
-Route::post('login', 'Auth\LoginController@logout')->name('admin.logout.post'); 
+Route::post('logout', 'Auth\LoginController@logout')->name('admin.logout.post'); 
 
 
 Route::get('register', 'Auth\LoginController@register')->name('admin.register');	//OK---------
@@ -29,6 +29,7 @@ Route::post('login-post', 'Auth\LoginController@loginPost')->name('admin.login.p
 Route::get('forgot-password', 'Auth\LoginController@forgotPassword')->name('admin.forgot.password');
 Route::post('forgot-password-send-link', 'Auth\LoginController@forgotPasswordSendLink')->name('admin.forgot.password.send.link');
 Route::get('forgot-password-reset/{email}', 'Auth\LoginController@forgotPasswordReset')->name('admin.forgot.password.reset');
+Route::post('forgot-password-reset-save/{email}', 'Auth\LoginController@forgotPasswordResetSave')->name('admin.forgot.password.reset.save');
 
 
 Route::group(['middleware' => 'admin'], function() {

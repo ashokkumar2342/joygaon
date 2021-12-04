@@ -229,55 +229,60 @@ class LoginController extends Controller
 
   
   
-  // public function forgotPassword()
-  // {
-  //  return view('admin.forgot_password');
-  // }
-  // public function forgotPasswordSendLink(Request $request)
-  // {
-  //   $this->validate($request, [
-  //   'email_or_phone' => 'required', 
-  //   ]);
-  //   $email = str_replace("'", "", trim($request->email_or_phone));
-  //   $mobile = str_replace("'", "", trim($request->email_or_phone)); 
-  //   $email_rs = DB::select(DB::raw("select * from `users` where `email_id` = '$email' and `status` < 2 limit 1;"));
-  //   $mobile_rs = DB::select(DB::raw("select * from `users` where `mobile_no` = '$mobile' and `status` < 2 limit 1;"));
-  //   if (!empty($email_rs)) {
-  //     if ($email_rs[0]->status==0) {
-  //         return redirect()->route('admin.otp.verify',Crypt::encrypt($email_rs[0]->id));
-  //     }
-  //     else{
-  //       $pathToFile =\Storage_path('app/ticket/10001.pdf');
-  //       $data = array( 'email' => $email, 'link' =>'$email', 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
-  //       Mail::send('emails.email_send_link', $data, function( $message ) use ($data)
-  //       {
-  //         $message->attach($pathToFile);
-  //       }); 
-  //     }
-  //       return redirect()->back()->with(['message'=>'Link Send Successfully','class'=>'success']);
-  //   } 
-  //   elseif(!empty($mobile_rs)){
-  //     if ($mobile_rs[0]->status==0) {
-  //         return redirect()->route('admin.otp.verify',Crypt::encrypt($mobile_rs[0]->id));
-  //     }else{
-  //       $pathToFile  =\Storage_path('app/ticket/10001.pdf');
-  //       $data = array( 'email' => $request->email, 'link' =>'$request->email', 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
-  //       Mail::send('emails.email_send_link', $data, function( $message ) use ($data)
-  //       {
-  //         $message->attach($pathToFile);
-  //       }); 
-  //     }
-  //       return redirect()->back()->with(['message'=>'Link Send Successfully','class'=>'success']);
-  //   } 
-      
-  //   return Redirect()->back()->with(['message'=>'Invalid User or Password','class'=>'error']); 
+  public function forgotPassword()
+  {
+   return view('admin.forgot_password');
+  }
+
+  public function forgotPasswordSendLink(Request $request)
+  {
+    $this->validate($request, [
+    'email_or_phone' => 'required', 
+    ]);
+   
+    $email_mobile = str_replace("'", "", trim($request->email_or_phone));
+    $user=DB::select(DB::raw("select * from `users` where `email_id` = '$email_mobile' or `mobile_no` = '$email_mobile' limit 1;")); 
     
-  // }
+    if (!empty($user)) {
+      if ($user[0]->status==0) {
+          return redirect()->route('admin.otp.verify',Crypt::encrypt($user[0]->id));
+      }
+      else{
+        
+        $data = array( 'link' => route('admin.forgot.password.reset',Crypt::encrypt($user[0]->email_id)),'user_name' => $user[0]->name,'email' => $user[0]->email_id, 'from' => 'info@joygaon.in', 'from_name' => 'Joygaon' );
+        Mail::send('emails.forgotPassword', $data, function( $message ) use ($data)
+        {
+          $message->to($data['email'] )->from( $data['from'], 'Joygaon' )->subject( 'Forgot Password' );
+        });
+      }
+        return redirect()->back()->with(['message'=>'Link Send Successfully','class'=>'success']);
+    } 
+    
+    
+      
+    return Redirect()->back()->with(['message'=>'Invalid User or Password','class'=>'error']); 
+    
+  }
+  public function forgotPasswordReset($email)
+  {
+    $email = Crypt::decrypt($email); 
+    
+    $user=DB::select(DB::raw("select * from `users` where `email_id` = '$email' limit 1;")); 
+    
+    if (!empty($user)) {
+      return view('admin.reset_password',compact('email'));
+    } 
+    
+    
+      
+    return Redirect()->back()->with(['message'=>'Invalid Link','class'=>'error']); 
+    
+  }
   
-  // public function logout(){
-  //   Session::flush();
-  //   return redirect()->route('admin.login');
-  // }
+  public function logout(){
+    Session::flush();
+    return redirect()->route('admin.login');
+  }
 
     
     
