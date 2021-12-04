@@ -54,7 +54,7 @@ class OnlinePaymentController extends Controller
             $result_rs = DB::select(DB::raw("update `booking` set `status` = '1' , `transation_no` ='$transaction_id' , `transation_date` ='$TXNDATE' where `order_id` ='$order_id' limit 1;"));
             //--start--pdf-generate
             $this->printTicket($order_id);
-            $downloadTicket = DB::select(DB::raw("select `email_id`, `booking_date` , `order_id` ,`mobile_no`  from `booking` where `order_id` = '$order_id'  limit 1;"));
+            $downloadTicket = DB::select(DB::raw("select *  from `booking` where `order_id` = '$order_id'  limit 1;"));
             //--end-pdf-generate
             //--start-sms
             $message = $downloadTicket[0]->id.' is the Verification code for registration on joygaon. EXCELNET';
