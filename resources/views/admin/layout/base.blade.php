@@ -68,12 +68,12 @@
    }
    .cursor:hover{
     cursor: pointer !important; 
-    color:#2d4e94 !important;
+    color:#508e4c !important;
     text-decoration: underline !important;
    }
    .cursor{
     cursor: pointer !important; 
-    color:#2d4e94 !important;
+    color:#508e4c !important;
     text-decoration: underline !important;
    }
    .select2-container .select2-selection--single{

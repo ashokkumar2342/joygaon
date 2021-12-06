@@ -8,7 +8,9 @@
     <meta name="description" content="Kid Template for Children and child.">
     <meta name="keywords" content="child,children,school,childcare,colorful">
     <meta name="author" content="2goodtheme">
-
+    <meta name="theme-color" content="#508e4c">
+    <meta name="msapplication-navbutton-color" content="#508e4c">
+    <meta name="apple-mobile-web-app-bar-style" content="#508e4c">
     <title>Best Weekend Getaways, Holiday Destinations near Delhi NCR - Joygaon</title>
     <!-- Swiper Slider CSS -->
     <link href="{{asset('front_asset/css/swiper.css')}}" rel="stylesheet">
@@ -24,90 +26,55 @@
     .gt_gallery_wrap{
         width: 140%;
     }
+    .navbar-collapse:hover {
+
+    box-shadow : none;
+
+    text-shadow : none;
+
+    background : #508e4c; /*You can change it to any color */ 
+
+}
 </style>
 <body> 
     <!--gt Wrapper Start-->  
     <div class="gt_wrapper"> 
         <!--Header Wrap Start-->
-        <header>
-            <div class="gt_top3_wrap default_width">
-                <div class="container">
-                    <div class="gt_top3_scl_icon">
-                        <ul class="gt_hdr3_scl_icon">
-                           {{--  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
-                        </ul>
-                    </div>
-                    <div class="gt_hdr_3_ui_element">
-                        <ul>
-                            <li><i class="fa fa-phone"></i>+91 7404452902</li>
-                            <li><i class="fa fa-envelope-o"></i><a href="#">info@joygaon.in</a></li> 
-                            <li><a class="btn-primary btn-sm" href="{{ route('admin.login') }}" title=""><i class="fa fa-user"></i>Sign In</a></li> 
-                            <li><a class="btn-info btn-sm" href="{{ route('admin.register') }}" title=""> <i class="fa fa-user"></i>Register</a></li> 
-                        </ul>
-                    </div> 
-                </div>
-            </div> 
-            <div class="gt_top3_menu default_width">
-                <div class="container"> 
-                    <div class="gt-logo" style="padding: 2px 0px;">
-                        <a href="#"><img src="{{asset('front_asset/images/logo.png')}}" alt=""></a>
-                    </div>
-                    <nav class="gt_hdr3_navigation">
-                        <!-- Responsive Buttun -->
-                        <a class="navbar-btn collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>   
-                        <!-- Responsive Buttun -->
-                        <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <li class="active"><a href="{{ route('front.index') }}">Home</a> 
-                            </li>
-                            <li><a href="{{ route('front.about') }}">About Us</a></li>
-                            <li><a href="{{ route('front.gallery') }}">Gallery</a> 
-                            <li><a href="{{ route('front.price.list') }}">Price List</a></li> 
-                            <li><a href="{{ route('front.cotactus') }}">Contact Us</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </header>
+        @include('front.header')
             <!--Header Wrap End--> 
             <!--Banner Wrap Start-->
             <div class="gt_banner default_width">
                 <div class="swiper-container" id="swiper-container">
                     <ul class="swiper-wrapper">
-                        <li class="swiper-slide" style="height: 750px">
+                        <li class="swiper-slide">
                             <img src="{{asset('front_asset/extra-images/banner-1.jpg')}}" alt="">
                             <div class="gt_banner_text gt_slide_1"> 
                             </div>
                         </li>
-                        <li class="swiper-slide" style="height: 750px">
+                        <li class="swiper-slide">
                             <img src="{{asset('front_asset/extra-images/banner-02.jpg')}}" alt="">
                             <div class="gt_banner_text gt_slide_2"> 
                             </div>
                         </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-03.jpg')}}" alt="">
+                        
+                        <li class="swiper-slide">
+                            <img src="{{asset('front_asset/extra-images/banner-04.webp')}}" alt=""> 
                             <div class="gt_banner_text gt_slide_3"> 
                             </div>
                         </li>
-                        <li class="swiper-slide" style="height: 750px">
-                            <img src="{{asset('front_asset/extra-images/banner-04.jpg')}}" alt=""> 
+                        <li class="swiper-slide">
+                            <img src="{{asset('front_asset/extra-images/banner-03.webp')}}" alt=""> 
                             <div class="gt_banner_text gt_slide_3"> 
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="swiper-button-next"><i class="fa fa-angle-right"></i></div>
+                <div class="swiper-button-next" ><i class="fa fa-angle-right"></i></div>
                 <div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
             </div>
             <!--Banner Wrap End-->
             <!-- About Start here -->
-            <section class="about about-two" style="margin-top:-200px">
+            <section class="about about-two">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -198,94 +165,7 @@
             </section>
             <!--Our Gallery Wrap End--> 
             <!--Footer Wrap Start-->
-            <footer> 
-                <!--Footer Wrap Start-->
-                <div class="gt_footer_bg default_width">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="default_width">
-                                    <div class="gt_office_time widget">
-                                        <h5>Opening Hour</h5>
-                                        <ul>
-                                            <li class="bg-warning">
-                                               9:30 a.m. to 5 p.m. Every Day
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                    <div class="gt_foo_about widget">
-                                        <h5>About Joygaon</h5>
-                                        <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin nibh vel velit auctor aliquet.</p>
-                                        <ul>
-                                           {{--  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="col-md-9">
-                                <div class="foo_col_outer_wrap default_width">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="gt_foo_news widget">
-                                                <h5>Price List</h5>
-                                                <ul> 
-                                                    <li>
-                                                        
-                                                        <span>Adult 1000</span>
-                                                    </li>
-                                                    <li>
-                                                      
-                                                        <span>Children 1000</span>
-                                                    </li>   
-                                                </ul>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="gt_foo_recent_projects widget">
-                                                <h5>Our Gallery</h5>
-                                                <ul>
-                                                    <li><img src="{{asset('front_asset/gallery/1.jpg')}}" alt=""></a></li>
-                                                    <li><img src="{{asset('front_asset/gallery/2.jpg')}}" alt=""></a></li>
-                                                    <li><img src="{{asset('front_asset/gallery/3.jpg')}}" alt=""></a></li>
-                                                    <li><img src="{{asset('front_asset/gallery/4.jpg')}}" alt=""></a></li>
-                                                    <li><img src="{{asset('front_asset/gallery/5.jpg')}}" alt=""></a></li>
-                                                    <li><img src="{{asset('front_asset/gallery/9.jpg')}}" alt=""></a></li>
-                                                    
-                                                </ul>
-                                            </div>
-                                        </div> 
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="widget">
-                                                <h5>Our Address</h5>
-                                                <ul class="gt_team1_contact_info">
-                                                    <li><i class="fa fa-map-marker"></i>Village Kablana, 9 Milestone, Jhajjar Bahadurgarh Road, Jhajjar, Haryana, 124104, INDIA </li>
-                                                    <li><i class="fa fa-phone"></i>+91 7404452902</li>
-                                                    <li><i class="fa fa-envelope"></i> <a href="#">info@joygaon.in</a> </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
-                <!--Footer Wrap End--> 
-                <!--Copyright Wrap Start-->
-                <div class="copyright_bg default_width">
-                    <div class="container">
-                        <div class="copyright_wrap default_width">
-                            <p>©copyrights.<a href="#">joygaon.in</a>. All Right Reserved.</p>
-                        </div>
-                    </div>
-                </div>  
-                <!--Copyright Wrap End-->      
-            </footer> 
+            @include('front.footer')
             <!--Footer Wrap End-->
             <!--Back to Top Wrap Start-->
             <div class="back-to-top">

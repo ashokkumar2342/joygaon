@@ -59,8 +59,8 @@ footer{
 	padding: 70px 0px;
 }
 .widget{
-	float: left;
-	width: 100%;
+	float: right;
+	width: 75%;
 	position: relative;
 }
 .widget h5{
