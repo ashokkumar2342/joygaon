@@ -77,7 +77,7 @@
             </div>
           </div>
         </div>
-        <p class="text-danger">{{ $errors->first('retype_password') }}</p>
+        <p class="text-danger">{{ $errors->first('confirm_password') }}</p>
 
           <div class="captcha">
             <span>{!! captcha_img('flat') !!}</span>

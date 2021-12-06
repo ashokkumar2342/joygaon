@@ -260,7 +260,7 @@ class LoginController extends Controller
     
     
       
-    return Redirect()->back()->with(['message'=>'Invalid User or Password','class'=>'error']); 
+    return Redirect()->back()->with(['message'=>'Invalid User','class'=>'error']); 
     
   }
   public function forgotPasswordReset($email)
@@ -271,12 +271,20 @@ class LoginController extends Controller
     
     if (!empty($user)) {
       return view('admin.reset_password',compact('email'));
-    } 
-    
-    
-      
+    }  
     return Redirect()->back()->with(['message'=>'Invalid Link','class'=>'error']); 
     
+  }
+  public function forgotPasswordResetSave(Request $request ,$email)
+  {
+      $this->validate($request, [
+      'password'=> 'required|min:6|max:15',
+      'confirm_password'=> 'required|min:6|max:15|same:password',
+      ]); 
+      $email = Crypt::decrypt($email); 
+      $password=bcrypt($request['password']); 
+      $user_rs = DB::select(DB::raw("update `users` set `password` ='$password' where `email_id` ='$email' limit 1")); 
+      return redirect()->route('admin.login')->with(['message'=>'Password Reset Successfully','class'=>'success']); 
   }
   
   public function logout(){

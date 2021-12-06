@@ -26,19 +26,26 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Reset Password</p>
 
-      <form action="{{ route('admin.forgot.password.reset.save',$email) }}" method="post">
+      <form action="{{ route('admin.forgot.password.reset.save',Crypt::encrypt($email)) }}" method="post">
         {{csrf_field()}}
-        <input type="hidden" name="email" value="{{ $email }}">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="email_or_phone" placeholder="New Password" maxlength="100">
-          
+          <input type="password" class="form-control" name="password" id="password" placeholder="Password" required minlength="6" maxlength="15" onchange="onChange()">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
         </div>
+        <p class="text-danger">{{ $errors->first('password') }}</p>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="email_or_phone" placeholder="Confirm Password" maxlength="100">
-          
+          <input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required minlength="6" maxlength="15" onchange="onChange()">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
         </div>
-       
-        <p class="text-danger">{{ $errors->first('email_or_phone') }}</p>
+        <p class="text-danger">{{ $errors->first('confirm_password') }}</p>
         <div class="row">
           <div class="col-12">
             <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
@@ -66,15 +73,15 @@
 <script src="{{ asset('admin_asset/dist/js/toastr.min.js') }}"></script>
 @include('admin.include.message')
 <script type="text/javascript">
-  function refresh(){
-    $.ajax({
-     type:'GET',
-     url:'{{ route('admin.refresh.captcha') }}',
-     success:function(data){
-        $(".captcha span").html(data);
-     }
-  });
+  function onChange() {
+  const password = document.querySelector('input[name=password]');
+  const confirm = document.querySelector('input[name=confirm_password]');
+  if (confirm.value === password.value) {
+    confirm.setCustomValidity('');
+  } else {
+    confirm.setCustomValidity('Passwords do not match');
   }
+}
  
 </script> 
 <script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
