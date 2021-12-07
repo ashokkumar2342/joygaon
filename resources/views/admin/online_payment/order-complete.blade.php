@@ -23,33 +23,34 @@
 <body class="hold-transition login-page">
   <div class="lockscreen-wrapper">
     <div class="lockscreen-logo">
-      <a class="bg-success"><b>Payment Successfully</a>
+      <a><b><H1 style="color: #31ba32;font-size:60px">THANK YOU! <i class="fa fa-check" aria-hidden="true"></i></H1></a>
+      <a><b><H5 style="color: #939496;font-size:15px">Payment Completed Successfully!</H5></a>
       </div>  
       <div class="lockscreen-item">
       </div>
       <table class="table"> 
         <tbody>
-          <tr>
+          {{-- <tr>
             <td>Name : </td>
-            <td></td>
+            <td>{{ $user_name }}</td>
           </tr>
           <tr>
-            <td>Transaction Id : </td>
-            <td>{{ $order->order_id }}</td>
+            <td>Order Id : </td>
+            <td>{{ $order_id }}</td>
           </tr>
+          
           <tr>
-            <td>Booking Id : </td>
-            <td>{{ $order->booking_id }}</td>
-          </tr>
-          <tr>
-            <td>Amount : </td>
-            <td>{{ $order->amount }}</td>
-          </tr>
+            <td>Ticket No. : </td>
+            <td>{{ $ticket_no }}</td>
+          </tr> --}}
         </tbody>
       </table> 
       <div class="text-center">
         <a href="{{ route('admin.booking.status') }}">Go to Booking History</a>
-        <a href="{{ route('admin.booking.status') }}" class="btn btn-sm btn-default">Print Ticket</a>
+        <a href="{{ route('admin.download.ticket',{{-- Crypt::encrypt($order_id) --}}) }}" target="blank" class="btn btn-sm btn-warning">Print Ticket</a>
+      </div>
+      <div class="text-center">
+        <a id="btn_book" href="{{ route('admin.booking')}}"  class="btn btn" style="margin:10px;width:200px;height:40px;background-color:#fbf104;border: solid 1px;">Book Again</a>
       </div> 
     </div> 
 <script src="{{ asset('admin_asset/plugins/jQuery/jquery.min.js') }}"></script>
@@ -65,10 +66,16 @@
 <script src="{{ asset('admin_asset/dist/js/toastr.min.js') }}"></script>
 @include('admin.include.message')
 <script type="text/javascript">
- 
+ $('#btn_book').mouseover(function(){
+    $('#btn_book').css("background-color", "#31ba32").css("color", "#fff");
+  });
+  $('#btn_book').mouseout(function(){
+    $('#btn_book').css("background-color", "#fbf104").css("color", "black");;
+  });
  
 </script> 
 <script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </body>
 </html>

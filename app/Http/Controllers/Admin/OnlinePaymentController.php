@@ -38,7 +38,8 @@ class OnlinePaymentController extends Controller
     //   */
     
     public function paytmCallback( Request $request ) { 
-        $order_id = $request['ORDERID'];  
+        $order_id = $request['ORDERID'];
+        $transaction_id=$request['TXNDATE'];  
         if ( 'TXN_SUCCESS' === $request['STATUS'] ) {
             $transaction_id = $request['TXNID'];
             $TXNDATE=$request['TXNDATE'];
@@ -81,8 +82,8 @@ class OnlinePaymentController extends Controller
             $message->attach($files); 
             });
              //--end-email 
-            return redirect()->route('admin.booking.status')->with(['message'=>'Payment Successfully','class'=>'success']);
-            return view('admin.online_payment.order-complete',compact('order'));
+            // return redirect()->route('admin.booking.status')->with(['message'=>'Payment Successfully','class'=>'success']);
+            return view('admin.online_payment.order-complete',compact('order_id','user_name','ticket_no','transaction_id'));
         } else if( 'TXN_FAILURE' === $request['STATUS'] ){
             return redirect()->route('admin.booking.status')->with(['message'=>'Payment Failed','class'=>'error']);
         }else if( 'PENDING' === $request['STATUS'] ){

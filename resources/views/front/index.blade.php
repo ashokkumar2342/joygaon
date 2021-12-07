@@ -26,16 +26,9 @@
     .gt_gallery_wrap{
         width: 140%;
     }
-    .navbar-collapse:hover {
-
-    box-shadow : none;
-
-    text-shadow : none;
-
-    background : #508e4c; /*You can change it to any color */ 
-
-}
+    
 </style>
+
 <body> 
     <!--gt Wrapper Start-->  
     <div class="gt_wrapper"> 
@@ -93,7 +86,7 @@
             <!--Main Content Wrap Start-->
             <div class="gt_main_content_wrap">
                 <div class="gt_hdg_1">
-                    <h3>Gallery</h3>
+                    <h4 style="font-size: 36px;color: #ffc000">Gallery</h4>
 
                     <span><img src="{{asset('front_asset/images/hdg-01.png')}}" alt=""></span>
                 </div>
@@ -119,7 +112,7 @@
             <section class="gt_gallery_bg">
                 <!--Main Heading Wrap Start-->
                 <div class="gt_hdg_1">
-                    <h3>Our Gallery</h3>
+                    <h4 style="font-size: 36px;color: #ffc000">Our Gallery</h4>
 
                 </div>
                 <!--Main Heading Wrap End--> 

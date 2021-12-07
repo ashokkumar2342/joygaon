@@ -37,9 +37,8 @@
             <!--Main Content Wrap Start-->
             <div class="gt_main_content_wrap" style="margin-top:30px">
                 <div class="gt_hdg_1">
-                    <h3>Gallery</h3>
+                    <h4 style="font-size: 36px;color: #ffc000">Gallery</h4>
 
-                    <span><img src="{{asset('front_asset/images/hdg-01.png')}}" alt=""></span>
                 </div>
                 <div class="container">
                     <div class="row">
@@ -63,7 +62,7 @@
             <section class="gt_gallery_bg">
                 <!--Main Heading Wrap Start-->
                 <div class="gt_hdg_1">
-                    <h3>Our Gallery</h3>
+                    <h4 style="font-size: 36px;color: #ffc000">Our Gallery</h4>
 
                 </div>
                 <!--Main Heading Wrap End--> 
