@@ -1,5 +1,6 @@
 
 
+
 @include('front.header')
 <!--Header Wrap End--> 
 <!--Main Content Wrap Start-->
@@ -21,3 +22,5 @@
 </div>
 <!--Footer Wrap Start-->
 @include('front.footer')
+
+    
