@@ -48,11 +48,11 @@ body{
                 <span><h4><b>{{date('d-m-Y',strtotime($booking_id[0]->trip_date))}}</b></h4></span>
               </td>
             </tr>
-            <tr>
+            {{-- <tr>
               <td style="padding-left: 20px;padding-top: 10px">
                 <span><h4><b>No. of Persons</b></h4></span>
               </td>
-            </tr> 
+            </tr>  --}}
             <tr>
               <td style="padding-left: 20px;">
                 <span><h4><b>Person Name : </b></h4></span>
