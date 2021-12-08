@@ -22,7 +22,7 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="card card-outline">
-    <div class="card-header text-center bg-gray">
+    <div class="card-header text-center" style="background-color: #508e4c;color: #fff">
       <a href="#" class="h4"><b>JOY GAON</b></a>
     </div>
     <div class="card-body">
@@ -94,10 +94,10 @@
           <p class="text-danger">{{ $errors->first('captcha') }}</p> 
         <div class="row"> 
           <div class="col-12 form-group">
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-block" style="background-color: #508e4c;color: #fff">Register</button>
           </div>
           <div class="col-12 form-group">
-            <a href="{{ route('admin.login') }}" class="text-center">I already have a membership</a>
+            <a href="{{ route('admin.login') }}" class="text-center" style="color: #508e4c">I already have a membership</a>
           </div>
         </div>
       </form>  

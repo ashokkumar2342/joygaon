@@ -17,19 +17,19 @@
         </div>
         <div class="card card-info"> 
             <div class="card-body">
-                <form action="{{ route('admin.report.post') }}" method="post" class="add_form" success-content-id="user_report_excel_datatable" no-reset="true" data-table-without-pagination="report_table" no-reset="true">
+                <form action="{{ route('admin.report.post') }}" method="post" class="add_form" success-content-id="user_report_excel_datatable" no-reset="true" data-table-without-pagination="report_table">
                 {{ csrf_field() }}
                 <div class="row">  
                     <div class="col-lg-6">
                         <div class="form-group">
                           <label>From Date</label>
-                          <input type="date"  name="from_date" class="form-control"> 
+                          <input type="date"  name="from_date" class="form-control" required> 
                         </div> 
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                           <label>To Date</label>
-                          <input type="date"  name="to_date" class="form-control"> 
+                          <input type="date"  name="to_date" class="form-control" required> 
                         </div> 
                     </div> 
                     <div class="col-lg-12 form-group"> 

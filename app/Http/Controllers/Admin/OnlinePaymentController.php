@@ -445,7 +445,7 @@ class OnlinePaymentController extends Controller
             'nbpgPrefix' => ' कुल ',
             'nbpgSuffix' => ' पृष्ठों का पृष्ठ'
         ]);
-        $bimage1  =\Storage_path('app/image/front_1.jpg');
+        $bimage1  =\Storage_path('app/image/front_2.png');
         $date=date('Y-m-d');
         $order_id=$order_id;
         $booking_id=DB::select(DB::raw("SELECT * FROM `booking` where  `order_id` = '$order_id' and `status` = 1 LIMIT 1")); 

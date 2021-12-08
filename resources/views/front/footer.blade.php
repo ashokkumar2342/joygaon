@@ -5,17 +5,10 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="foo_col_outer_wrap default_width">
-                        
+
                         <div class="gt_foo_about widget">
                             <h5>About Joygaon</h5>
-                            <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin nibh vel velit auctor aliquet.</p>
-                            <ul>
-                               {{--  <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> --}}
-                            </ul>
+                            <p>Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area.</p> 
                         </div>
                     </div>
                 </div> 
@@ -27,10 +20,10 @@
                                     <h5>OPENING HOUR </h5>
                                     <ul> 
                                         <li>
-                                            
+
                                             <span>9:30 a.m. to 5 p.m. Every Day</span>
                                         </li>
-                                         
+
                                     </ul>
                                 </div>
                             </div> 
@@ -44,7 +37,7 @@
                                         <li><img src="{{asset('front_asset/gallery/4.jpg')}}" alt=""></a></li>
                                         <li><img src="{{asset('front_asset/gallery/5.jpg')}}" alt=""></a></li>
                                         <li><img src="{{asset('front_asset/gallery/9.jpg')}}" alt=""></a></li>
-                                        
+
                                     </ul>
                                 </div>
                             </div> 
@@ -75,3 +68,35 @@
     </div>  
     <!--Copyright Wrap End-->      
 </footer> 
+<div class="back-to-top">
+    <a href="#home"><i class="fa fa-angle-up"></i></a>
+</div>
+<!--Back to Top Wrap Start--> 
+</div>
+<!--gt Wrapper End--> 
+<!--Jquery Library-->
+<script src="{{asset('front_asset/js/jquery.js')}}"></script>
+<!--Bootstrap core JavaScript-->
+<script src="{{asset('front_asset/js/bootstrap.min.js')}}"></script>
+<!--Swiper JavaScript-->
+<script src="{{asset('front_asset/js/swiper.jquery.min.js')}}"></script>
+<!--Accordian JavaScript-->
+<script src="{{asset('front_asset/js/jquery.accordion.js')}}"></script>
+<!--Count Down JavaScript-->
+<script src="{{asset('front_asset/js/jquery.downCount.js')}}"></script>
+<!--Pretty Photo JavaScript-->
+<script src="{{asset('front_asset/js/jquery.prettyPhoto.js')}}"></script>
+<!--Owl Carousel JavaScript-->
+<script src="{{asset('front_asset/js/owl.carousel.js')}}"></script>
+<!--Number Count (Waypoint) JavaScript-->
+<script src="{{asset('front_asset/js/waypoints-min.js')}}"></script>
+<!--Filter able JavaScript-->
+<script src="{{asset('front_asset/js/jquery-filterable.js')}}"></script>
+<!--WOW JavaScript-->
+<script src="{{asset('front_asset/js/wow.min.js')}}"></script>
+<!--Custom JavaScript-->
+<script src="{{asset('front_asset/js/custom.js')}}"></script>
+
+</body>
+
+</html>

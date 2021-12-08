@@ -1,12 +1,12 @@
  
 	<table class="table table-bordered" id="report_table">
-		<thead>
+		<thead style="background-color: #605f6a;color: #fff">
 			<tr>
-				<th>booking typ</th>
-				<th>booking date</th>
-				<th>trip_date</th>
-				<th>adults</th>
-				<th>children</th> 
+				<th>Booking typ</th>
+				<th>Booking date</th>
+				<th>Trip Date</th>
+				<th>Adults</th>
+				<th>Children</th> 
 			</tr>
 		</thead>
 		<tbody>

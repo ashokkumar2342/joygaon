@@ -96,7 +96,7 @@ class BookingController extends Controller
         try{
             $users=Auth::guard('user')->user();  
             $bookingTypes = DB::select(DB::raw("select * from `booking_type` order by `id`"));
-            return view('admin.online_payment.order-complete',compact('bookingTypes','users')); 
+            return view('admin.booking.report',compact('bookingTypes','users')); 
         }catch (Exception $e) { }
     }
     public function reportPost(Request $request)

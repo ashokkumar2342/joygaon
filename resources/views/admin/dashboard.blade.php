@@ -20,7 +20,7 @@
   <div class="container-fluid"> 
     <div class="row">
           <div class="col-md-4 col-sm-6 col-12">
-            <div class="info-box">
+            <div class="info-box" style="background:#71b371">
               <span class="info-box-icon bg-succes"><i class="fa fa-file"></i></span>
 
               <div class="info-box-content">

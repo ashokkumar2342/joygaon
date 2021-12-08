@@ -92,6 +92,8 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#example').DataTable( {
+        "ordering": false,
+        'paging':   false,
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'

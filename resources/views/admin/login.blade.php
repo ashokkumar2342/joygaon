@@ -24,7 +24,7 @@
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline">
-      <div class="card-header text-center bg-info">
+      <div class="card-header text-center" style="background-color: #508e4c;color: #fff">
         <a href="../../index2.html" class="h1"><b>JOY GAON</b></a>
       </div>
       <div class="card-body">
@@ -64,11 +64,11 @@
           <p class="text-danger">{{ $errors->first('captcha') }}</p> 
           <div class="row"> 
             <div class="col-12 form-group">
-              <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+              <button type="submit" class="btn  btn-block" style="background-color: #508e4c;color: #fff">Sign In</button>
             </div> 
             <div class="col-12 form-group">
-              <a href="{{ route('admin.register') }}" title="">Register for new membership</a><br>
-              <a href="{{ route('admin.forgot.password') }}" title="">Forgot Password</a>
+              <a href="{{ route('admin.register') }}" title="" style="color: #508e4c">Register for new membership</a><br>
+              <a href="{{ route('admin.forgot.password') }}" title="" style="color: #508e4c">Forgot Password</a>
             </div>
           </div>
         </form>   

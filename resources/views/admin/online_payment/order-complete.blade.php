@@ -30,7 +30,7 @@
       </div>
       <table class="table"> 
         <tbody>
-          {{-- <tr>
+          <tr>
             <td>Name : </td>
             <td>{{ $user_name }}</td>
           </tr>
@@ -42,12 +42,12 @@
           <tr>
             <td>Ticket No. : </td>
             <td>{{ $ticket_no }}</td>
-          </tr> --}}
+          </tr>
         </tbody>
       </table> 
       <div class="text-center">
         <a href="{{ route('admin.booking.status') }}">Go to Booking History</a>
-        <a href="{{ route('admin.download.ticket',{{-- Crypt::encrypt($order_id) --}}) }}" target="blank" class="btn btn-sm btn-warning">Print Ticket</a>
+        <a href="{{ route('admin.download.ticket',Crypt::encrypt($order_id)) }}" target="blank" class="btn btn-sm btn-warning">Print Ticket</a>
       </div>
       <div class="text-center">
         <a id="btn_book" href="{{ route('admin.booking')}}"  class="btn btn" style="margin:10px;width:200px;height:40px;background-color:#fbf104;border: solid 1px;">Book Again</a>
@@ -70,7 +70,7 @@
     $('#btn_book').css("background-color", "#31ba32").css("color", "#fff");
   });
   $('#btn_book').mouseout(function(){
-    $('#btn_book').css("background-color", "#fbf104").css("color", "black");;
+    $('#btn_book').css("background-color", "#fbf104").css("color", "black");
   });
  
 </script> 
