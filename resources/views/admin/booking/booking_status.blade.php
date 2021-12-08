@@ -61,6 +61,11 @@
                                     
                                         @if ($rr_list->status==0)
                                             <a href="{{ route('admin.pay.again',Crypt::encrypt($rr_list->id)) }}" class="btn btn-xs btn-info">PAY Again</a>
+                                           
+                                        @endif
+                                        @if ($rr_list->status==0 && $user->role_id==1)
+                                            
+                                            <a href="{{ route('admin.manual.payment',Crypt::encrypt($rr_list->order_id)) }}" class="btn btn-xs btn-info">Manual PAY</a>
                                         @endif
                                         @if ($rr_list->status==1) 
                                             <a href="{{ route('admin.download.ticket',Crypt::encrypt($rr_list->order_id)) }}" class="btn btn-xs btn-success" target="_blank" > <i class="fa fa-download"></i> Download Ticket</a>

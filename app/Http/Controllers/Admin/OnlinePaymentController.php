@@ -117,6 +117,7 @@ class OnlinePaymentController extends Controller
     }
     
 
+
     public function payAgain($booking_id)
     {   
         $booking_id=Crypt::decrypt($booking_id);
@@ -455,6 +456,43 @@ class OnlinePaymentController extends Controller
         @mkdir($documentUrl, 0755, true);  
         $mpdf->Output($documentUrl.'/'.$order_id.'.pdf', 'F');
         // return view('admin.booking.print_ticket',compact('paymentModes'));
+    }
+    public function manualPayment($order_id)
+    {
+        $order_id=Crypt::decrypt($order_id);
+        $order = OnlinePayment::where('order_id', $order_id)->first();
+        $order->status = 1;
+        $order->save();
+        $result_rs = DB::select(DB::raw("update `booking` set `status` = '1' where `order_id` ='$order_id' limit 1;"));
+        //--start--pdf-generate
+        $this->printTicket($order_id);
+        $downloadTicket = DB::select(DB::raw("select *  from `booking` where `order_id` = '$order_id'  limit 1;"));
+        //--end-pdf-generate
+        //--start-sms
+        $message = $downloadTicket[0]->id.' is the Verification code for registration on joygaon. EXCELNET';
+        $tempid ='1707163663440740652'; 
+        event(new SmsEvent($downloadTicket[0]->mobile_no,$message,$tempid));
+        //--end-sms
+        //--start-email 
+        
+        $booking_date=$downloadTicket[0]->booking_date;
+        $order_id=$downloadTicket[0]->order_id;
+        $email_id=$downloadTicket[0]->email_id;
+        $user_name=$downloadTicket[0]->person_name;
+        $ticket_no=$downloadTicket[0]->id;
+        $downloadTicket = reset($downloadTicket);
+        $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id; 
+        $files =$documentUrl.'.pdf';
+        $data["email"] = $email_id;
+        $data["user_name"] = $user_name;
+        $data["ticket_no"] = $ticket_no;
+        $data["subject"] = "Joygaon Ticket Booking";
+        $data["from"] = "info@joygaon.in";
+        \Mail::send('emails.attachment', $data, function($message)use($data, $files) {
+        $message->to($data["email"])->from( $data['from'], 'Joygaon' )->subject($data["subject"]); 
+        $message->attach($files);
+        });
+        return redirect()->back()->with(['message'=>'Payment Successfully','class'=>'success']);
     }
 
 

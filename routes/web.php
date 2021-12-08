@@ -45,6 +45,7 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::get('payment-status', 'BookingController@BookingStatus')->name('admin.booking.status'); 	//OK--------------
 	
 	Route::get('pay-again/{bookin_id}', 'OnlinePaymentController@payAgain')->name('admin.pay.again');//OK------
+	Route::get('manual-payment/{bookin_id}', 'OnlinePaymentController@manualPayment')->name('admin.manual.payment');//OK------
 	Route::get('attendance', 'DashboardController@attendance')->name('admin.attendance'); 		//OK--------
 	Route::get('attendance-barcode', 'DashboardController@attendanceBarcode')->name('admin.attendance.barcode'); 	//OK--------
 	Route::post('attendance-store', 'DashboardController@attendanceStore')->name('admin.attendance.store'); 	//OK--------
