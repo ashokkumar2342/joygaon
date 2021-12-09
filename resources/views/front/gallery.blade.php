@@ -7,19 +7,17 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6">                            
-                <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjoygaon12%2Fvideos%2F808253496291964%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+            <div class="col-md-6 form-group">                            
+                <iframe width="560" height="314" src="https://www.youtube.com/embed/Ru06lKBBfEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            <div class="col-md-6">                            
-                <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://www.facebook.com/100004830724819/videos/798624393641911%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+            <div class="col-md-6 form-group">                            
+                <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjoygaon12%2Fvideos%2F808253496291964%2F&show_text=false&width=560&t=0" width="560" height="314"  scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
             </div>
-            
-            <div class="col-md-6">                            
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/BzH6v9XFxi0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="col-md-6 form-group">                            
+                <iframe width="560" height="314" src="https://www.youtube.com/embed/BzH6v9XFxi0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-            
-            <div class="col-md-6">                            
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/Ru06lKBBfEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="col-md-6 form-group">                            
+                <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://www.facebook.com/100004830724819/videos/798624393641911%2F&show_text=false&width=560&t=0" width="560" height="314"  scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
             </div>   
         </div>
     </div>

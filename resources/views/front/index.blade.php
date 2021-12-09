@@ -41,8 +41,8 @@
 				<div class="about-content">
 					<h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon</h4>
 					{{--  <img src="{{ asset('front_asset/extra-images/about_us_img.jpg') }}" align="right" alt="about image" class="img-responsive" style="height: 250px;"> --}} 
-					<p>Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area. Joygaon shares an experience of an ethnic village culture, activities, hygienic food, dance, music along with Modern indoor/outdoor games and activities spread in an area of 12 acres.</p>
-					<p>Joygaon is situated on Haryana State Highway #22 which is about 35kms from Peeragarhi Chowk, Delhi, 40 kms from Gurgaon, 9 kms from Jhajjar, and 15 kms from Bahadurgarh, and 40 kms from Rohtak, turning out to be best weekend getaways in Delhi/NCR with Picnic & Luxurious Stay Facility. Joygaon is a one stop location to a perfect weekend getaway to spend with your family and friends.</p>
+					<p style="text-align: justify;">Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area. Joygaon shares an experience of an ethnic village culture, activities, hygienic food, dance, music along with Modern indoor/outdoor games and activities spread in an area of 12 acres.</p>
+					<p style="text-align: justify;">Joygaon is situated on Haryana State Highway #22 which is about 35kms from Peeragarhi Chowk, Delhi, 40 kms from Gurgaon, 9 kms from Jhajjar, and 15 kms from Bahadurgarh, and 40 kms from Rohtak, turning out to be best weekend getaways in Delhi/NCR with Picnic & Luxurious Stay Facility. Joygaon is a one stop location to a perfect weekend getaway to spend with your family and friends.</p>
 
 				</div><!-- about content -->
 			</div> 
@@ -59,20 +59,21 @@
 	</div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6">                            
-				<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjoygaon12%2Fvideos%2F808253496291964%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+			<div class="col-md-6 form-group">                            
+				<iframe width="560" height="314" src="https://www.youtube.com/embed/Ru06lKBBfEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			</div>
-			<div class="col-md-6">                            
-				<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://www.facebook.com/100004830724819/videos/798624393641911%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+			<div class="col-md-6 form-group">                            
+				<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjoygaon12%2Fvideos%2F808253496291964%2F&show_text=false&width=560&t=0" width="560" height="314"  scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
 			</div>
+			<div class="col-md-6 form-group">                            
+				<iframe width="560" height="314" src="https://www.youtube.com/embed/BzH6v9XFxi0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+			<div class="col-md-6 form-group">                            
+				<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https://www.facebook.com/100004830724819/videos/798624393641911%2F&show_text=false&width=560&t=0" width="560" height="314"  scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+			</div> 
 			
-			<div class="col-md-6">                            
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/BzH6v9XFxi0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>
 			
-			<div class="col-md-6">                            
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/Ru06lKBBfEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-			</div>  
+			  
 		</div>
 	</div>
 </div> 

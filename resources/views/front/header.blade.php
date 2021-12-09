@@ -51,7 +51,7 @@
     <div class="gt_top3_menu default_width bg-info">
       <div class="container"> 
         <div class="gt-logo" style="padding: 2px 0px;">
-          <a href="#"><img src="{{asset('front_asset/images/logo.png')}}" alt="" style="float: left;"></a>
+          <a href="{{ route('front.index') }}"><img src="{{asset('front_asset/images/logo.png')}}" alt="" style="float: left;"></a>
         </div>
         <nav class="gt_hdr3_navigation">
           <!-- Responsive Buttun -->

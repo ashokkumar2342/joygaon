@@ -8,7 +8,7 @@
       <div class="col-md-12">
         <div class="about-content">
           <h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon Contact Us</h4>
-          <H3>Village Kablana, 9 Milestone, Jhajjar Bahadurgarh Road, Jhajjar, Haryana, 124104, INDIA </H3>
+          <H3 style="text-align: justify;">Village Kablana, 9 Milestone, Jhajjar Bahadurgarh Road, Jhajjar, Haryana, 124104, INDIA </H3>
         </ul>
       </div><!-- about content -->
     </div> 
