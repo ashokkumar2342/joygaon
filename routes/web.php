@@ -53,6 +53,8 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::get('download-ticket/{order_id?}', 'BookingController@downloadTicket')->name('admin.download.ticket'); 
 	Route::get('report', 'BookingController@report')->name('admin.report'); 
 	Route::post('report-post', 'BookingController@reportPost')->name('admin.report.post'); 
+	Route::get('payment-history', 'BookingController@paymentHistory')->name('admin.payment.history'); 
+	Route::post('payment-history-show', 'BookingController@paymentHistoryShow')->name('admin.payment.history.show'); 
 
 
 

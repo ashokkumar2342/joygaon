@@ -91,7 +91,7 @@ class BookingController extends Controller
         $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id;
         return response()->file($documentUrl.'.pdf');
     }
-    public function report($value='')
+    public function report()
     {
         try{
             $users=Auth::guard('user')->user();  
@@ -109,5 +109,37 @@ class BookingController extends Controller
             $response["data"]=view('admin.booking.report_table',compact('bookings'))->render();
             return response()->json($response); 
         }catch (Exception $e) { } 
+    }
+    public function paymentHistory()
+    {
+        try{
+            return view('admin.booking.payment_history'); 
+        }catch (Exception $e) { }
+    }
+
+    public function paymentHistoryShow(Request $request)
+    {
+
+        $rules=[ 
+              'date_range'=> 'required', 
+           ];
+        $validator = Validator::make($request->all(),$rules);
+        if ($validator->fails()) {
+              $errors = $validator->errors()->all();
+              $response=array();
+              $response["status"]=0;
+              $response["msg"]=$errors[0];
+              return response()->json($response);// response as json
+        }
+        $user=Auth::guard('user')->user();
+          
+        $date_range= explode('-',$request->date_range);
+        $from_date = date('Y-m-d H:i:s',strtotime($date_range[0]));
+        $to_date =  date('Y-m-d H:i:s',strtotime($date_range[1]));  
+        $bookings=DB::select(DB::raw(" select * from  `booking` where `booking_date` >= '$from_date' and `booking_date` < date_add('$to_date', INTERVAL 1 DAY) Order By  `booking_date` DESC ;"));  
+        $response=array();
+        $response["status"]=1;
+        $response["data"]=view('admin.booking.payment_history_table',compact('bookings'))->render();
+        return response()->json($response);
     } 
 }
