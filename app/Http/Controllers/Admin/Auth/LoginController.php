@@ -119,7 +119,7 @@ class LoginController extends Controller
         $count_rs = count($result_rs); 
         if($count_rs == 2){
           $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
-          return redirect()->route('admin.login')->with(['class'=>'success','message'=>'EMail Otp Verified Successfully']);
+          return redirect()->route('admin.login')->with(['class'=>'success','message'=>'EMail Code Verified Successfully']);
         }
         return redirect()->back()->with(['class'=>'success','message'=>'EMail Code Verified Successfully']);      
       }
@@ -138,12 +138,12 @@ class LoginController extends Controller
         $count_rs = count($result_rs); 
         if($count_rs == 2){
           $update_rs = DB::select(DB::raw("update `users` set `status` = 1 where `id` = $user_id limit 1;"));
-          return redirect()->route('admin.login')->with(['class'=>'success','message'=>'Mobile Otp Verified Successfully']);
+          return redirect()->route('admin.login')->with(['class'=>'success','message'=>'Mobile Code Verified Successfully']);
         }
         return redirect()->back()->with(['class'=>'success','message'=>'Mobile Code Verified Successfully']);      
       }
     } 
-    return redirect()->back()->with(['class'=>'error','message'=>'Invalid OTP, Please Try Again']);
+    return redirect()->back()->with(['class'=>'error','message'=>'Invalid Code, Please Try Again']);
   }
   
 

@@ -32,7 +32,7 @@
         <form action="{{ route('admin.login.post') }}" method="post" class="add_form">
           {{csrf_field()}}
           <div class="input-group mb-3">
-            <input type="text" class="form-control" name="email_or_phone" placeholder="Email or phone" maxlength="100">
+            <input type="text" class="form-control" name="email_or_phone" placeholder="Email or phone" maxlength="100" value="{{ old('email_or_phone') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
@@ -41,7 +41,7 @@
           </div>
           <p class="text-danger">{{ $errors->first('email_or_phone') }}</p>
           <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control" placeholder="Password">
+            <input type="password" name="password" class="form-control" placeholder="Password" value="{{ old('password') }}">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock text-success"></span>

@@ -33,7 +33,7 @@
       <form action="{{ route('admin.register.store') }}" method="post" no-reset="true">
         {{csrf_field()}}
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="name" placeholder="Full name" required maxlength="100" minlength="2">
+          <input type="text" class="form-control" name="name" placeholder="Full name" required maxlength="100" minlength="2" value="{{ old('name') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -43,7 +43,7 @@
         <p class="text-danger">{{ $errors->first('name') }}</p>
 
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="email_id" placeholder="Email" required maxlength="100">
+          <input type="email" class="form-control" name="email_id" placeholder="Email" required maxlength="100" value="{{ old('email_id') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -53,7 +53,7 @@
         <p class="text-danger">{{ $errors->first('email_id') }}</p>
 
         <div class="input-group mb-3">
-          <input type="text" class="form-control" name="mobile_no" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Mobile No." required maxlength="10" minlength = "10">
+          <input type="text" class="form-control" name="mobile_no" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Mobile No." required maxlength="10" minlength = "10" value="{{ old('mobile_no') }}">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-phone"></span>
