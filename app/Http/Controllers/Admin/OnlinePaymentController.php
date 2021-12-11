@@ -63,6 +63,7 @@ class OnlinePaymentController extends Controller
             $booking_date=$downloadTicket[0]->booking_date;
             $order_id=$downloadTicket[0]->order_id;
             $email_id=$downloadTicket[0]->email_id;
+            $mobile_no=$downloadTicket[0]->mobile_no;
             $user_name=$downloadTicket[0]->person_name;
             $ticket_no=$downloadTicket[0]->id;
             $downloadTicket = reset($downloadTicket);
@@ -80,7 +81,7 @@ class OnlinePaymentController extends Controller
              //--end-email
             //--start-sms
             $message = 'Dear '.$user_name.', Thanks For Booking Trip For Joygoan Your Ticket No. '.$ticket_no.' For Date '.$booking_date.' Enjoy The Adventure Trip. Sir Salasar Balaji Enterprises Private Limited'; 
-            event(new SmsEvent($downloadTicket[0]->mobile_no,$message,$tempid));
+            event(new SmsEvent($mobile_no,$message,$tempid));
             //--end-sms 
             // return redirect()->route('admin.booking.status')->with(['message'=>'Payment Successfully','class'=>'success']);
             return view('admin.online_payment.order-complete',compact('order_id','user_name','ticket_no','transaction_id'));
@@ -474,6 +475,7 @@ class OnlinePaymentController extends Controller
         $booking_date=$downloadTicket[0]->booking_date;
         $order_id=$downloadTicket[0]->order_id;
         $email_id=$downloadTicket[0]->email_id;
+        $mobile_no=$downloadTicket[0]->mobile_no;
         $user_name=$downloadTicket[0]->person_name;
         $ticket_no=$downloadTicket[0]->id;
         $downloadTicket = reset($downloadTicket);
@@ -491,7 +493,7 @@ class OnlinePaymentController extends Controller
         //--start-sms
         $message = 'Dear '.$user_name.', Thanks For Booking Trip For Joygoan Your Ticket No. '.$ticket_no.' For Date '.$booking_date.' Enjoy The Adventure Trip. Sir Salasar Balaji Enterprises Private Limited';
         $tempid ='1707163862931289760'; 
-        event(new SmsEvent($downloadTicket[0]->mobile_no,$message,$tempid));
+        event(new SmsEvent($mobile_no,$message,$tempid));
         //--end-sms
         return redirect()->back()->with(['message'=>'Payment Successfully','class'=>'success']);
     }

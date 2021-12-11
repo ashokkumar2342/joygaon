@@ -52,11 +52,12 @@ class LoginController extends Controller
       });
       
     }else{
+      $mobile_no=$user_rs[0]->mobile_no;
       $message = $rs_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
       $tempid ='1707163860074623221';
-      event(new SmsEvent($user_rs[0]->mobile_no,$message,$tempid));
+      event(new SmsEvent($mobile_no,$message,$tempid));
     }
-    return redirect()->back()->with(['message'=>'Code Resend Successfully.','class'=>'success']); 
+    return redirect()->back()->with(['message'=>'Code Resent Successfully.','class'=>'success']); 
   }
   
 
