@@ -11,6 +11,7 @@
   <meta name="theme-color" content="#508e4c">
   <meta name="msapplication-navbutton-color" content="#508e4c">
   <meta name="apple-mobile-web-app-bar-style" content="#508e4c">
+  <meta name="facebook-domain-verification" content="tmijcupqjyj971x8rtlrfm1apt49lc"/>
   <title>Best Weekend Getaways, Holiday Destinations near Delhi NCR - Joygaon</title>
   <!-- Swiper Slider CSS -->
   <link href="{{asset('front_asset/css/swiper.css')}}" rel="stylesheet">
