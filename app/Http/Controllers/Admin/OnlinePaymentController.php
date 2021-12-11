@@ -80,7 +80,8 @@ class OnlinePaymentController extends Controller
             });
              //--end-email
             //--start-sms
-            $message = 'Dear '.$user_name.', Thanks For Booking Trip For Joygoan Your Ticket No. '.$ticket_no.' For Date '.$booking_date.' Enjoy The Adventure Trip. Sir Salasar Balaji Enterprises Private Limited'; 
+            $message = 'Dear '.$user_name.', Thanks For Booking Trip For Joygoan Your Ticket No. '.$ticket_no.' For Date '.$booking_date.' Enjoy The Adventure Trip. Sir Salasar Balaji Enterprises Private Limited';
+            $tempid ='1707163862931289760'; 
             event(new SmsEvent($mobile_no,$message,$tempid));
             //--end-sms 
             // return redirect()->route('admin.booking.status')->with(['message'=>'Payment Successfully','class'=>'success']);
