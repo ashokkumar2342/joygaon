@@ -8,7 +8,7 @@
         	
          </div>
         <div class="modal-footer">
-          <a href="" onclick="callPopupLarge(this,'{{ route('front.mobile.form') }}')" class="btn btn-success" >Book Now</a>
+          
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div> 

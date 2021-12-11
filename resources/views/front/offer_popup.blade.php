@@ -6,16 +6,11 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
-      
-                             
-    </div>                     
-                          
-      
-      <div class="box-footer text-center" style="margin-top: 30px">
-        <button type="submit" class="btn btn-primary form-control">Update</button>
-      </div>
-  
+    <div class="modal-body"> 
+    </div>
+    <div class="box-footer text-center" style="margin-top: 30px">
+      <button type="submit" class="btn btn-primary form-control">Update</button>
     </div>
   </div>
+</div>
 

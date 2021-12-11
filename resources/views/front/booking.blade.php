@@ -77,9 +77,21 @@
                         <p class="text-danger">{{ $errors->first('children') }}</p>
                         </div> 
                     </div>
-                        <div class="col-lg-12 form-group text-center" style="margin-top: 30px">
-                          <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
-                        </div>   
+                    <div class="row"> 
+                        <div class="col-lg-4 form-group">
+                            <label>Reddem a gift card or promo code</label> 
+                            <input type="text" name="code" class="form-control" maxlength="8"> 
+                        <p class="text-danger">{{ $errors->first('adults') }}</p> 
+                        </div>
+                        <div class="col-lg-2 form-group" style="margin-top: 35px;">
+                            <a href="" style="color:blue;margin-top: 30px;">Verify Code</a>
+                        </div>
+                        <div class="col-lg-4 form-group" style="margin-top: 35px;">
+                            <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
+                        </div>
+
+                    </div>
+                           
                     </div>
                      
               </form>  

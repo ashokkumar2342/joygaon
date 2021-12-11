@@ -15,7 +15,7 @@
     </div>
 </div> 
 <div class="gt_hdg_1" style="margin-top:20px">
-    <a href="" class="btn btn-success btn-lg">Book Now</a>
+    <a href="" class="btn btn-warning btn-lg">Register And Book Now</a>
 </div>
 <div class="gt_main_content_wrap" style="margin-top:30px">
     <div class="gt_hdg_1">
@@ -30,9 +30,7 @@
         </div>
     </div>
 </div> 
-<div class="gt_hdg_1" style="margin-top:20px">
-    <a href="" class="btn btn-success btn-lg">Book Now</a>
-</div>
+
 <!--Footer Wrap Start-->
 @include('front.footer')
 

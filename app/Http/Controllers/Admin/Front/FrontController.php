@@ -20,6 +20,12 @@ class FrontController extends Controller
 			return view('front.index'); 
 		}catch (Exception $e) { }
 	}
+	public function booknowF($value='')
+	{
+		try{ 
+			return view('front.add_page'); 
+		}catch (Exception $e) { }
+	}
 	public function about()
 	{     
 		try{ 

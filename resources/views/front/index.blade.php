@@ -139,19 +139,18 @@
           <a href="" onclick="callPopupLevel2(this,'{{ route('front.mobile.form') }}')" class="btn btn-success" >Book Now</a>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
-        <a onclick="callPopupLarge(this,'{{route('front.mobile.form')}}')" id="popo"></a>
       </div> 
     </div>
   </div>
-  <script src="{{ asset('admin_asset/plugins/jQuery/jquery.min.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ asset('admin_asset/plugins/jQuery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('admin_asset/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
   <script type="text/javascript">
-  	// $('document').ready(function() {
+  	$('document').ready(function() {
   	   
-  	//     $('#offer_model').modal('show'); 
-  	// });
-  	$('#popo').click(); 
+  	    $('#offer_model').modal('show'); 
+  	}); 
   </script> 
 @include('front.footer')
 <!--Footer Wrap End-->
