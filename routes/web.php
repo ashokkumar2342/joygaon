@@ -8,6 +8,7 @@ Route::get('/', function () {
 
 
 Route::get('index', 'Front\FrontController@index')->name('front.index'); //OK-------
+Route::get('mob-form', 'Front\FrontController@mobileForm')->name('front.mobile.form'); //OK-------
 Route::get('book', 'Front\FrontController@bookNow')->name('front.book'); //OK-------
 Route::get('about', 'Front\FrontController@about')->name('front.about'); //OK-------
 Route::get('gallery', 'Front\FrontController@gallery')->name('front.gallery'); //OK-------

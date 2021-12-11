@@ -45,6 +45,10 @@ class FrontController extends Controller
 			return view('front.price_list',compact('priceLists')); 
 		}catch (Exception $e) { }
 	}
+	public function mobileForm($value='')
+	{
+		return view('front.mobile_form',compact('bookingTypes'));
+	}
 	public function bookNow($value='')
 	{
 		$users=Auth::guard('user')->user();  

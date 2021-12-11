@@ -1,30 +1,6 @@
 
 <!--Header Wrap Start-->
 @include('front.header')
-<!--Header Wrap End--> 
-<!--Banner Wrap Start-->
-{{-- <div class="container">
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div> --}}
-
 <div class="gt_banner default_width">
 	<div class="swiper-container" id="swiper-container">
 		<ul class="swiper-wrapper">
@@ -55,30 +31,9 @@
 	<div class="swiper-button-prev"><i class="fa fa-angle-left"></i></div>
 </div>
 <!--Banner Wrap End-->
-<!-- About Start here -->
-<section class="about about-two">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="about-content">
-					<h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon</h4>
-					{{--  <img src="{{ asset('front_asset/extra-images/about_us_img.jpg') }}" align="right" alt="about image" class="img-responsive" style="height: 250px;"> --}} 
-					<p style="text-align: justify;">Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area. Joygaon shares an experience of an ethnic village culture, activities, hygienic food, dance, music along with Modern indoor/outdoor games and activities spread in an area of 12 acres.</p>
-					<p style="text-align: justify;">Joygaon is situated on Haryana State Highway #22 which is about 35kms from Peeragarhi Chowk, Delhi, 40 kms from Gurgaon, 9 kms from Jhajjar, and 15 kms from Bahadurgarh, and 40 kms from Rohtak, turning out to be best weekend getaways in Delhi/NCR with Picnic & Luxurious Stay Facility. Joygaon is a one stop location to a perfect weekend getaway to spend with your family and friends.</p>
-
-				</div><!-- about content -->
-			</div> 
-		</div><!-- row -->
-	</div><!-- container -->
-</section><!-- about -->
-<!-- About End here -->      
 <!--Main Content Wrap Start-->
-<div class="gt_main_content_wrap">
-	<div class="gt_hdg_1">
-		<h4 style="font-size: 36px;color: #ffc000">Gallery</h4>
-
-		<span><img src="{{asset('front_asset/images/hdg-01.png')}}" alt=""></span>
-	</div>
+<div class="gt_main_content_wrap" style="margin-top:10px">
+	
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6 form-group">                            
@@ -98,7 +53,24 @@
 			  
 		</div>
 	</div>
-</div> 
+</div>
+<!-- About Start here -->
+<section class="about about-two">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="about-content">
+					<h4 style="font-size: 36px;color: #ffc000;text-align: center;">Welcome To Joygaon</h4>
+					{{--  <img src="{{ asset('front_asset/extra-images/about_us_img.jpg') }}" align="right" alt="about image" class="img-responsive" style="height: 250px;"> --}} 
+					<p style="text-align: justify;">Joygaon, A Unit of Sir Salasar Balaji Enterprises Private Limited is a Modern Indian Village surrounded by lush green agricultural fields in an Eco-friendly area. Joygaon shares an experience of an ethnic village culture, activities, hygienic food, dance, music along with Modern indoor/outdoor games and activities spread in an area of 12 acres.</p>
+					<p style="text-align: justify;">Joygaon is situated on Haryana State Highway #22 which is about 35kms from Peeragarhi Chowk, Delhi, 40 kms from Gurgaon, 9 kms from Jhajjar, and 15 kms from Bahadurgarh, and 40 kms from Rohtak, turning out to be best weekend getaways in Delhi/NCR with Picnic & Luxurious Stay Facility. Joygaon is a one stop location to a perfect weekend getaway to spend with your family and friends.</p>
+
+				</div><!-- about content -->
+			</div> 
+		</div><!-- row -->
+	</div><!-- container -->
+</section><!-- about -->
+<!-- About End here --> 
 <!--Banner Services Wrap End-->
 <!--Our Gallery Wrap Start-->
 <section class="gt_gallery_bg">
@@ -164,17 +136,22 @@
         	<h3 style="color: #508e4c">Get 5% Discount</h3>
          </div>
         <div class="modal-footer">
-          <a href="{{ route('front.book') }}"  class="btn btn-success" >Book Now</a>
+          <a href="" onclick="callPopupLevel2(this,'{{ route('front.mobile.form') }}')" class="btn btn-success" >Book Now</a>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
+        <a onclick="callPopupLarge(this,'{{route('front.mobile.form')}}')" id="popo"></a>
       </div> 
     </div>
   </div>
+  <script src="{{ asset('admin_asset/plugins/jQuery/jquery.min.js') }}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{ asset('admin_asset/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
   <script type="text/javascript">
-  	$('document').ready(function() {
+  	// $('document').ready(function() {
   	   
-  	    $('#offer_model').modal('show'); 
-  	}); 
+  	//     $('#offer_model').modal('show'); 
+  	// });
+  	$('#popo').click(); 
   </script> 
 @include('front.footer')
 <!--Footer Wrap End-->
