@@ -68,7 +68,8 @@
             </div> 
             <div class="col-12 form-group">
               <a href="{{ route('admin.register') }}" title="" style="color: #508e4c">Register for new membership</a><br>
-              <a href="{{ route('admin.forgot.password') }}" title="" style="color: #508e4c">Forgot Password</a>
+              <a href="{{ route('admin.forgot.password') }}" title="" style="color: #508e4c">Forgot Password</a><br>
+              <a href="{{ route('front.index') }}" title="">Home</a>
             </div>
           </div>
         </form>   

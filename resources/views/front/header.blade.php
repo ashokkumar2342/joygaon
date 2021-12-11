@@ -63,13 +63,12 @@
           </a>   
           <!-- Responsive Buttun -->
           <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <li><a  href="{{ route('front.index') }}">Home</a> 
-            </li>
-
+            <li><a  href="{{ route('front.index') }}">Home</a></li>
+            <li><a  href="{{ route('front.book') }}">Booking</a></li>
             <li><a href="{{ route('front.about') }}">About Us</a></li>
             <li><a href="{{ route('front.gallery') }}">Gallery</a> 
-              <li><a href="{{ route('front.price.list') }}">Price List</a></li> 
-              <li><a href="{{ route('front.cotactus') }}">Contact Us</a></li>
+            <li><a href="{{ route('front.price.list') }}">Price List</a></li> 
+            <li><a href="{{ route('front.cotactus') }}">Contact Us</a></li>
             </ul>
           </nav>
         </div>

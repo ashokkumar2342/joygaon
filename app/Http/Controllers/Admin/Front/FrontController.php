@@ -43,5 +43,9 @@ class FrontController extends Controller
 			return view('front.price_list',compact('priceLists')); 
 		}catch (Exception $e) { }
 	}
+	public function bookNow($value='')
+	{
+		return view('front.booking');
+	}
  
 }

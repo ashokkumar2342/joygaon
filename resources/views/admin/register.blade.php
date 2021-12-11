@@ -100,7 +100,8 @@
             <button type="submit" class="btn btn-block" style="background-color: #508e4c;color: #fff">Register</button>
           </div>
           <div class="col-12 form-group">
-            <a href="{{ route('admin.login') }}" class="text-center" style="color: #508e4c">I already have a membership</a>
+            <a href="{{ route('admin.login') }}" class="text-center" style="color: #508e4c">I already have a membership</a><br>
+            <a href="{{ route('front.index') }}" title="">Home</a>
 
           </div>
         </div>
