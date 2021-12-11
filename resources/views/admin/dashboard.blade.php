@@ -20,7 +20,7 @@
   <div class="container-fluid"> 
     <div class="row">
           <div class="col-md-4 col-sm-6 col-12">
-            <div class="info-box" style="background:#71b371">
+            <div class="info-box">
               <span class="info-box-icon bg-succes"><i class="fa fa-file"></i></span>
 
               <div class="info-box-content">
@@ -32,18 +32,15 @@
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
-          {{-- <div class="col-md-4 col-sm-6 col-12">
+          <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-success"><i class="fa fa-rupee"></i></span>
-
               <div class="info-box-content">
-                <span class="info-box-text">Paid Amount</span>
-                <span class="info-box-number">410</span>
+                <a href="{{ route('admin.booking') }}" class="btn btn-lg btn-info" style="background:#71b371">Book Now</a>
               </div>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
-          </div> --}}
+          </div>
           <!-- /.col -->
           {{-- <div class="col-md-4 col-sm-6 col-12">
             <div class="info-box">

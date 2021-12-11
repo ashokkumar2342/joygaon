@@ -45,7 +45,9 @@ class FrontController extends Controller
 	}
 	public function bookNow($value='')
 	{
-		return view('front.booking');
+		$users=Auth::guard('user')->user();  
+        $bookingTypes = DB::select(DB::raw("select * from `booking_type` order by `id`"));
+		return view('front.booking',compact('bookingTypes'));
 	}
  
 }

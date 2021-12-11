@@ -75,6 +75,7 @@
 </div>
 <!--gt Wrapper End--> 
 <!--Jquery Library-->
+
 <script src="{{asset('front_asset/js/jquery.js')}}"></script>
 <!--Bootstrap core JavaScript-->
 <script src="{{asset('front_asset/js/bootstrap.min.js')}}"></script>
