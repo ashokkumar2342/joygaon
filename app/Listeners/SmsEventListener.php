@@ -34,7 +34,7 @@ class SmsEventListener
        // \Log::info($url); 
         // $response = file_get_contents($url);
 
-        $url = "http://smsdealnow.com/api/pushsms?user=eageskool&authkey=92OnWW5BqI2&sender=EXCNET&mobile=$event->mobile&text=$event->message&entityid=1701161891809058634&templateid=$event->tempid&rpt=1";
+        $url = "http://smsdealnow.com/api/pushsms?user=joygaon&authkey=927mh3X5DzDjQ&sender=SSBEPL&mobile=$event->mobile&text=$event->message&entityid=1701163748607955584&templateid=$event->tempid&rpt=1";
         $url = str_replace(" ", '%20', $url);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

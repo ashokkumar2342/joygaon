@@ -48,7 +48,7 @@
         </div> 
       </div>
     </div> 
-    <div class="gt_top3_menu default_width bg-info">
+    <div class="gt_top3_menu default_width bg-info" style="background-color: #f0f0f0">
       <div class="container"> 
         <div class="gt-logo" style="padding: 2px 0px;">
           <a href="{{ route('front.index') }}"><img src="{{asset('front_asset/images/logo.png')}}" alt="" style="float: left;"></a>

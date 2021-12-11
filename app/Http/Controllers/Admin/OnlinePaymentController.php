@@ -58,8 +58,7 @@ class OnlinePaymentController extends Controller
             $downloadTicket = DB::select(DB::raw("select *  from `booking` where `order_id` = '$order_id'  limit 1;"));
             //--end-pdf-generate
             //--start-sms
-            $message = $downloadTicket[0]->id.' is the Verification code for registration on joygaon. EXCELNET';
-            $tempid ='1707163663440740652'; 
+            $message = 'Dear '.$user_name.', Thanks For Booking Trip For Joygoan Your Ticket No. '.$downloadTicket[0]->id.' For Date '.$booking_date.' Enjoy The Adventure Trip. Sir Salasar Balaji Enterprises Private Limited'; 
             event(new SmsEvent($downloadTicket[0]->mobile_no,$message,$tempid));
             //--end-sms
             //--start-email 
@@ -468,11 +467,7 @@ class OnlinePaymentController extends Controller
         $this->printTicket($order_id);
         $downloadTicket = DB::select(DB::raw("select *  from `booking` where `order_id` = '$order_id'  limit 1;"));
         //--end-pdf-generate
-        //--start-sms
-        $message = $downloadTicket[0]->id.' is the Verification code for registration on joygaon. EXCELNET';
-        $tempid ='1707163663440740652'; 
-        event(new SmsEvent($downloadTicket[0]->mobile_no,$message,$tempid));
-        //--end-sms
+        
         //--start-email 
         
         $booking_date=$downloadTicket[0]->booking_date;
@@ -492,6 +487,11 @@ class OnlinePaymentController extends Controller
         $message->to($data["email"])->from( $data['from'], 'Joygaon' )->subject($data["subject"]); 
         $message->attach($files);
         });
+        //--start-sms
+        $message = 'Dear '.$user_name.', Thanks For Booking Trip For Joygoan Your Ticket No. '.$downloadTicket[0]->id.' For Date '.$booking_date.' Enjoy The Adventure Trip. Sir Salasar Balaji Enterprises Private Limited';
+        $tempid ='1707163862931289760'; 
+        event(new SmsEvent($downloadTicket[0]->mobile_no,$message,$tempid));
+        //--end-sms
         return redirect()->back()->with(['message'=>'Payment Successfully','class'=>'success']);
     }
 

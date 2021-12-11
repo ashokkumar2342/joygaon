@@ -52,8 +52,8 @@ class LoginController extends Controller
       });
       
     }else{
-      $message = $rs_otp.' is the Verification code for registration on joygaon. EXCELNET';
-      $tempid ='1707163663440740652';
+      $message = $rs_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
+      $tempid ='1707163860074623221';
       event(new SmsEvent($user_rs[0]->mobile_no,$message,$tempid));
     }
     return redirect()->back()->with(['message'=>'Code Resend Successfully.','class'=>'success']); 
@@ -193,8 +193,8 @@ class LoginController extends Controller
       $mobile_sv_otp=DB::select(DB::raw("Insert Into `user_otp` (`user_id`, `otp`, `otp_type`, `status`) Values ('$user_id', '$mobile_otp',2,0);")); 
         
       //Code To Send Mobile Verification Code
-      $message = $mobile_otp.' is the Verification code for registration on joygaon. EXCELNET';
-      $tempid ='1707163663440740652'; 
+      $message = $mobile_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
+      $tempid ='1707163860074623221'; 
       event(new SmsEvent($request->mobile_no,$message,$tempid));
         
       #send email
