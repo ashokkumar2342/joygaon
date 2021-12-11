@@ -13,7 +13,8 @@ Route::get('about', 'Front\FrontController@about')->name('front.about'); //OK---
 Route::get('gallery', 'Front\FrontController@gallery')->name('front.gallery'); //OK-------
 Route::get('price-list', 'Front\FrontController@priceList')->name('front.price.list'); //OK-------
 Route::get('cotact-us', 'Front\FrontController@cotactus')->name('front.cotactus'); //OK-------
-Route::get('booking', 'Front\FrontController@booking')->name('front.booking'); //OK-------
+
+Route::post('booking-store', 'Front\FrontController@bookingstore')->name('front.booking.store'); //OK-------
 Route::get('login', 'Auth\LoginController@login')->name('admin.login'); //OK-------
 Route::get('refresh-captcha', 'Auth\LoginController@refreshCaptcha')->name('admin.refresh.captcha'); 	//OK----
 

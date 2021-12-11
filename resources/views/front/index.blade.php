@@ -152,6 +152,30 @@
 </section>
 <!--Our Gallery Wrap End--> 
 <!--Footer Wrap Start-->
+<!-- Modal -->
+  <div class="modal fade modal-xs" id="offer_model" role="dialog" style="margin-top: 200px">
+    <div class="modal-dialog"> 
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button> 
+        </div>
+        <div class="modal-body">
+        	<h3 style="color: #508e4c">Get 5% Discount</h3>
+         </div>
+        <div class="modal-footer">
+          <a href="{{ route('front.book') }}"  class="btn btn-success" >Book Now</a>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <script type="text/javascript">
+  	$('document').ready(function() {
+  	   
+  	    $('#offer_model').modal('show'); 
+  	}); 
+  </script> 
 @include('front.footer')
 <!--Footer Wrap End-->
 <!--Back to Top Wrap Start-->

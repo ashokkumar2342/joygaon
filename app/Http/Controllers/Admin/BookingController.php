@@ -36,6 +36,7 @@ class BookingController extends Controller
             'children' => 'required|numeric',  
             "contact_person_name" => 'required', 
             "contact_mobile_no" => 'required|numeric|digits:10',  
+            "email_id" => 'required',  
         ]);
         $booking_date=date('Y-m-d');
         $objOnlinepaymentClass = new OnlinePaymentController(); 

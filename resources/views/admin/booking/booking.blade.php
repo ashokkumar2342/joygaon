@@ -23,7 +23,7 @@
                             <select class="form-control" name="booking_type" id="booking_type" required onchange="amontAdd()">
                             <option selected disabled>Select Booking Type</option>
                             @foreach ($bookingTypes as $bookingType)
-                                <option value="{{$bookingType->id}}">{{$bookingType->code}}-{{$bookingType->name}}</option>
+                                <option value="{{$bookingType->id}}" @if (old('booking_type')==$bookingType->id) selected="selected" @endif>{{$bookingType->code}}-{{$bookingType->name}}</option>
                             @endforeach 
                              </select>                    
                         <p class="text-danger">{{ $errors->first('booking_type') }}</p>
@@ -31,19 +31,19 @@
                         <div class="col-lg-6 form-group">
                             <label>Trip Date</label>
                             <span class="fa fa-asterisk"></span> 
-                            <input type="date" name="trip_date" class="form-control"  min="{{ date('Y-m-d',strtotime(date('d-m-Y'))) }}" required> 
+                            <input type="date" name="trip_date" class="form-control"  min="{{ date('Y-m-d',strtotime(date('d-m-Y'))) }}" required value="{{ old('trip_date') }}"> 
                         <p class="text-danger">{{ $errors->first('trip_date') }}</p> 
                         </div>
                         <div class="col-lg-6 form-group">
                             <label>School/Company/Person Name</label>
                             <span class="fa fa-asterisk"></span>
-                            <textarea name="school_Company_name" class="form-control section"   required maxlength="100" style="height: 50px"></textarea> 
+                            <textarea name="school_Company_name" class="form-control section"   required maxlength="100" style="height: 50px">{{ old('school_Company_name') }}</textarea> 
                         <p class="text-danger">{{ $errors->first('school_Company_name') }}</p> 
                         </div>
                         <div class="col-lg-6 form-group">
                             <label>Address/City</label>
                             <span class="fa fa-asterisk"></span>
-                            <textarea name="school_Company_city" class="form-control section"  required maxlength="100" style="height: 50px"></textarea> 
+                            <textarea name="school_Company_city" class="form-control section"  required maxlength="100" style="height: 50px">{{ old('school_Company_city') }}</textarea> 
                         <p class="text-danger">{{ $errors->first('school_Company_city') }}</p>
                         </div>
                         <div class="col-lg-4 form-group">
@@ -82,7 +82,8 @@
                         </div>
                         <div class="col-lg-4 form-group">
                             <label>Email ID.</label> 
-                            <input type="email" name="email_id" class="form-control" value="{{$users->email_id}}">
+                            <input type="email" name="email_id" required class="form-control" value="{{$users->email_id}}">
+                            <p class="text-danger">{{ $errors->first('email_id') }}</p>
                         </div>
                         
                         <div class="col-lg-12 form-group text-center" style="margin-top: 30px">
@@ -110,13 +111,22 @@
     @endforeach
     function amontAdd() {
         booking_type = $('#booking_type').val() ;
-
+        if(booking_type==null){
+           alert('Please select booking type')
+           return false;
+        }
         adult_div = parseInt($('#adult_div').val());
         children_div = parseInt($('#children_div').val());
 
         adult_div = adult_div * brate_ad[booking_type];
         children_div = children_div * brate_ch[booking_type];
         totalPoints = adult_div+children_div;
+        if(isNaN(adult_div)){
+           adult_div=0; 
+        }
+        if(isNaN(children_div)){
+           children_div=0; 
+        }
 
         $('#total_amount_show').html(totalPoints);
         $('#total_amount_hidden').val(totalPoints);
