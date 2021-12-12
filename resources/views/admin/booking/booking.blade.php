@@ -45,29 +45,7 @@
                             <span class="fa fa-asterisk"></span>
                             <textarea name="school_Company_city" class="form-control section"  required maxlength="100" style="height: 50px">{{ old('school_Company_city') }}</textarea> 
                         <p class="text-danger">{{ $errors->first('school_Company_city') }}</p>
-                        </div>
-                        <div class="col-lg-4 form-group">
-                            <label>Adults (Above 10 Years)</label>
-                            <span class="fa fa-asterisk"></span> 
-                            <input type="text" name="adults" class="form-control section" id="adult_div" maxlength="3" onkeyup="amontAdd()" value="0" required  onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
-                        <p class="text-danger">{{ $errors->first('adults') }}</p> 
-                        </div>
-                        <div class="col-lg-4 form-group">
-                            <label>Children (5-10 Years)</label>
-                            <span class="fa fa-asterisk"></span> 
-                            <input type="text" name="children" class="form-control section" id="children_div" maxlength="3" onkeyup="amontAdd()" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
-                        <p class="text-danger">{{ $errors->first('children') }}</p>
-                        </div>
-                        <div class="col-lg-4 form-group" style="margin-top: 30px"> 
-                            <div class="card bg-gray"> 
-                              <div class="form-group clearfix">
-                                <div class="icheck-primary d-inline"> 
-                                  <input type="text" name="total_amount"  id="total_amount_hidden">
-                                  <span style="margin: 15px"> Total Amount : <b><span id="total_amount_show"> 0</span></b></span>
-                                </div> 
-                              </div>
-                            </div> 
-                        </div>
+                        </div> 
                         <div class="col-lg-4 form-group">
                             <label>Contact Person Name</label>
                             <span class="fa fa-asterisk"></span> 
@@ -85,7 +63,38 @@
                             <input type="email" name="email_id" required class="form-control" value="{{$users->email_id}}">
                             <p class="text-danger">{{ $errors->first('email_id') }}</p>
                         </div>
-                        
+                        <div class="col-lg-4 form-group">
+                            <label>Adults (Above 10 Years)</label>
+                            <span class="fa fa-asterisk"></span> 
+                            <input type="text" name="adults" class="form-control section" id="adult_div" maxlength="3" onkeyup="amontAdd()" value="0" required  onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
+                        <p class="text-danger">{{ $errors->first('adults') }}</p> 
+                        </div>
+                        <div class="col-lg-4 form-group">
+                            <label>Children (5-10 Years)</label>
+                            <span class="fa fa-asterisk"></span> 
+                            <input type="text" name="children" class="form-control section" id="children_div" maxlength="3" onkeyup="amontAdd()" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
+                        <p class="text-danger">{{ $errors->first('children') }}</p>
+                        </div>
+                        <div class="col-lg-2 form-group" style="margin-top: 30px"> 
+                            <div class="card bg-gray"> 
+                              <div class="form-group clearfix">
+                                <div class="icheck-primary d-inline"> 
+                                  <input type="text" name="total_amount"  id="total_amount_hidden">
+                                  <span style="margin: 15px"> Total Amount : <b><span id="total_amount_show"> 0</span></b></span>
+                                </div> 
+                              </div>
+                            </div> 
+                        </div>
+                        <div class="col-lg-2 form-group">
+                            <label>Coupon Code</label>
+                           <div class="input-group input-group-sm">
+                             <input type="text" class="form-control" autocomplete="off">
+                             <span class="input-group-append">
+                               <button type="button" class="btn btn-info btn-flat">Verify</button>
+                             </span>
+                           </div> 
+                        <p class="text-danger">{{ $errors->first('children') }}</p>
+                        </div>
                         <div class="col-lg-12 form-group text-center" style="margin-top: 30px">
                           <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
                         </div>   

@@ -23,19 +23,38 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Get Verification Code</b></a>
+    <a href="#"><b>Enter Verification Code</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body"> 
-        <form action="{{ route('front.mobile.verify') }}" method="post">
+        <form action="{{ route('front.mobile.verify.store') }}" method="post">
           {{csrf_field()}}
           <div class="row">
-            <div class="col-lg-12 form-group">
-              <input type="text" name="mobile_no" class="form-control" placeholder="Enter Mobile No."  required minlength="10" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
+            <div class="input-group mb-3">
+              <input type="text" name="code" class="form-control" placeholder="Enter Code"  required minlength="6" maxlength="6" onkeypress='return event.charCode >= 48 && event.charCode <= 57' {{old('code')}}>
+              <div class="input-group-append">
+              <div class="input-group-text">
+             
+              </div>
+            </div> 
             </div>
+            <p class="text-danger">{{ $errors->first('code') }}</p>
+            <div class="captcha">
+            <span>{!! captcha_img('flat') !!}</span>
+            <button type="button" class="btn btn-warning" onclick="refresh()"><i class="fas fa-1x fa-sync-alt" ></i></button>
+          </div>
+          <div class="input-group mb-3" style="margin-top: 15px">
+            <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha"> 
+            <div class="input-group-append">
+              <div class="input-group-text">
+             
+              </div>
+            </div>
+          </div>
+          <p class="text-danger">{{ $errors->first('captcha') }}</p>
             <div class="col-lg-12 form-group">
-              <input type="submit"  class="form-control btn btn-info" value="Get Verification Code"> 
+              <input type="submit"  class="form-control btn btn-info" value="Verification"> 
             </div>
            
           </div>
@@ -60,7 +79,15 @@
 <script src="{{ asset('admin_asset/dist/js/toastr.min.js') }}"></script>
 @include('admin.include.message')
 <script type="text/javascript">
-  
+  function refresh(){
+    $.ajax({
+     type:'GET',
+     url:'{{ route('admin.refresh.captcha') }}',
+     success:function(data){
+        $(".captcha span").html(data);
+     }
+  });
+  }
  
 </script> 
 {{-- <script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}

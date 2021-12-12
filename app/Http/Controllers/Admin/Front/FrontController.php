@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Helper\MyFuncs;
 use App\Http\Controllers\Admin\OnlinePaymentController;
 use App\Model\OnlinePayment;
+use App\Events\SmsEvent;
 class FrontController extends Controller
 {
    
@@ -53,7 +54,38 @@ class FrontController extends Controller
 	}
 	public function mobileForm($value='')
 	{
-		return view('front.mobile_form',compact('bookingTypes'));
+		return view('front.mobile_form');
+	}
+	public function mobileVerify(Request $request)
+	{
+		
+      $rs_otp = random_int(100000, 999999);
+	  $mobile_no=$request->mobile_no;
+	  \Session::put('user', ['mobile_no' => $mobile_no, 'otp' => $rs_otp, 'status' => 0]);
+	  $message = $rs_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
+	  $tempid ='1707163860074623221';
+	  event(new SmsEvent($mobile_no,$message,$tempid));
+	 
+	  return redirect()->route('front.mobile.verify.form')->with(['class'=>'success','message'=>'Code Send Successfully']);
+        
+	}
+	public function mobileVerifyForm($value='')
+	{
+		return view('front.mobile_verify');
+	}
+	public function mobileVerifystore(Request $request)
+	{
+		
+     $this->validate($request, [
+   
+    'code' => 'required',
+    'captcha' => 'required|captcha',
+              
+    ]);
+     $mobile_no=Session::get('user')['mobile_no'];
+     $get=Session::get('user')['otp'];
+     return redirect()->route('front.book')->with(['class'=>'success','message'=>'Code Verified Successfully']);
+        
 	}
 	public function bookNow($value='')
 	{
