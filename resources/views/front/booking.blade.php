@@ -73,8 +73,7 @@
                         </div>
                         <div class="col-lg-4 form-group">
                             <label>Total Amount</label> 
-                            <input type="text" name="total_amount" class="form-control"  readonly id="total_amount_show" value="0"> 
-                        <p class="text-danger">{{ $errors->first('children') }}</p>
+                            <input type="text" name="total_amount" class="form-control"  readonly id="total_amount_show" value="0">
                         </div> 
                     </div>
                     <div class="row"> 

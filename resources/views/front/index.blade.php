@@ -136,21 +136,39 @@
         	<h3 style="color: #508e4c">Get 5% Discount</h3>
          </div>
         <div class="modal-footer">
-          <a href="" onclick="callPopupLevel2(this,'{{ route('front.mobile.form') }}')" class="btn btn-success" >Book Now</a>
+          <a href="" onclick="callPopupL2()" class="btn btn-success" >Book Now</a>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div> 
     </div>
   </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="{{ asset('admin_asset/plugins/jQuery/jquery.min.js') }}"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="{{ asset('admin_asset/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+  <div class="modal fade modal-xs" id="offer_model_2" role="dialog" style="margin-top: 200px">
+    <div class="modal-dialog"> 
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button> 
+        </div>
+        <div class="modal-body">
+        	<h3 style="color: #508e4c">Get 5% Discount</h3>
+         </div>
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div> 
+    </div>
+  </div>
+
   <script type="text/javascript">
   	$('document').ready(function() {
   	   
   	    $('#offer_model').modal('show'); 
   	}); 
+  	function callPopupL2(argument) {
+  	 $('#offer_model_2').modal('show');	
+  	} 
+  	 
   </script> 
 @include('front.footer')
 <!--Footer Wrap End-->

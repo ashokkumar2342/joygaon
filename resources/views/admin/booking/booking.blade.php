@@ -47,13 +47,13 @@
                         <p class="text-danger">{{ $errors->first('school_Company_city') }}</p>
                         </div>
                         <div class="col-lg-4 form-group">
-                            <label>Adults</label>
+                            <label>Adults (Above 10 Years)</label>
                             <span class="fa fa-asterisk"></span> 
                             <input type="text" name="adults" class="form-control section" id="adult_div" maxlength="3" onkeyup="amontAdd()" value="0" required  onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('adults') }}</p> 
                         </div>
                         <div class="col-lg-4 form-group">
-                            <label>Children</label>
+                            <label>Children (5-10 Years)</label>
                             <span class="fa fa-asterisk"></span> 
                             <input type="text" name="children" class="form-control section" id="children_div" maxlength="3" onkeyup="amontAdd()" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('children') }}</p>
