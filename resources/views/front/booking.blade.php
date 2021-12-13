@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-lg-4 form-group">
                             <label>Mobile No.</label>
-                            <input  name="contact_mobile_no" class="form-control" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required value="{{ $mobile_no }}"> 
+                            <input  name="contact_mobile_no" class="form-control" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required value="{{ $mobile_no }}" readonly> 
                         <p class="text-danger">{{ $errors->first('contact_mobile_no') }}</p> 
                         </div>
                         <div class="col-lg-4 form-group">
