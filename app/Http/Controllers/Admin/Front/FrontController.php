@@ -59,39 +59,48 @@ class FrontController extends Controller
 	public function mobileVerify(Request $request)
 	{
 		
-      $rs_otp = random_int(100000, 999999);
 	  $mobile_no=$request->mobile_no;
-	  \Session::put('user', ['mobile_no' => $mobile_no, 'otp' => $rs_otp, 'status' => 0]);
+      $rs_otp = random_int(100000, 999999);
+	  $guest = DB::select(DB::raw("select * from `guest_users` where `mobile_no` ='$mobile_no' LIMIT 1;"));
+	  if (empty($guest)) {
+	  	$guest_users = DB::select(DB::raw("INSERT Into `guest_users` (`mobile_no`,`otp`) Values ('$mobile_no','$rs_otp');"));
+	  }
+	  if (!empty($guest)) {
+	  	$guest_users = DB::select(DB::raw("update `guest_users` set `otp` ='$rs_otp' where `mobile_no` ='$mobile_no';"));
+	  } 
 	  $message = $rs_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
 	  $tempid ='1707163860074623221';
-	  event(new SmsEvent($mobile_no,$message,$tempid));
-	 
-	  return redirect()->route('front.mobile.verify.form')->with(['class'=>'success','message'=>'Code Send Successfully']);
+	  event(new SmsEvent($mobile_no,$message,$tempid)); 
+	  return redirect()->route('front.mobile.verify.form',Crypt::encrypt($mobile_no))->with(['class'=>'success','message'=>'Code Send Successfully']);
         
 	}
-	public function mobileVerifyForm($value='')
+	public function mobileVerifyForm($mobile_no)
 	{
-		return view('front.mobile_verify');
+		$mobile_no = Crypt::decrypt($mobile_no);
+		return view('front.mobile_verify' ,compact('mobile_no'));
 	}
 	public function mobileVerifystore(Request $request)
-	{
-		
+	{ 	
      $this->validate($request, [
    
     'code' => 'required',
     'captcha' => 'required|captcha',
               
     ]);
-     $mobile_no=Session::get('user')['mobile_no'];
-     $get=Session::get('user')['otp'];
-     return redirect()->route('front.book')->with(['class'=>'success','message'=>'Code Verified Successfully']);
+    $check_otp = DB::select(DB::raw("select * from `guest_users` where `mobile_no` ='$request->mobile_no' LIMIT 1;")); 
+    if ($check_otp[0]->otp==$request->code) {
+    	// return $this->bookNow();
+     return redirect()->route('front.booking.form',Crypt::encrypt($request->mobile_no))->with(['class'=>'success','message'=>'Code Verified Successfully']);
+    } 
+     return redirect()->back()->with(['class'=>'error','message'=>'Invalid Code']);
         
 	}
-	public function bookNow($value='')
-	{
+	public function bookingForm($mobile_no)
+	{	
+		$mobile_no = Crypt::decrypt($mobile_no);
 		$users=Auth::guard('user')->user();  
-        $bookingTypes = DB::select(DB::raw("select * from `booking_type` order by `id`"));
-		return view('front.booking',compact('bookingTypes'));
+        $bookingTypes = DB::select(DB::raw("select * from `booking_type_all` where `status`=1 order by `id`"));
+		return view('front.booking',compact('bookingTypes','mobile_no'));
 	}
 	public function bookingstore(Request $request)
     { 

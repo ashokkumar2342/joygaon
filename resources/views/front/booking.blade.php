@@ -7,6 +7,15 @@
     font-weight: 400;
     margin-bottom: 10px;
 }
+ #message{
+  position: relative;
+  top: 10px;
+  color:green;
+}
+#err{
+  position: relative;
+  top: 10px;
+  color:red;
 </style>
 <!--Header Wrap End-->
 <!-- About Start here -->
@@ -51,41 +60,43 @@
                         </div>
                         <div class="col-lg-4 form-group">
                             <label>Mobile No.</label>
-                            <input  name="contact_mobile_no" class="form-control" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required value="{{ old('contact_mobile_no') }}"> 
+                            <input  name="contact_mobile_no" class="form-control" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required value="{{ $mobile_no }}"> 
                         <p class="text-danger">{{ $errors->first('contact_mobile_no') }}</p> 
                         </div>
                         <div class="col-lg-4 form-group">
-                            <label>Email ID.</label> 
+                            <label>Email ID</label> 
                             <input  name="email_id" class="form-control" required value="{{ old('email_id') }}">
                             <p class="text-danger">{{ $errors->first('email_id') }}</p>
                         </div>
                     </div>
                     <div class="row"> 
-                        <div class="col-lg-4 form-group">
+                        <div class="col-lg-3 form-group">
                             <label>Adults (Above 10 Years)</label> 
                             <input type="text" name="adults" class="form-control" id="adult_div" maxlength="3" onkeyup="amontAdd()" value="0" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('adults') }}</p> 
                         </div>
-                        <div class="col-lg-4 form-group">
+                        <div class="col-lg-3 form-group">
                             <label>Children (5-10 Years)</label> 
                             <input type="text" name="children" class="form-control" id="children_div" maxlength="3" onkeyup="amontAdd()" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('children') }}</p>
                         </div>
-                        <div class="col-lg-4 form-group">
+                        <div class="col-lg-2 form-group">
                             <label>Total Amount</label> 
                             <input type="text" name="total_amount" class="form-control"  readonly id="total_amount_show" value="0">
                         </div> 
+                    
+                        <div class="col-lg-2 form-group">
+                            <label>Coupon Code</label>
+                           <div class="input-group input-group-sm">
+                             <input type="text" name="coupon" id="in" class="form-control coupon" title="Enter coupon" autocomplete="off"></div> 
+                            <span id="message"></span>
+                            <span id="err"></span>
+                        </div>
+                        <div class="col-lg-2 form-group" style="margin-top: 30px">
+                            <button type="button" class="btn btn-info btn-flat" onclick="validate(coupon)">Verify</button>
+                        </div>
                     </div>
-                    <div class="row"> 
-                        <div class="col-lg-4 form-group">
-                            <label>Reddem a gift card or promo code</label> 
-                            <input type="text" name="code" class="form-control" maxlength="8"> 
-                        <p class="text-danger">{{ $errors->first('adults') }}</p> 
-                        </div>
-                        <div class="col-lg-2 form-group" style="margin-top: 35px;">
-                            <a href="" style="color:blue;margin-top: 30px;">Verify Code</a>
-                        </div>
-                        <div class="col-lg-4 form-group" style="margin-top: 35px;">
+                        <div class="col-lg-12 form-group text-center" style="margin-top: 35px;">
                             <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
                         </div>
 
@@ -139,7 +150,20 @@
         }     
     }
     
-   
+   function validate(coupon) {
+    var myRe = "LUCKY100";
+    var coupon = myRe.trim();
+    var input = document.getElementById('in').value;
+    if(input.toUpperCase() == coupon.toUpperCase()) {
+        document.getElementById('message').innerHTML="Coupon applied!";
+        document.getElementById('err').innerHTML="";
+        return true;
+    } else {
+        document.getElementById('err').innerHTML="Invalid coupon";
+        document.getElementById('message').innerHTML="";
+        return false;
+    }
+}
         
   
    </script>

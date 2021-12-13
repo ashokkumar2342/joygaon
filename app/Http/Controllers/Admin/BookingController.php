@@ -150,15 +150,15 @@ class BookingController extends Controller
             return view('admin.booking.generate_coupon',compact('users')); 
         }catch (Exception $e) { }  
     }
-    public function generatestore(Request $request)
+    public function couponPost(Request $request)
     {
-
+        return 'ok';
         $rules=[ 
               'user_id'=> 'required', 
               'coupan_code'=> 'required|unique:coupan_detail|max:8|min:8', 
               
         ];
-        return 'ok';
+       
         $validator = Validator::make($request->all(),$rules);
         if ($validator->fails()) {
               $errors = $validator->errors()->all();
@@ -167,7 +167,7 @@ class BookingController extends Controller
               $response["msg"]=$errors[0];
               return response()->json($response);// response as json
         }
-
+        return 'ok';
         $user=Auth::guard('user')->user(); 
         $coupan_detail=DB::select(DB::raw("Insert Into `coupan_detail` (`user_id`, `coupan_code`, `discount_percent`, `discount_fix`, `complemantry_adult` , `complementry_child` `genereted_by`) Values ('$request->user_id', '$request->coupon_code', '$request->discount_percent', '$request->discount_fix', '$request->complementary_adult', '$request->complementary_child',$user->id);")); 
         $response=['status'=>1,'msg'=>'Generated Successfully'];

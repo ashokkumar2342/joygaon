@@ -27,10 +27,12 @@
   </div>
   <!-- /.login-logo -->
   <div class="card">
-    <div class="card-body login-card-body"> 
+    <div class="card-body login-card-body">
+    <p class="login-box-msg">Check Your Mobile <b>****{{substr($mobile_no, 6)}}</b> For The Verification Code</p> 
         <form action="{{ route('front.mobile.verify.store') }}" method="post">
           {{csrf_field()}}
           <div class="row">
+            <input type="hidden" name="mobile_no" class="form-control hidden" value="{{$mobile_no}}"> 
             <div class="input-group mb-3">
               <input type="text" name="code" class="form-control" placeholder="Enter Code"  required minlength="6" maxlength="6" onkeypress='return event.charCode >= 48 && event.charCode <= 57' {{old('code')}}>
               <div class="input-group-append">

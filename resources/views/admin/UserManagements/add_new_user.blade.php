@@ -13,7 +13,7 @@
         </div> 
         <div class="card card-info"> 
             <div class="card-body">
-                <form action="{{ route('admin.add.new.user.store') }}" method="post" class="add_form" >
+                <form action="{{ route('admin.add.new.user.store') }}" method="post" class="add_form">
                 {{ csrf_field() }}
                 <div class="row"> 
                     <div class="col-lg-4">

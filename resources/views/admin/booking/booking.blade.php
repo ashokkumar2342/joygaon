@@ -1,5 +1,17 @@
 @extends('admin.layout.base')
 @section('body')
+<style>
+    #message{
+  position: relative;
+  top: 10px;
+  color:green;
+}
+#err{
+  position: relative;
+  top: 10px;
+  color:red;
+}
+</style>
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -88,12 +100,13 @@
                         <div class="col-lg-2 form-group">
                             <label>Coupon Code</label>
                            <div class="input-group input-group-sm">
-                             <input type="text" class="form-control" autocomplete="off">
+                             <input type="text" name="coupon" id="in" class="form-control coupon" title="Enter coupon" autocomplete="off">
                              <span class="input-group-append">
-                               <button type="button" class="btn btn-info btn-flat">Verify</button>
+                               <button type="button" class="btn btn-info btn-flat" onclick="validate(coupon)">Verify</button>
                              </span>
                            </div> 
-                        <p class="text-danger">{{ $errors->first('children') }}</p>
+                            <span id="message"></span>
+                            <span id="err"></span>
                         </div>
                         <div class="col-lg-12 form-group text-center" style="margin-top: 30px">
                           <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
@@ -149,7 +162,20 @@
         }     
     }
     
-   
+   function validate(coupon) {
+    var myRe = "LUCKY100";
+    var coupon = myRe.trim();
+    var input = document.getElementById('in').value;
+    if(input.toUpperCase() == coupon.toUpperCase()) {
+        document.getElementById('message').innerHTML="Coupon applied!";
+        document.getElementById('err').innerHTML="";
+        return true;
+    } else {
+        document.getElementById('err').innerHTML="Invalid coupon";
+        document.getElementById('message').innerHTML="";
+        return false;
+    }
+}
         
   
    </script>

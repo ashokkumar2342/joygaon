@@ -11,9 +11,10 @@ Route::get('index', 'Front\FrontController@index')->name('front.index'); //OK---
 Route::get('booknow', 'Front\FrontController@booknowF')->name('front.booknow'); //OK-------
 Route::get('mob-form', 'Front\FrontController@mobileForm')->name('front.mobile.form'); //OK-------
 Route::post('mob-verify', 'Front\FrontController@mobileVerify')->name('front.mobile.verify'); //OK-------
-Route::get('mob-verify-form', 'Front\FrontController@mobileVerifyForm')->name('front.mobile.verify.form'); //OK-------
+Route::get('mob-verify-form/{mobile_no}', 'Front\FrontController@mobileVerifyForm')->name('front.mobile.verify.form'); //OK-------
 Route::post('mob-verify-store', 'Front\FrontController@mobileVerifyStore')->name('front.mobile.verify.store'); //OK-------
-Route::get('book', 'Front\FrontController@bookNow')->name('front.book'); //OK-------
+Route::get('booking-form/{mobile_no}', 'Front\FrontController@bookingForm')->name('front.booking.form'); //OK-------
+
 Route::get('about', 'Front\FrontController@about')->name('front.about'); //OK-------
 Route::get('gallery', 'Front\FrontController@gallery')->name('front.gallery'); //OK-------
 Route::get('price-list', 'Front\FrontController@priceList')->name('front.price.list'); //OK-------
@@ -63,8 +64,9 @@ Route::group(['middleware' => 'admin'], function() {
 	Route::post('report-post', 'BookingController@reportPost')->name('admin.report.post'); 
 	Route::get('payment-history', 'BookingController@paymentHistory')->name('admin.payment.history'); 
 	Route::post('payment-history-show', 'BookingController@paymentHistoryShow')->name('admin.payment.history.show'); 
-	Route::get('generate-coupon', 'BookingController@generateCoupon')->name('admin.generate.coupon'); 
-	Route::post('generate-store', 'BookingController@generatestore')->name('admin.generate.store'); 
+	Route::get('generate-coupon', 'BookingController@generateCoupon')->name('admin.generate.coupon');
+	Route::post('coupon-post', 'BookingController@couponPost')->name('admin.coupon.post'); 
+	
 	
 
 

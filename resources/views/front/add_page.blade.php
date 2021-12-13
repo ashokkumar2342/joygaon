@@ -15,12 +15,10 @@
     </div>
 </div> 
 <div class="gt_hdg_1" style="margin-top:20px">
-    <a href="" class="btn btn-warning btn-lg">Register And Book Now</a>
+    <a href="{{ route('front.mobile.form') }}" class="btn btn-warning btn-lg" style="width:250px">Book Now</a>
 </div>
 <div class="gt_main_content_wrap" style="margin-top:30px">
-    <div class="gt_hdg_1">
-        <h4 style="font-size: 36px;color: #ffc000">Gallery</h4>
-    </div>
+    
     <div class="container">
         <div class="row">
             <div class="col-md-12">                            
@@ -29,6 +27,9 @@
 
         </div>
     </div>
+</div>
+<div class="gt_hdg_1" style="margin-top:20px">
+    <a href="{{ route('front.mobile.form') }}" class="btn btn-warning btn-lg" style="width:250px">Book Now</a>
 </div> 
 
 <!--Footer Wrap Start-->
