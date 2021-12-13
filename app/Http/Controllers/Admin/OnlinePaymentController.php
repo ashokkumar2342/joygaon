@@ -501,9 +501,7 @@ class OnlinePaymentController extends Controller
 
 
 
-    // public function paymentFailed(Request $request) {     	 
-    //     return redirect()->route('admin.booking.status')->with(['message'=>'Payment Failed','class'=>'error']);
-    // }
+   
 
 
     

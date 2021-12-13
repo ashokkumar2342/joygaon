@@ -13,6 +13,6 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'online-pay/paytm-callback',
-        'pay-online/paytm-callback'
+        'front-pay/paytm-callback'
     ];
 }

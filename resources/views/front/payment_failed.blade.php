@@ -5,7 +5,7 @@
         <div class="box"> 
             <div class="box-body">
               <div class="login-box-body">
-                <h4 class="login-box-msg bg-danger text-info text-center" style="padding-top: 15px">Payment Successful</h4> 
+                <h4 class="login-box-msg bg-danger text-info text-center" style="padding-top: 15px">Sorry payment failed</h4> 
                  </br>
                  <div class="row"> 
                    {{-- <div class="col-xs-4 pull-right">

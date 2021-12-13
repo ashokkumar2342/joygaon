@@ -81,7 +81,17 @@ Route::group(['middleware' => 'admin'], function() {
    		Route::post('payment-store', 'BookingController@storeBooking')->name('admin.booking.store'); 	//OK------------
 
    		Route::post('/paytm-callback', 'OnlinePaymentController@paytmCallback');
+	});
 });
+
+Route::group(['prefix' => 'front-pay'], function() {
+		Route::get('/', 'Front\FrontController@index')->name('front.payment.form');  
+		Route::get('completed/{id}', 'Front\FrontController@completed')->name('front.payment.completed');  
+		Route::get('failed', 'Front\FrontController@paymentFailed')->name('front.payment.failed');   
+
+		Route::post('/paytm-callback', 'Front\FrontController@paytmCallback');
 });
+
+
 
 

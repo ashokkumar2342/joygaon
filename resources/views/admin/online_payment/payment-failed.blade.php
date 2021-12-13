@@ -21,7 +21,7 @@
                  <div class="row"> 
                    <div class="col-xs-4 pull-right">
                    	<a href="{{ route('payment.form') }}" title="">
-                     <button  class="btn btn-primary">Pay Again </button>
+                     <button  class="btn btn-primary">Try Again  </button>
                      </a>
                    </div>
                   
