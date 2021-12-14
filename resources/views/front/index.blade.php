@@ -125,7 +125,7 @@
 <!--Our Gallery Wrap End--> 
 <!--Footer Wrap Start-->
 <!-- Modal -->
-  <div class="modal fade modal-xs" id="offer_model" role="dialog" style="margin-top: 180px">
+  <div class="modal fade modal-xs" id="offer_model" role="dialog">
     <div class="modal-dialog"> 
       <!-- Modal content-->
       <div class="modal-content">
