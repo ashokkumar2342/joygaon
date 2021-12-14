@@ -87,7 +87,7 @@
                             <input type="text" name="children" class="form-control section" id="children_div" maxlength="3" onkeyup="amontAdd()" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('children') }}</p>
                         </div>
-                        <div class="col-lg-2 form-group" style="margin-top: 30px"> 
+                        <div class="col-lg-4 form-group" style="margin-top: 30px"> 
                             <div class="card bg-gray"> 
                               <div class="form-group clearfix">
                                 <div class="icheck-primary d-inline"> 
@@ -97,7 +97,7 @@
                               </div>
                             </div> 
                         </div>
-                        <div class="col-lg-2 form-group">
+                        {{-- <div class="col-lg-2 form-group">
                             <label>Coupon Code</label>
                            <div class="input-group input-group-sm">
                              <input type="text" name="coupon" id="in" class="form-control coupon" title="Enter coupon" autocomplete="off">
@@ -107,7 +107,7 @@
                            </div> 
                             <span id="message"></span>
                             <span id="err"></span>
-                        </div>
+                        </div> --}}
                         <div class="col-lg-12 form-group text-center" style="margin-top: 30px">
                           <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
                         </div>   

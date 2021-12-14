@@ -70,22 +70,22 @@
                         </div>
                     </div>
                     <div class="row"> 
-                        <div class="col-lg-3 form-group">
+                        <div class="col-lg-4 form-group">
                             <label>Adults (Above 10 Years)</label> 
                             <input type="text" name="adults" class="form-control" id="adult_div" maxlength="3" onkeyup="amontAdd()" value="0" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('adults') }}</p> 
                         </div>
-                        <div class="col-lg-3 form-group">
+                        <div class="col-lg-4 form-group">
                             <label>Children (5-10 Years)</label> 
                             <input type="text" name="children" class="form-control" id="children_div" maxlength="3" onkeyup="amontAdd()" value="0" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('children') }}</p>
                         </div>
-                        <div class="col-lg-2 form-group">
+                        <div class="col-lg-4 form-group">
                             <label>Total Amount</label> 
                             <input type="text" name="total_amount" class="form-control"  readonly id="total_amount_show" value="0">
                         </div> 
                     
-                        <div class="col-lg-2 form-group">
+                        {{-- <div class="col-lg-2 form-group">
                             <label>Coupon Code</label>
                            <div class="input-group input-group-sm">
                              <input type="text" name="coupon" id="in" class="form-control coupon" title="Enter coupon" autocomplete="off"></div> 
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-lg-2 form-group" style="margin-top: 30px">
                             <button type="button" class="btn btn-info btn-flat" onclick="validate(coupon)">Verify</button>
-                        </div>
+                        </div> --}}
                     </div>
                         <div class="col-lg-12 form-group text-center" style="margin-top: 35px;">
                             <input type="submit" class="btn" value="Booking" style="width: 250px;background-color:#f2cb2f">

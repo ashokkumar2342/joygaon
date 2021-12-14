@@ -125,15 +125,15 @@
 <!--Our Gallery Wrap End--> 
 <!--Footer Wrap Start-->
 <!-- Modal -->
-  <div class="modal fade modal-xs" id="offer_model" role="dialog" style="margin-top: 200px">
+  <div class="modal fade modal-xs" id="offer_model" role="dialog" style="margin-top: 180px">
     <div class="modal-dialog"> 
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
+        {{-- <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button> 
-        </div>
+        </div> --}}
         <div class="modal-body">
-        	<h3 style="color: #508e4c">Get 5% Discount</h3>
+        	<img src="{{asset('front_asset/images/discount_img.png')}}" alt="">
          </div>
         <div class="modal-footer">
           <a href="{{ route('front.mobile.form') }}" class="btn btn-success" >Book Now</a>
