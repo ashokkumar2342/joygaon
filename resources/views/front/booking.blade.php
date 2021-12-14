@@ -29,7 +29,7 @@
                             <select class="form-control" name="booking_type" id="booking_type" required onchange="amontAdd()">
                             <option selected disabled>Select Booking Type</option>
                             @foreach ($bookingTypes as $bookingType)
-                                <option value="{{$bookingType->id}}" @if (old('booking_type')==$bookingType->id) selected="selected" @endif>{{$bookingType->code}}-{{$bookingType->name}}</option>
+                                <option value="{{$bookingType->id}}" @if (old('booking_type')==$bookingType->id) selected="selected" @endif>{{$bookingType->name}}</option>
                             @endforeach 
                              </select>                    
                         <p class="text-danger">{{ $errors->first('booking_type') }}</p>
@@ -97,7 +97,7 @@
                         </div>
                     </div>
                         <div class="col-lg-12 form-group text-center" style="margin-top: 35px;">
-                            <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
+                            <input type="submit" class="btn" value="Booking" style="width: 250px;background-color:#f2cb2f">
                         </div>
 
                     </div>
@@ -140,7 +140,7 @@
         totalPoints = adult_div+children_div; 
         $('#total_amount_show').val(totalPoints);
         $('#total_amount_hidden').val(totalPoints);
-
+        
         const adults = document.querySelector('input[name=adults]');
         const children = document.querySelector('input[name=children]');
         if ((children.value == 0 ) && (adults.value ==0)){
@@ -151,7 +151,7 @@
     }
     
    function validate(coupon) {
-    var myRe = "LUCKY100";
+    var myRe = "JOY12345";
     var coupon = myRe.trim();
     var input = document.getElementById('in').value;
     if(input.toUpperCase() == coupon.toUpperCase()) {

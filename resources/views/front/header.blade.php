@@ -95,44 +95,26 @@ src="https://www.facebook.com/tr?id=1372186106530894&ev=PageView&noscript=1"
     <script>
 
       $('#id1').mouseover(function(){
-        $('#id1').css("color", "#ffc000");
+        $('#id1').css("color", "#80cd33");
       });
       $('#id1').mouseout(function(){
         $('#id1').css("color", "#fff");
       });
-      $('#id2').mouseover(function(){
-        $('#id2').css("color", "#ffc000");
-      });
-      $('#id2').mouseout(function(){
-        $('#id2').css("color", "#fff");
-      });
-      $('#id3').mouseover(function(){
-        $('#id3').css("color", "#ffc000");
-      });
-      $('#id3').mouseout(function(){
-        $('#id3').css("color", "#fff");
-      });
-      $('#id4').mouseover(function(){
-        $('#id4').css("color", "#ffc000");
-      });
-      $('#id4').mouseout(function(){
-        $('#id4').css("color", "#fff");
-      });
-
+     
       $('#btn_1').mouseover(function(){
-        $('#btn_1').css("color", "#ffc000");
+        $('#btn_1').css("color", "#80cd33");
       });
       $('#btn_1').mouseout(function(){
         $('#btn_1').css("color", "#fff");
       });
       $('#btn_2').mouseover(function(){
-        $('#btn_2').css("color", "#ffc000");
+        $('#btn_2').css("color", "#80cd33");
       });
       $('#btn_2').mouseout(function(){
         $('#btn_2').css("color", "#fff");
       });
       $('#btn_3').mouseover(function(){
-        $('#btn_3').css("color", "#ffc000");
+        $('#btn_3').css("color", "#80cd33");
       });
       $('#btn_3').mouseout(function(){
         $('#btn_3').css("color", "#fff");

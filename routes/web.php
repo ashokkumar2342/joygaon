@@ -14,6 +14,7 @@ Route::post('mob-verify', 'Front\FrontController@mobileVerify')->name('front.mob
 Route::get('mob-verify-form/{mobile_no}', 'Front\FrontController@mobileVerifyForm')->name('front.mobile.verify.form'); //OK-------
 Route::post('mob-verify-store', 'Front\FrontController@mobileVerifyStore')->name('front.mobile.verify.store'); //OK-------
 Route::get('booking-form/{mobile_no}', 'Front\FrontController@bookingForm')->name('front.booking.form'); //OK-------
+Route::get('download-ticket/{order_id}', 'Front\FrontController@downloadTicket')->name('front.download.ticket'); //OK-------
 
 Route::get('about', 'Front\FrontController@about')->name('front.about'); //OK-------
 Route::get('gallery', 'Front\FrontController@gallery')->name('front.gallery'); //OK-------

@@ -116,8 +116,7 @@ class FrontController extends Controller
             "email_id" => 'required',  
         ]);
         $booking_date=date('Y-m-d');
-         
-        $admin=100;
+        $admin=0;
         $booking_type=DB::select(DB::raw("SELECT `ad_amount`,`ch_amount` FROM `booking_type_all` where `id`=$request->booking_type LIMIT 1"));
         $ad_amount=$booking_type[0]->ad_amount;
         $ch_amount=$booking_type[0]->ch_amount;
@@ -134,7 +133,7 @@ class FrontController extends Controller
         DB::select(DB::raw("INSERT Into `booking` (`user_id`, `booking_type_id`, `booking_date`, `trip_date`, `school_Company_name`, `school_Company_city`, `adults`, `children`, `person_name`, `mobile_no`, `email_id`, `ticket_rate_adult`, `ticket_rate_child`, `amount`, `status`, `remarks`, `order_id`) Values ($admin, '$request->booking_type', '$booking_date', '$request->trip_date', '$company_name', '$address_city', '$request->adults', '$request->children','$contact_name','$request->contact_mobile_no','$request->email_id','$ad_amount','$ch_amount','$total_amount', 0, '', '$order_id');"));
 
         $booking_id=DB::select(DB::raw("SELECT `id` FROM `booking` where `user_id` = $admin and `order_id` = '$order_id' ORDER BY `id` DESC LIMIT 1")); 
-        $user_id =100; 
+        $user_id =0; 
         $booking_id = $booking_id[0]->id;
         $order = new OnlinePayment(); 
         $order->user_id = $user_id;
@@ -525,4 +524,15 @@ class FrontController extends Controller
  	    $mpdf->Output($documentUrl.'/'.$order_id.'.pdf', 'F');
  	    // return view('admin.booking.print_ticket',compact('paymentModes'));
  	}
+ 	public function downloadTicket($order_id)
+    {
+       
+        $order_id=Crypt::decrypt($order_id);
+        $downloadTicket = DB::select(DB::raw("select `booking_date` , `order_id` from `booking` where `order_id` = '$order_id'  limit 1;"));
+        $booking_date=$downloadTicket[0]->booking_date;
+        $order_id=$downloadTicket[0]->order_id;
+        $downloadTicket = reset($downloadTicket);
+        $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id;
+        return response()->file($documentUrl.'.pdf');
+    }
 }

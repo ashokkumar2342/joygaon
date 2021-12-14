@@ -35,7 +35,7 @@
               <input type="text" name="mobile_no" class="form-control" placeholder="Enter Mobile No."  required minlength="10" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
             </div>
             <div class="col-lg-12 form-group">
-              <input type="submit"  class="form-control btn btn-info" value="Get Verification Code"> 
+              <input type="submit"  class="form-control btn" id="get_btn" value="Get Verification Code" style="background-color:#80cd33;color:#fff"> 
             </div>
            
           </div>
@@ -61,7 +61,12 @@
 @include('admin.include.message')
 <script type="text/javascript">
   
- 
+ $('#get_btn').mouseover(function(){
+        $('#get_btn').css("background-color", "#5a9023");
+      });
+      $('#get_btn').mouseout(function(){
+        $('#get_btn').css("background-color", "#80cd33");
+      });
 </script> 
 {{-- <script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
 

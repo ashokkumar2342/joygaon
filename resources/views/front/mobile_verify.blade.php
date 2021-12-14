@@ -56,7 +56,7 @@
           </div>
           <p class="text-danger">{{ $errors->first('captcha') }}</p>
             <div class="col-lg-12 form-group">
-              <input type="submit"  class="form-control btn btn-info" value="Verification"> 
+              <input type="submit"  class="form-control btn" id="very_btn" value="Verification" style="background-color:#80cd33;color:#fff"> 
             </div>
            
           </div>
@@ -90,7 +90,12 @@
      }
   });
   }
- 
+ $('#very_btn').mouseover(function(){
+        $('#very_btn').css("background-color", "#5a9023");
+      });
+      $('#very_btn').mouseout(function(){
+        $('#very_btn').css("background-color", "#80cd33");
+});
 </script> 
 {{-- <script data-ad-client="ca-pub-6986129570235357" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> --}}
 
