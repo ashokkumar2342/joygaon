@@ -31,9 +31,29 @@
         <form action="{{ route('front.mobile.verify') }}" method="post">
           {{csrf_field()}}
           <div class="row">
-            <div class="col-lg-12 form-group">
-              <input type="text" name="mobile_no" class="form-control" placeholder="Enter Mobile No."  required minlength="10" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
+            
+            <div class="input-group mb-3">
+              <input type="text" name="mobile_no" class="form-control" placeholder="Enter Mobile No."  required minlength="10" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' {{old('mobile_no')}}>
+              <div class="input-group-append">
+              <div class="input-group-text">
+             
+              </div>
+            </div> 
             </div>
+            <p class="text-danger">{{ $errors->first('mobile_no') }}</p>
+            <div class="captcha">
+            <span>{!! captcha_img('flat') !!}</span>
+            <button type="button" class="btn btn-warning" onclick="refresh()"><i class="fas fa-1x fa-sync-alt" ></i></button>
+          </div>
+          <div class="input-group mb-3" style="margin-top: 15px">
+            <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha"> 
+            <div class="input-group-append">
+              <div class="input-group-text">
+             
+              </div>
+            </div>
+          </div>
+          <p class="text-danger">{{ $errors->first('captcha') }}</p>
             <div class="col-lg-12 form-group">
               <input type="submit"  class="form-control btn" id="get_btn" value="Get Verification Code" style="background-color:#80cd33;color:#fff"> 
             </div>
@@ -60,7 +80,15 @@
 <script src="{{ asset('admin_asset/dist/js/toastr.min.js') }}"></script>
 @include('admin.include.message')
 <script type="text/javascript">
-  
+  function refresh(){
+    $.ajax({
+     type:'GET',
+     url:'{{ route('admin.refresh.captcha') }}',
+     success:function(data){
+        $(".captcha span").html(data);
+     }
+  });
+  }
  $('#get_btn').mouseover(function(){
         $('#get_btn').css("background-color", "#5a9023");
       });

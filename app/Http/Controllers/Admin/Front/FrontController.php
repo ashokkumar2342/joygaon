@@ -57,7 +57,12 @@ class FrontController extends Controller
 	}
 	public function mobileVerify(Request $request)
 	{
-		
+    	$this->validate($request, [
+       
+        'mobile_no' => 'required',
+        'captcha' => 'required|captcha',
+                  
+        ]);
 	  $mobile_no=$request->mobile_no;
       $rs_otp = random_int(100000, 999999);
 	  $guest = DB::select(DB::raw("delete from `guest_users` where `mobile_no` ='$mobile_no' LIMIT 1;"));
