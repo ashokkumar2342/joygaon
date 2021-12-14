@@ -29,19 +29,19 @@ table ,td{
         <td style="padding-left: 356px;padding-top:7px"><barcode code="{{$booking_id[0]->id}}" height="0.8" type="C39" size = "1.0" class="barcode"/></td> 
       </tr>
       <tr>
-        <td style="padding-left:100px;padding-top:72px"><b>{{$booking_id[0]->person_name}}</b></td> 
+        <td style="padding-left:100px;padding-top:68px"><b>{{$booking_id[0]->person_name}}</b></td> 
       </tr>
       <tr>
         <td style="padding-left:154px;padding-top:-3px"><b>{{$booking_id[0]->mobile_no}}</b></td> 
       </tr>
       <tr>
-        <td style="padding-left:110px;padding-top:-3px"><b>{{$booking_id[0]->adults}}</b></td> 
+        <td style="padding-left:225px;padding-top:-2px"><b>{{$booking_id[0]->adults}}</b></td> 
       </tr> 
       <tr>
-        <td style="padding-left:137px;padding-top:-3px"><b>{{$booking_id[0]->children}}</b></td> 
+        <td style="padding-left:132px;padding-top:9px"><b>{{$booking_id[0]->children}}</b></td> 
       </tr>
       <tr>
-        <td style="padding-left:180px;padding-top:62px;font-size: 20px"><b>Trip Date : {{date('d-m-Y',strtotime($booking_id[0]->trip_date))}}</b></td> 
+        <td style="padding-left:180px;padding-top:52px;font-size: 20px"><b>Trip Date : {{date('d-m-Y',strtotime($booking_id[0]->trip_date))}}</b></td> 
       </tr> 
       </table> 
     </div> 

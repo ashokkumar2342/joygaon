@@ -71,7 +71,7 @@
                     </div>
                     <div class="row"> 
                         <div class="col-lg-4 form-group">
-                            <label>Adults (Above 10 Years)</label> 
+                            <label>Adults & Children (Above 10 Years)</label> 
                             <input type="text" name="adults" class="form-control" id="adult_div" maxlength="3" onkeyup="amontAdd()" value="0" required onkeypress='return event.charCode >= 48 && event.charCode <= 57'> 
                         <p class="text-danger">{{ $errors->first('adults') }}</p> 
                         </div>
