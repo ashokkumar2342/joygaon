@@ -35,16 +35,13 @@ table ,td{
         <td style="padding-left:154px;padding-top:-3px"><b>{{$booking_id[0]->mobile_no}}</b></td> 
       </tr>
       <tr>
-        <td style="padding-left:182px;padding-top:-3px"><b>{{ ($booking_id[0]->adults) + ($booking_id[0]->children) }}</b></td> 
-      </tr> 
-      <tr>
         <td style="padding-left:110px;padding-top:-3px"><b>{{$booking_id[0]->adults}}</b></td> 
       </tr> 
       <tr>
         <td style="padding-left:137px;padding-top:-3px"><b>{{$booking_id[0]->children}}</b></td> 
       </tr>
       <tr>
-        <td style="padding-left:180px;padding-top:42px;font-size: 20px"><b>Trip Date : {{date('d-m-Y',strtotime($booking_id[0]->trip_date))}}</b></td> 
+        <td style="padding-left:180px;padding-top:62px;font-size: 20px"><b>Trip Date : {{date('d-m-Y',strtotime($booking_id[0]->trip_date))}}</b></td> 
       </tr> 
       </table> 
     </div> 
