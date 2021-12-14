@@ -60,13 +60,8 @@ class FrontController extends Controller
 		
 	  $mobile_no=$request->mobile_no;
       $rs_otp = random_int(100000, 999999);
-	  $guest = DB::select(DB::raw("select * from `guest_users` where `mobile_no` ='$mobile_no' LIMIT 1;"));
-	  if (empty($guest)) {
-	  	$guest_users = DB::select(DB::raw("INSERT Into `guest_users` (`mobile_no`,`otp`) Values ('$mobile_no','$rs_otp');"));
-	  }
-	  if (!empty($guest)) {
-	  	$guest_users = DB::select(DB::raw("update `guest_users` set `otp` ='$rs_otp' where `mobile_no` ='$mobile_no';"));
-	  } 
+	  $guest = DB::select(DB::raw("delete from `guest_users` where `mobile_no` ='$mobile_no' LIMIT 1;"));
+	  $guest_users = DB::select(DB::raw("INSERT Into `guest_users` (`mobile_no`,`otp`) Values ('$mobile_no','$rs_otp');"));
 	  $message = $rs_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
 	  $tempid ='1707163860074623221';
 	  event(new SmsEvent($mobile_no,$message,$tempid)); 
