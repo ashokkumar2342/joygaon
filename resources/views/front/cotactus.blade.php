@@ -29,7 +29,7 @@
              <span style="font-weight: bold; text-align: justify !important;">For Picnic: +91-7404452902, 301, 302, 305, 306 <br> For Hotel:- +91-7404452902, 318<br>
             For Tennis Academy:- +91 7404452902, 02, 03, 04<br>
 
-           Email:- info@joygaon.com</span>
+           Email:- info@joygaon.in</span>
           </div>
   </div>
 </div><!-- container -->

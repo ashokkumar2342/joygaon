@@ -7,22 +7,11 @@
               <div class="login-box-body">
                 <h4 class="login-box-msg bg-danger text-info text-center" style="padding-top: 15px">Sorry payment failed</h4> 
                  </br>
-                 <div class="row"> 
-                   {{-- <div class="col-xs-4 pull-right">
-                   	<a href="{{ route('payment.form') }}" title="">
-                     <button  class="btn btn-primary">Try Again  </button>
-                     </a>
-                   </div> --}}
-                  
-                 </div>
+                 
               </div> 
             </div>  
-     <!-- /.content -->
-   </div>
-
-     </section>
-   <!-- /.content-wrapper -->
- 
+     </div>
+   </section>
 </div>
 @include('front.footer')
  
