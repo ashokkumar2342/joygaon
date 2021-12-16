@@ -165,7 +165,7 @@ class FrontController extends Controller
         }
         if (!empty($request->type)) { 
             $booking_type=DB::select(DB::raw("SELECT * FROM `bivents_booking_type` where `id` =$request->booking_type LIMIT 1"));
-            $trip_date='2021-31-12';
+            $trip_date='31-12-2021';
             $ad_amount=0;
             $ch_amount=0;
             $ticket_rate_adult=$booking_type[0]->package_price;
