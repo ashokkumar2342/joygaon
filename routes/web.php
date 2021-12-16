@@ -9,12 +9,13 @@ Route::get('/', function () {
 
 Route::get('index', 'Front\FrontController@index')->name('front.index'); //OK-------
 Route::get('booknow', 'Front\FrontController@booknowF')->name('front.booknow'); //OK-------
-Route::get('mob-form', 'Front\FrontController@mobileForm')->name('front.mobile.form'); //OK-------
+Route::get('mob-form/{type?}', 'Front\FrontController@mobileForm')->name('front.mobile.form'); //OK-------
 Route::post('mob-verify', 'Front\FrontController@mobileVerify')->name('front.mobile.verify'); //OK-------
-Route::get('mob-verify-form/{mobile_no}', 'Front\FrontController@mobileVerifyForm')->name('front.mobile.verify.form'); //OK-------
+Route::get('mob-verify-form/{mobile_no}/{type}', 'Front\FrontController@mobileVerifyForm')->name('front.mobile.verify.form'); //OK-------
 Route::post('mob-verify-store', 'Front\FrontController@mobileVerifyStore')->name('front.mobile.verify.store'); //OK-------
 Route::get('booking-form/{mobile_no}', 'Front\FrontController@bookingForm')->name('front.booking.form'); //OK-------
 Route::get('download-ticket/{order_id}', 'Front\FrontController@downloadTicket')->name('front.download.ticket'); //OK-------
+Route::get('bivents-booking', 'Front\FrontController@biventsBooking')->name('front.bivents.booking'); //OK-------
 
 Route::get('about', 'Front\FrontController@about')->name('front.about'); //OK-------
 Route::get('gallery', 'Front\FrontController@gallery')->name('front.gallery'); //OK-------

@@ -16,16 +16,26 @@
   position: relative;
   top: 10px;
   color:red;
+}
+#bac{
+    background-image: url('{{asset('front_asset/images/banner2.jpg')}}');
+    height: 650px;
+}
+.fa-asterisk {
+     color: red;
+     font-size:7px; 
+     vertical-align: super;
+   }
 </style>
 <!--Header Wrap End-->
 <!-- About Start here -->
-<section class="about about-two" style="background: #508e4c;color: #fff;">
+<section class="about about-two" id="bac">
     <div class="container"> 
                 <form action="{{ route('front.booking.store') }}" method="post">
                     {{ csrf_field() }}
                     <div class="row"> 
                         <div class="col-lg-6 form-group"> 
-                            <label for="exampleInputEmail1">Booking Type</label> 
+                            <label for="exampleInputEmail1">Booking Type <span class="fa fa-asterisk"></span></label> 
                             <select class="form-control" name="booking_type" id="booking_type" required onchange="amontAdd()">
                             <option selected disabled>Select Booking Type</option>
                             @foreach ($bookingTypes as $bookingType)
@@ -35,36 +45,36 @@
                         <p class="text-danger">{{ $errors->first('booking_type') }}</p>
                         </div>
                         <div class="col-lg-6">
-                            <label>Trip Date</label> 
+                            <label>Trip Date <span class="fa fa-asterisk"></span></label> 
                             <input type="date" name="trip_date" class="form-control"  min="{{ date('Y-m-d',strtotime(date('d-m-Y'))) }}" required value="{{ old('trip_date') }}"> 
                         <p class="text-danger">{{ $errors->first('trip_date') }}</p> 
                         </div>
                     </div>
                     <div class="row"> 
                         <div class="col-lg-6 form-group">
-                            <label>School/Company/Person Name</label>
+                            <label>School/Company/Person Name <span class="fa fa-asterisk"></span></label>
                             <input type="text" name="school_Company_name" class="form-control"   required maxlength="100" value="{{ old('school_Company_name') }}">
                         <p class="text-danger">{{ $errors->first('school_Company_name') }}</p> 
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label>Address/City</label>
+                            <label>Address/City <span class="fa fa-asterisk"></span></label>
                             <input type="text" name="school_Company_city" class="form-control"  required maxlength="100" value="{{ old('school_Company_city') }}">
                         <p class="text-danger">{{ $errors->first('school_Company_city') }}</p>
                         </div>
                     </div>
                     <div class="row"> 
                         <div class="col-lg-4 form-group">
-                            <label>Contact Person Name</label> 
+                            <label>Contact Person Name <span class="fa fa-asterisk"></span></label> 
                             <input  name="contact_person_name" class="form-control"  maxlength="50" required value="{{ old('contact_person_name') }}"> 
                         <p class="text-danger">{{ $errors->first('team_leader_name') }}</p>
                         </div>
                         <div class="col-lg-4 form-group">
-                            <label>Mobile No.</label>
+                            <label>Mobile No. <span class="fa fa-asterisk"></span></label>
                             <input  name="contact_mobile_no" class="form-control" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required value="{{ $mobile_no }}" readonly> 
                         <p class="text-danger">{{ $errors->first('contact_mobile_no') }}</p> 
                         </div>
                         <div class="col-lg-4 form-group">
-                            <label>Email ID</label> 
+                            <label>Email ID <span class="fa fa-asterisk"></span> (You Will Receive Ticket PDF on This Email.)</label> 
                             <input  name="email_id" class="form-control" required value="{{ old('email_id') }}">
                             <p class="text-danger">{{ $errors->first('email_id') }}</p>
                         </div>

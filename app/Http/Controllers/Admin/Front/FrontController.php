@@ -29,7 +29,7 @@ class FrontController extends Controller
 	public function about()
 	{     
 		try{ 
-			return view('front.about'); 
+		  return view('front.about');
 		}catch (Exception $e) { }
 	}
 	public function gallery()
@@ -51,12 +51,25 @@ class FrontController extends Controller
 			return view('front.price_list',compact('priceLists')); 
 		}catch (Exception $e) { }
 	}
-	public function mobileForm($value='')
+    public function biventsBooking($value='')
+    {
+        $biventsBookingTypes = DB::select(DB::raw("select * from `bivents_booking_type` where `status`=1 order by `id`"));
+        return view('front.bivents_booking',compact('biventsBookingTypes'));
+    }
+	public function mobileForm($type=null)
 	{
-		return view('front.mobile_form');
+        
+		return view('front.mobile_form',compact('type'));
 	}
 	public function mobileVerify(Request $request)
 	{
+        if (!empty($request->type)) {
+          $type=1;  
+        }
+        if (empty($request->type)) {
+          $type=2;  
+        }
+
     	$this->validate($request, [
        
         'mobile_no' => 'required',
@@ -70,16 +83,18 @@ class FrontController extends Controller
 	  $message = $rs_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
 	  $tempid ='1707163860074623221';
 	  event(new SmsEvent($mobile_no,$message,$tempid)); 
-	  return redirect()->route('front.mobile.verify.form',Crypt::encrypt($mobile_no))->with(['class'=>'success','message'=>'Code Send Successfully']);
+	  return redirect()->route('front.mobile.verify.form',[$type,Crypt::encrypt($mobile_no)])->with(['class'=>'success','message'=>'Code Send Successfully']);
         
 	}
-	public function mobileVerifyForm($mobile_no)
+	public function mobileVerifyForm($type,$mobile_no)
 	{
+        
 		$mobile_no = Crypt::decrypt($mobile_no);
-		return view('front.mobile_verify' ,compact('mobile_no'));
+		return view('front.mobile_verify' ,compact('type','mobile_no'));
 	}
 	public function mobileVerifystore(Request $request)
 	{ 	
+        
      $this->validate($request, [
    
     'code' => 'required',
@@ -88,8 +103,10 @@ class FrontController extends Controller
     ]);
     $check_otp = DB::select(DB::raw("select * from `guest_users` where `mobile_no` ='$request->mobile_no' LIMIT 1;")); 
     if ($check_otp[0]->otp==$request->code) {
-    	// return $this->bookNow();
-     return redirect()->route('front.booking.form',Crypt::encrypt($request->mobile_no))->with(['class'=>'success','message'=>'Code Verified Successfully']);
+        if ($request->type==1) {
+          return redirect()->route('front.bivents.booking',Crypt::encrypt($request->mobile_no))->with(['class'=>'success','message'=>'Code Verified Successfully']);  
+        }
+        return redirect()->route('front.booking.form',Crypt::encrypt($request->mobile_no))->with(['class'=>'success','message'=>'Code Verified Successfully']);
     } 
      return redirect()->back()->with(['class'=>'error','message'=>'Invalid Code']);
         
@@ -103,37 +120,65 @@ class FrontController extends Controller
 	}
 	public function bookingstore(Request $request)
     { 
+        if (empty($request->type)) {
+            $this->validate($request, [
+                'booking_type' => 'required',             
+                'trip_date' => 'required',             
+                'school_Company_name' => 'required',             
+                'school_Company_city' => 'required',             
+                'adults' => 'required|numeric',             
+                'children' => 'required|numeric',  
+                "contact_person_name" => 'required', 
+                "contact_mobile_no" => 'required|numeric|digits:10',  
+                "email_id" => 'required',  
+            ]);
 
-        $this->validate($request, [
-            'booking_type' => 'required',             
-            'trip_date' => 'required',             
-            'school_Company_name' => 'required',             
-            'school_Company_city' => 'required',             
-            'adults' => 'required|numeric',             
-            'children' => 'required|numeric',  
-            "contact_person_name" => 'required', 
-            "contact_mobile_no" => 'required|numeric|digits:10',  
-            "email_id" => 'required',  
-        ]);
+        }
+        if (!empty($request->type)) {
+            $this->validate($request, [
+                'booking_type' => 'required', 
+                "contact_person_name" => 'required', 
+                "contact_mobile_no" => 'required|numeric|digits:10',  
+                "email_id" => 'required',  
+            ]);
+         
+        }
         $booking_date=date('Y-m-d');
-        $admin=0;
-        $booking_type=DB::select(DB::raw("SELECT `ad_amount`,`ch_amount` FROM `booking_type_all` where `id`=$request->booking_type LIMIT 1"));
-        $ad_amount=$booking_type[0]->ad_amount;
-        $ch_amount=$booking_type[0]->ch_amount;
-        $ticket_rate_adult=$ad_amount*$request->adults;
-        $ticket_rate_child=$ch_amount*$request->children;
-        $total_amount=($ad_amount*$request->adults)+($ch_amount*$request->children); 
-        
-        $company_name = MyFuncs::removeSpacialChr($request->school_Company_name);
-        $address_city = MyFuncs::removeSpacialChr($request->school_Company_city);
-        $contact_name = MyFuncs::removeSpacialChr($request->contact_person_name);
+        $user_id=0;
+        if (empty($request->type)) { 
+            $booking_type=DB::select(DB::raw("SELECT `ad_amount`,`ch_amount` FROM `booking_type_all` where `id`=$request->booking_type LIMIT 1"));
+            $ad_amount=$booking_type[0]->ad_amount;
+            $ch_amount=$booking_type[0]->ch_amount;
+            $ticket_rate_adult=$ad_amount*$request->adults;
+            $ticket_rate_child=$ch_amount*$request->children;
+            $total_amount=($ad_amount*$request->adults)+($ch_amount*$request->children); 
+            
+            $company_name = MyFuncs::removeSpacialChr($request->school_Company_name);
+            $address_city = MyFuncs::removeSpacialChr($request->school_Company_city);
+            $contact_name = MyFuncs::removeSpacialChr($request->contact_person_name);
 
-        $order_id = uniqid();
-        
-        DB::select(DB::raw("INSERT Into `booking` (`user_id`, `booking_type_id`, `booking_date`, `trip_date`, `school_Company_name`, `school_Company_city`, `adults`, `children`, `person_name`, `mobile_no`, `email_id`, `ticket_rate_adult`, `ticket_rate_child`, `amount`, `status`, `remarks`, `order_id`) Values ($admin, '$request->booking_type', '$booking_date', '$request->trip_date', '$company_name', '$address_city', '$request->adults', '$request->children','$contact_name','$request->contact_mobile_no','$request->email_id','$ad_amount','$ch_amount','$total_amount', 0, '', '$order_id');"));
+            $order_id = uniqid();
+            
+            DB::select(DB::raw("INSERT Into `booking` (`user_id`, `booking_type_id`, `booking_date`, `trip_date`, `school_Company_name`, `school_Company_city`, `adults`, `children`, `person_name`, `mobile_no`, `email_id`, `ticket_rate_adult`, `ticket_rate_child`, `amount`, `status`, `remarks`, `order_id`,`url_type`) Values ($user_id, '$request->booking_type', '$booking_date', '$request->trip_date', '$company_name', '$address_city', '$request->adults', '$request->children','$contact_name','$request->contact_mobile_no','$request->email_id','$ad_amount','$ch_amount','$total_amount', 0, '', '$order_id',2);"));
 
-        $booking_id=DB::select(DB::raw("SELECT `id` FROM `booking` where `user_id` = $admin and `order_id` = '$order_id' ORDER BY `id` DESC LIMIT 1")); 
-        $user_id =0; 
+        }
+        if (!empty($request->type)) { 
+            $booking_type=DB::select(DB::raw("SELECT * FROM `bivents_booking_type` where `id` =$request->booking_type LIMIT 1"));
+            $trip_date='2021-31-12';
+            $ad_amount=0;
+            $ch_amount=0;
+            $ticket_rate_adult=$booking_type[0]->package_price;
+            $ticket_rate_child=$booking_type[0]->package_price;
+            $total_amount=$booking_type[0]->package_price; 
+            $contact_name = MyFuncs::removeSpacialChr($request->contact_person_name);
+
+            $order_id = uniqid();
+            
+            DB::select(DB::raw("INSERT Into `booking` (`user_id`, `booking_type_id`, `booking_date`, `trip_date`,`adults`, `children`, `person_name`, `mobile_no`, `email_id`, `ticket_rate_adult`, `ticket_rate_child`, `amount`, `status`, `remarks`, `order_id` ,`url_type`) Values ($user_id, '$request->booking_type', '$booking_date', '$trip_date', '$company_name', '$address_city', '$request->adults', '$request->children','$contact_name','$request->contact_mobile_no','$request->email_id','$ad_amount','$ch_amount','$total_amount', 0, 'Bivents', '$order_id',1);"));
+
+        }
+        $booking_id=DB::select(DB::raw("SELECT `id` FROM `booking` where `user_id` = $user_id and `order_id` = '$order_id' ORDER BY `id` DESC LIMIT 1")); 
+        
         $booking_id = $booking_id[0]->id;
         $order = new OnlinePayment(); 
         $order->user_id = $user_id;
@@ -166,8 +211,14 @@ class FrontController extends Controller
             $order->save();
             $result_rs = DB::select(DB::raw("update `booking` set `status` = '1' , `transation_no` ='$transaction_id' , `transation_date` ='$TXNDATE' where `order_id` ='$order_id' limit 1;"));
             //--start--pdf-generate
-            $this->printTicket($order_id);
             $downloadTicket = DB::select(DB::raw("select *  from `booking` where `order_id` = '$order_id'  limit 1;"));
+            if ($downloadTicket[0]->url_type==1) {
+              $this->printTicketBivents($order_id);  
+            }
+            if ($downloadTicket[0]->url_type==2) {
+              $this->printTicket($order_id);  
+            }
+            
             //--end-pdf-generate
             
             //--start-email 
@@ -524,6 +575,42 @@ class FrontController extends Controller
  	    $mpdf->Output($documentUrl.'/'.$order_id.'.pdf', 'F');
  	    // return view('admin.booking.print_ticket',compact('paymentModes'));
  	}
+    public function printTicketBivents($order_id)
+    {
+        $path=Storage_path('fonts/');
+        $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
+        $fontDirs = $defaultConfig['fontDir']; 
+        $defaultFontConfig = (new \Mpdf\Config\FontVariables())->getDefaults();
+        $fontData = $defaultFontConfig['fontdata'];
+        $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => [250, 100],
+            'fontDir' => array_merge($fontDirs, [
+                __DIR__ . $path,
+            ]),
+            'fontdata' => $fontData + [
+                'frutiger' => [
+                    'R' => 'FreeSans.ttf',
+                    'I' => 'FreeSansOblique.ttf',
+                ]
+            ],
+            'default_font' => 'freesans',
+            'pagenumPrefix' => '',
+            'pagenumSuffix' => '',
+            'nbpgPrefix' => ' कुल ',
+            'nbpgSuffix' => ' पृष्ठों का पृष्ठ'
+        ]);
+        $bimage1  =\Storage_path('app/image/bivents_front.png');
+        $date=date('Y-m-d');
+        $order_id=$order_id;
+        $booking_id=DB::select(DB::raw("SELECT * FROM `booking` where  `order_id` = '$order_id' and `status` = 1 LIMIT 1")); 
+        $booking_type_id=$booking_id[0]->booking_type_id; 
+        $bivents_booking_type=DB::select(DB::raw("SELECT * FROM `bivents_booking_type` where  `id` = '$booking_type_id' and `status` = 1 LIMIT 1")); 
+        $html = view('front.bivents_ticket_pdf',compact('bimage1','booking_id','bivents_booking_type')); 
+        $mpdf->WriteHTML($html); 
+        $documentUrl = Storage_path() . '/app/ticket/'.$date;   
+        @mkdir($documentUrl, 0755, true);  
+        $mpdf->Output($documentUrl.'/'.$order_id.'.pdf', 'F');
+        // return view('admin.booking.print_ticket',compact('paymentModes'));
+    }
  	public function downloadTicket($order_id)
     {
        

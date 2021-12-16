@@ -46,7 +46,7 @@
         </tbody>
       </table> 
       <div class="text-center">
-        <a href="{{ route('front.download.ticket',Crypt::encrypt($order_id)) }}" target="blank" class="btn btn-sm btn-warning">Print Ticket</a>
+        <a href="{{ route('front.download.ticket',Crypt::encrypt($order_id)) }}" target="blank" class="btn btn-sm btn-warning">Download Ticket</a>
       </div>
       
     </div> 

@@ -7,9 +7,13 @@ label {
     font-weight: 400;
     margin-bottom: 10px;
 }
+#bac{
+    background-image: url('{{asset('front_asset/images/banner2.jpg')}}');
+    height: 650px;
+}
 
 </style>
-<section class="about about-two" style="background: #508e4c;color: #fff;">
+<section class="about about-two" id="bac">
     <div class="container">
         <div class="card-body login-card-body">
             <form action="{{ route('front.mobile.verify.store') }}" method="post">
@@ -23,6 +27,7 @@ label {
                 </div>
                 <div class="row">
                     <div class="col-md-4 form-group">
+                      <input type="hidden" name="type" class="form-control hidden" value="{{$type}}">
                       <input type="hidden" name="mobile_no" class="form-control hidden" value="{{$mobile_no}}">
                     </div>
                     <div class="col-md-4 form-group">
@@ -36,7 +41,7 @@ label {
                     <div class="col-md-4">
 
                     </div>
-                    <div class="col-md-4 form-group">
+                    <div class="col-md-4">
                         <div class="captcha">
                         <span>{!! captcha_img('flat') !!}</span>
                         <button type="button" class="btn btn-warning form-group" onclick="refresh()"><i class="fa fa-refresh" ></i></button>
