@@ -175,7 +175,7 @@ class FrontController extends Controller
 
             $order_id = uniqid();
             
-            DB::select(DB::raw("INSERT Into `booking` (`user_id`, `booking_type_id`, `booking_date`, `trip_date`,`adults`, `children`, `person_name`, `mobile_no`, `email_id`, `ticket_rate_adult`, `ticket_rate_child`, `amount`, `status`, `remarks`, `order_id` ,`url_type`) Values ($user_id, '$request->booking_type', '$booking_date', '2021-12-30','0', '0','$contact_name','$request->contact_mobile_no','$request->email_id','$ad_amount','$ch_amount','$total_amount', 0, 'Bivents', '$order_id',1);"));
+            DB::select(DB::raw("INSERT Into `booking` (`user_id`, `booking_type_id`, `booking_date`, `trip_date`,`adults`, `children`, `person_name`, `mobile_no`, `email_id`, `ticket_rate_adult`, `ticket_rate_child`, `amount`, `status`, `remarks`, `order_id` ,`url_type`) Values ($user_id, '$request->booking_type', '$booking_date', '2021-12-31','0', '0','$contact_name','$request->contact_mobile_no','$request->email_id','$ad_amount','$ch_amount','$total_amount', 0, 'Bivents', '$order_id',1);"));
 
         }
         $booking_id=DB::select(DB::raw("SELECT `id` FROM `booking` where `user_id` = $user_id and `order_id` = '$order_id' ORDER BY `id` DESC LIMIT 1")); 
