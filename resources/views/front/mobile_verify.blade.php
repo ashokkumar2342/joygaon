@@ -46,9 +46,9 @@ label {
                         <span>{!! captcha_img('flat') !!}</span>
                         <button type="button" class="btn btn-warning form-group" onclick="refresh()"><i class="fa fa-refresh" ></i></button>
                         </div>
-                        <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha" style="margin-top:5px">
-                    </div>
+                        <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha" style="margin-top:5px" required>
                     <p class="text-danger">{{ $errors->first('captcha') }}</p>
+                    </div>
 
                     <div class="col-md-4">
 
@@ -56,8 +56,9 @@ label {
                 </div>
                 <div class="row">
                     <div class="col-lg-12 form-group text-center">
-                    <input type="submit"  class="btn" id="get_btn" value="Verification" style="width: 260px;background-color:#80cd33;color:#fff"> 
-                    </div>
+                    <input type="submit"  class="btn" id="get_btn" value="Verify" style="width: 230px;background-color:#80cd33;color:#fff"> 
+                    <a href="{{ route('front.code.resend',Crypt::encrypt($mobile_no)) }}" class="btn  btn-warning" style="width: 120px">Resend Code</a>
+                  
 
                 </div>
             </form>

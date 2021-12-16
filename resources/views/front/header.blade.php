@@ -34,14 +34,15 @@
   <!--gt Wrapper Start-->  
   <div class="gt_wrapper"> 
     <header>
-      <div class="" style="background-color:#508e4c">
+      <div class="" style="background-color:#508e4c;height:45px">
         <div class="container" >
           <div >
-            <ul class="gt_hdr3_scl_icon" style="text-align: center;">
-              <li><a href="#" id="id1"><i class="fa fa-facebook"></i></a></li>
+            <ul class="gt_hdr3_scl_icon" style="text-align: center;margin-top:10px;">
+              {{-- <li><a href="#" id="id1"><i class="fa fa-facebook"></i></a></li> --}}
               <a class="btn-xs" id="btn_1" href="{{ route('admin.login') }}" title="" style="color:#fff"><i class="fa fa-user"></i> Sign In </a>
               <a class="btn-xs" id="btn_2" href="{{ route('admin.register') }}" title="" style="color:#fff"> <i class="fa fa-user"></i> Register </a>
-              <a class="btn-xs" id="btn_3" href="{{ route('front.mobile.form') }}" title="" style="color:#fff"> <i class="fa fa-user"></i> Book Now </a>
+              <a class="btn-xs" id="btn_3" href="{{ route('front.mobile.form') }}" title="" style="color:#fff">Book Now </a>
+              <a  class="btn-xs" id="btn_4" href="{{ route('front.mobile.form',1) }}" title="" style="color:#fff">Book Now For 31st Event</a>
 
             </li>
           </ul>
@@ -65,10 +66,11 @@
           <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <li><a  href="{{ route('front.index') }}">Home</a></li>
             <li><a  href="{{ route('front.mobile.form') }}">Book Now</a></li>
-            <li><a href="{{ route('front.about') }}">About Us</a></li>
+            <li><a  href="{{ route('front.mobile.form',1) }}">Book For 31st Event</a></li>
+            <li><a href="{{ route('front.about') }}">About</a></li>
             <li><a href="{{ route('front.gallery') }}">Gallery</a> 
-            <li><a href="{{ route('front.price.list') }}">Price List</a></li> 
-            <li><a href="{{ route('front.cotactus') }}">Contact Us</a></li>
+            <li><a href="{{ route('front.price.list') }}">Price list</a></li> 
+            <li><a href="{{ route('front.cotactus') }}">Contacts</a></li>
             </ul>
           </nav>
         </div>
@@ -118,6 +120,12 @@ src="https://www.facebook.com/tr?id=1372186106530894&ev=PageView&noscript=1"
       });
       $('#btn_3').mouseout(function(){
         $('#btn_3').css("color", "#fff");
+      });
+      $('#btn_4').mouseover(function(){
+        $('#btn_4').css("color", "#80cd33");
+      });
+      $('#btn_4').mouseout(function(){
+        $('#btn_4').css("color", "#fff");
       });
 
 

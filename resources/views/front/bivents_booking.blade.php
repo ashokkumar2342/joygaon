@@ -65,7 +65,7 @@
                     </div>
                     <div class="row"> 
                         <div class="col-lg-6 form-group">
-                            <label>ID Card Uploade</label> 
+                            <label>ID Card Upload</label> 
                             <input type="file" name="idcard" class="form-control"> 
                         <p class="text-danger">{{ $errors->first('adults') }}</p> 
                         </div> 
