@@ -95,7 +95,7 @@
         booking_type = $('#booking_type').val() ;
         totalAmount=0;
         if (booking_type==1) {
-            totalAmount=2200;
+            totalAmount=1;
         }
         if (booking_type==2) {
             totalAmount=3000;
