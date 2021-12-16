@@ -51,10 +51,11 @@ class FrontController extends Controller
 			return view('front.price_list',compact('priceLists')); 
 		}catch (Exception $e) { }
 	}
-    public function biventsBooking($value='')
-    {
+    public function biventsBooking($mobile_no)
+    {   
+        $mobile_no = Crypt::decrypt($mobile_no);
         $biventsBookingTypes = DB::select(DB::raw("select * from `bivents_booking_type` where `status`=1 order by `id`"));
-        return view('front.bivents_booking',compact('biventsBookingTypes'));
+        return view('front.bivents_booking',compact('biventsBookingTypes','mobile_no'));
     }
 	public function mobileForm($type=null)
 	{
