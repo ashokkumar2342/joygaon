@@ -55,10 +55,20 @@ label {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12 form-group text-center">
-                    <input type="submit"  class="btn" id="get_btn" value="Verify" style="width: 230px;background-color:#80cd33;color:#fff"> 
-                    <a href="{{ route('front.code.resend',Crypt::encrypt($mobile_no)) }}" class="btn  btn-warning" style="width: 120px">Resend Code</a>
-                  
+                    <div class="col-lg-4 text-center">
+
+                    </div>
+                    <div class="col-lg-2 col-md-2  form-group text-center">
+                        <input type="submit"  class="btn form-control" id="get_btn" value="Verify" style="background-color:#80cd33;color:#fff"> 
+                        
+                    </div>
+                    <div class="col-lg-2 col-md-2  form-group text-center">
+                        
+                        <a href="{{ route('front.code.resend',Crypt::encrypt($mobile_no)) }}" class="btn  btn-warning form-control">Resend Code</a>
+                    </div>
+                    <div class="col-lg-4 form-group text-center">
+                        
+                    </div>
 
                 </div>
             </form>

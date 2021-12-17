@@ -53,8 +53,14 @@ label {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-12 form-group text-center">
-                    <input type="submit"  class="btn" id="get_btn" value="Get Verification Code" style="width: 350px;background-color:#80cd33;color:#fff"> 
+                    <div class="col-lg-4 form-group text-center">
+                     
+                    </div>
+                    <div class="col-lg-4 form-group text-center">
+                    <input type="submit"  class="btn form-control" id="get_btn" value="Get Verification Code" style="background-color:#80cd33;color:#fff"> 
+                    </div>
+                    <div class="col-lg-4 form-group text-center">
+                    
                     </div>
 
                 </div>
