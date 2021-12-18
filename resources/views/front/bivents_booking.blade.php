@@ -26,6 +26,7 @@
      font-size:7px; 
      vertical-align: super;
    }
+
 </style>
 <!--Header Wrap End-->
 <!-- About Start here -->
@@ -35,15 +36,19 @@
                     {{ csrf_field() }}
                     <div class="row">
                     <input type="hidden" name="type" class="form-control hidden" value="1"> 
-                        <div class="col-lg-12 form-group"> 
+                        <div class="col-lg-8 form-group"> 
                             <label for="exampleInputEmail1">Booking Type <span class="fa fa-asterisk"></span></label> 
                             <select class="form-control" name="booking_type" id="booking_type" required onchange="amontAdd()">
                             <option selected disabled>Select Package Type</option>
                             @foreach ($biventsBookingTypes as $biventsBookingType)
-                                <option value="{{$biventsBookingType->id}}">{{$biventsBookingType->name}}-(+INR{{$biventsBookingType->package_price}})-{{$biventsBookingType->remarks}}</option>
+                                <option value="{{$biventsBookingType->id}}">{{$biventsBookingType->name}}-(+INR {{$biventsBookingType->package_price}})-{{$biventsBookingType->remarks}}</option>
                             @endforeach 
                              </select>                    
                         <p class="text-danger">{{ $errors->first('booking_type') }}</p>
+                        </div>
+                        <div class="col-lg-4 form-group">
+                            <label>Total Amount</label> 
+                            <button  class="btn btn-success btn-sm"  readonly id="total_amount_show" style="width: 100px">0</button>
                         </div>
                     </div>
                     <div class="row"> 
@@ -63,17 +68,7 @@
                             <p class="text-danger">{{ $errors->first('email_id') }}</p>
                         </div>
                     </div>
-                    <div class="row"> 
-                        <div class="col-lg-6 form-group">
-                            <label>ID Card Upload</label> 
-                            <input type="file" name="idcard" class="form-control"> 
-                        <p class="text-danger">{{ $errors->first('adults') }}</p> 
-                        </div> 
-                        <div class="col-lg-6 form-group">
-                            <label>Total Amount</label> 
-                            <input type="text" name="total_amount" class="form-control"  readonly id="total_amount_show" value="0">
-                        </div>
-                    </div>
+                    
                     <div class="row">
                         <div class="col-lg-12 form-group text-center" style="margin-top: 35px;">
                             <input type="submit" class="btn" value="Booking" style="width: 250px;background-color:#f2cb2f">
@@ -93,11 +88,11 @@
     var totalPoints = 0;
     var brate_ad = [];
   
-    var counter = 1;
+    var counter = 4;
     @foreach ($biventsBookingTypes as $brate)
         brate_ad[counter] = {{$brate->package_price}};
        
-        counter = counter + 1;    
+        counter = counter - 1;    
     @endforeach
     
     function amontAdd() {
@@ -105,7 +100,7 @@
         totalAmount=0;
 
        totalAmount=brate_ad[booking_type];
-        $('#total_amount_show').val(totalAmount); 
+        $('#total_amount_show').html(totalAmount); 
     }
     
    

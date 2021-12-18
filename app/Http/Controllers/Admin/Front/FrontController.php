@@ -65,7 +65,7 @@ class FrontController extends Controller
     public function biventsBooking()
     {   
         
-        $biventsBookingTypes = DB::select(DB::raw("select * from `bivents_booking_type` where `status`=1 order by `id`"));
+        $biventsBookingTypes = DB::select(DB::raw("select * from `bivents_booking_type` where `status`=1 order by `id` DESC"));
         return view('front.bivents_booking',compact('biventsBookingTypes','mobile_no'));
     }
 	public function mobileForm()
