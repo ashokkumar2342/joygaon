@@ -626,4 +626,26 @@ class FrontController extends Controller
         $documentUrl = Storage_path().'/app/ticket/'.$booking_date.'/'.$order_id;
         return response()->file($documentUrl.'.pdf');
     }
+    public function downloadForm()
+    {
+
+        return view('front.download_form');
+        
+    }
+    public function downloadShow(Request $request)
+    {
+        $this->validate($request, [
+               
+            "mobile_no" => 'required|numeric|digits:10',  
+                 
+        ]);
+        $bookLists = DB::select(DB::raw("select * from `booking` where `mobile_no` = '$request->mobile_no';"));
+        if (empty($bookLists)) {
+           return redirect()->back()->with(['class'=>'error','message'=>'Invalid Mobile No.']);
+        }
+
+        return view('front.download_table',compact('bookLists'));
+        
+    }
+    
 }

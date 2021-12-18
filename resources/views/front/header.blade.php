@@ -50,7 +50,7 @@
               <a class="btn-xs" id="btn_2" href="{{ route('admin.register') }}" title="" style="color:#fff"> <i class="fa fa-user"></i> Register </a>
               <a class="btn-xs" id="btn_3" href="{{ route('front.mobile.form') }}" title="" style="color:#fff">Book Now </a>
               <a  class="btn-xs" id="btn_4" href="{{ route('front.bivents.booking') }}" title="" style="color:#fff">Book For 31st Event</a>
-              <a  class="btn-xs" id="btn_4" href="{{ route('front.bivents.booking') }}" title="" style="color:#fff"><i class="fa fa-download"></i> Download Ticket</a>
+              <a  class="btn-xs" id="btn_4" href="{{ route('front.download.form') }}" title="" style="color:#fff"><i class="fa fa-download"></i> Download Ticket</a>
 
             </li>
           </ul>
