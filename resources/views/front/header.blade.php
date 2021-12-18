@@ -24,10 +24,15 @@
 </head>
 <style>
 
-  .gt_gallery_wrap{
-    width: 140%;
+  .rwid {
+      position: fixed; 
+      z-index: 999;
+      right: 0;
+      top: 47%;
+      display: inline-block;
+      margin-right:20px;
+      font-size: 50px;
   }
-
 </style>
 
 <body> 
@@ -75,6 +80,14 @@
           </nav>
         </div>
         
+      </div>
+
+      <div class="rwid">
+        <a href="tel:7404452902" style="color:#80cd33 !important">
+        <i class="fa fa-phone"> </i>
+      </a>
+      
+          
       </div>
 <script>
 !function(f,b,e,v,n,t,s)
