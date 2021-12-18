@@ -41,15 +41,16 @@
   <!--gt Wrapper Start-->  
   <div class="gt_wrapper"> 
     <header>
-      <div class="" style="background-color:#508e4c;height:45px">
+      <div class="" style="background-color:#508e4c;height:55px">
         <div class="container" >
           <div >
-            <ul class="gt_hdr3_scl_icon" style="text-align: center;margin-top:10px;">
+            <ul class="gt_hdr3_scl_icon" style="text-align: center;margin-top:13px;">
               {{-- <li><a href="#" id="id1"><i class="fa fa-facebook"></i></a></li> --}}
               <a class="btn-xs" id="btn_1" href="{{ route('admin.login') }}" title="" style="color:#fff"><i class="fa fa-user"></i> Sign In </a>
               <a class="btn-xs" id="btn_2" href="{{ route('admin.register') }}" title="" style="color:#fff"> <i class="fa fa-user"></i> Register </a>
               <a class="btn-xs" id="btn_3" href="{{ route('front.mobile.form') }}" title="" style="color:#fff">Book Now </a>
               <a  class="btn-xs" id="btn_4" href="{{ route('front.bivents.booking') }}" title="" style="color:#fff">Book For 31st Event</a>
+              <a  class="btn-xs" id="btn_4" href="{{ route('front.bivents.booking') }}" title="" style="color:#fff"><i class="fa fa-download"></i> Download Ticket</a>
 
             </li>
           </ul>

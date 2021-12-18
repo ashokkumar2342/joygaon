@@ -17,6 +17,7 @@ Route::get('booking-form/{mobile_no}', 'Front\FrontController@bookingForm')->nam
 Route::get('code-resend/{mobile_no}', 'Front\FrontController@codeResend')->name('front.code.resend'); //OK-------
 Route::get('download-ticket/{order_id}', 'Front\FrontController@downloadTicket')->name('front.download.ticket'); //OK-------
 Route::get('bivents-booking', 'Front\FrontController@biventsBooking')->name('front.bivents.booking'); //OK-------
+Route::get('download-form', 'Front\FrontController@biventsBooking')->name('front.bivents.booking'); //OK-------
 
 Route::get('about', 'Front\FrontController@about')->name('front.about'); //OK-------
 Route::get('gallery', 'Front\FrontController@gallery')->name('front.gallery'); //OK-------
