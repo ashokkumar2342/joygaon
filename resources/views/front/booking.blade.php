@@ -2,7 +2,7 @@
 @include('front.header')
 <style>
     label {
-    color: #f9f3f3;
+    color: #fff;
     display: block;
     font-weight: 400;
     margin-bottom: 10px;
@@ -19,7 +19,7 @@
 }
 #bac{
     background-image: url('{{asset('front_asset/images/banner2.jpg')}}');
-    height: 650px;
+    height: 600px;
 }
 .fa-asterisk {
      color: red;

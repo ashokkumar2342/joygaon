@@ -2,7 +2,7 @@
 @include('front.header')
 <style>
     label {
-    color: #0d0209;
+    color: #fff;
     display: block;
     font-weight: 400;
     margin-bottom: 10px;
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-lg-4 form-group">
                             <label>Mobile No. <span class="fa fa-asterisk"></span></label>
-                            <input  name="contact_mobile_no" class="form-control" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required value="{{$mobile_no}}" readonly placeholder="Enter Mobile No."> 
+                            <input  name="contact_mobile_no" class="form-control" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' required placeholder="Enter Mobile No."> 
                         <p class="text-danger">{{ $errors->first('contact_mobile_no') }}</p> 
                         </div>
                         <div class="col-lg-4 form-group">
@@ -90,22 +90,21 @@
 </section>
 
    <script>
+    var totalPoints = 0;
+    var brate_ad = [];
+  
+    var counter = 1;
+    @foreach ($biventsBookingTypes as $brate)
+        brate_ad[counter] = {{$brate->package_price}};
+       
+        counter = counter + 1;    
+    @endforeach
     
     function amontAdd() {
         booking_type = $('#booking_type').val() ;
         totalAmount=0;
-        if (booking_type==1) {
-            totalAmount=2200;
-        }
-        if (booking_type==2) {
-            totalAmount=3000;
-        }
-        if (booking_type==3) {
-            totalAmount=4000;
-        }
-        if (booking_type==4) {
-            totalAmount=6500;
-        }
+
+       totalAmount=brate_ad[booking_type];
         $('#total_amount_show').val(totalAmount); 
     }
     

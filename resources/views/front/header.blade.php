@@ -23,7 +23,9 @@
   <link href="{{asset('front_asset/css/responsive.css')}}" rel="stylesheet">
 </head>
 <style>
-
+  .gt_gallery_wrap{
+    width: 140%;
+  }
   .rwid {
       position: fixed; 
       z-index: 999;
@@ -47,7 +49,7 @@
               <a class="btn-xs" id="btn_1" href="{{ route('admin.login') }}" title="" style="color:#fff"><i class="fa fa-user"></i> Sign In </a>
               <a class="btn-xs" id="btn_2" href="{{ route('admin.register') }}" title="" style="color:#fff"> <i class="fa fa-user"></i> Register </a>
               <a class="btn-xs" id="btn_3" href="{{ route('front.mobile.form') }}" title="" style="color:#fff">Book Now </a>
-              <a  class="btn-xs" id="btn_4" href="{{ route('front.mobile.form',1) }}" title="" style="color:#fff">Book For 31st Event</a>
+              <a  class="btn-xs" id="btn_4" href="{{ route('front.bivents.booking') }}" title="" style="color:#fff">Book For 31st Event</a>
 
             </li>
           </ul>
@@ -71,7 +73,7 @@
           <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <li><a  href="{{ route('front.index') }}">Home</a></li>
             <li><a  href="{{ route('front.mobile.form') }}">Book Now</a></li>
-            <li><a  href="{{ route('front.mobile.form',1) }}">Book For 31st Event</a></li>
+            <li><a  href="{{ route('front.bivents.booking') }}">Book For 31st Event</a></li>
             <li><a href="{{ route('front.about') }}">About</a></li>
             <li><a href="{{ route('front.gallery') }}">Gallery</a> 
             <li><a href="{{ route('front.price.list') }}">Price list</a></li> 
@@ -86,7 +88,7 @@
         <a href="tel:7404452902" style="color:#80cd33 !important">
         <i class="fa fa-phone"> </i>
       </a>
-      
+
           
       </div>
 <script>

@@ -26,7 +26,7 @@ label {
                 </div>
                 <div class="row">
                     <div class="col-md-4 form-group">
-                        <input type="hidden" name="type" class="form-control hidden" value="{{$type}}">
+                        
                     </div>
                     <div class="col-md-4 form-group">
                         <input type="text" name="mobile_no" class="form-control" placeholder="Enter Mobile No."  required minlength="10" maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57' {{old('mobile_no')}}>

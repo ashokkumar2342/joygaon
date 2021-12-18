@@ -62,25 +62,20 @@ class FrontController extends Controller
         event(new SmsEvent($mobile_no,$message,$tempid)); 
         return redirect()->back()->with(['message'=>'Code Resent Successfully.','class'=>'success']);
     }
-    public function biventsBooking($mobile_no)
+    public function biventsBooking()
     {   
-        $mobile_no = Crypt::decrypt($mobile_no);
+        
         $biventsBookingTypes = DB::select(DB::raw("select * from `bivents_booking_type` where `status`=1 order by `id`"));
         return view('front.bivents_booking',compact('biventsBookingTypes','mobile_no'));
     }
-	public function mobileForm($type=null)
+	public function mobileForm()
 	{
         
-		return view('front.mobile_form',compact('type'));
+		return view('front.mobile_form');
 	}
 	public function mobileVerify(Request $request)
 	{
-        if (!empty($request->type)) {
-          $type=1;  
-        }
-        if (empty($request->type)) {
-          $type=2;  
-        }
+       
 
     	$this->validate($request, [
        
@@ -95,14 +90,14 @@ class FrontController extends Controller
 	  $message = $rs_otp.' is the OPT Verification code for Joygaon. SIR SALASAR BALAJI ENTERPRISES PRIVATE LIMITED';
 	  $tempid ='1707163860074623221';
 	  event(new SmsEvent($mobile_no,$message,$tempid)); 
-	  return redirect()->route('front.mobile.verify.form',[$type,Crypt::encrypt($mobile_no)])->with(['class'=>'success','message'=>'Code Send Successfully']);
+	  return redirect()->route('front.mobile.verify.form',Crypt::encrypt($mobile_no))->with(['class'=>'success','message'=>'Code Send Successfully']);
         
 	}
-	public function mobileVerifyForm($type,$mobile_no)
+	public function mobileVerifyForm($mobile_no)
 	{
         
 		$mobile_no = Crypt::decrypt($mobile_no);
-		return view('front.mobile_verify' ,compact('type','mobile_no'));
+		return view('front.mobile_verify' ,compact('mobile_no'));
 	}
 	public function mobileVerifystore(Request $request)
 	{ 	
@@ -115,9 +110,6 @@ class FrontController extends Controller
     ]);
     $check_otp = DB::select(DB::raw("select * from `guest_users` where `mobile_no` ='$request->mobile_no' LIMIT 1;")); 
     if ($check_otp[0]->otp==$request->code) {
-        if ($request->type==1) {
-          return redirect()->route('front.bivents.booking',Crypt::encrypt($request->mobile_no))->with(['class'=>'success','message'=>'Code Verified Successfully']);  
-        }
         return redirect()->route('front.booking.form',Crypt::encrypt($request->mobile_no))->with(['class'=>'success','message'=>'Code Verified Successfully']);
     } 
      return redirect()->back()->with(['class'=>'error','message'=>'Invalid Code']);

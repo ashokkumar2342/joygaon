@@ -27,7 +27,7 @@ label {
                 </div>
                 <div class="row">
                     <div class="col-md-4 form-group">
-                      <input type="hidden" name="type" class="form-control hidden" value="{{$type}}">
+                      
                       <input type="hidden" name="mobile_no" class="form-control hidden" value="{{$mobile_no}}">
                     </div>
                     <div class="col-md-4 form-group">
