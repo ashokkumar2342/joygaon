@@ -27,7 +27,11 @@
                                 <td>{{date('d-m-Y',strtotime($bookList->booking_date))}}</td>
                                 <td>{{date('d-m-Y',strtotime($bookList->trip_date))}}</td>
                                 <td>
-                                <a href="{{ route('admin.download.ticket',Crypt::encrypt($bookList->order_id)) }}" class="btn btn-xs btn-success" target="_blank" > <i class="fa fa-download"></i> Download Ticket</a>
+                                   
+                                    @if ($bookList->status==1) 
+                                        <a href="{{ route('admin.download.ticket',Crypt::encrypt($bookList->order_id)) }}" class="btn btn-xs btn-success" target="_blank" > <i class="fa fa-download"></i> Download Ticket</a>
+                                    @endif
+                                
                                 </td>        
                                 
                             </tr>
