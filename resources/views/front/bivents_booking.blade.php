@@ -71,7 +71,7 @@
                     
                     <div class="row">
                         <div class="col-lg-12 form-group text-center" style="margin-top: 35px;">
-                            <input type="submit" class="btn" value="Booking" style="width: 250px;background-color:#f2cb2f">
+                            <input type="submit" class="btn" value="Book" style="width: 250px;background-color:#f2cb2f">
                         </div>
                     </div>
                     </div>
@@ -88,7 +88,7 @@
     var totalPoints = 0;
     var brate_ad = [];
   
-    var counter = 4;
+    var counter = 5;
     @foreach ($biventsBookingTypes as $brate)
         brate_ad[counter] = {{$brate->package_price}};
        

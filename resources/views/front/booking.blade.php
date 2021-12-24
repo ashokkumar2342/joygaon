@@ -107,7 +107,7 @@
                         </div> --}}
                     </div>
                         <div class="col-lg-12 form-group text-center" style="margin-top: 35px;">
-                            <input type="submit" class="btn" value="Booking" style="width: 250px;background-color:#f2cb2f">
+                            <input type="submit" class="btn" value="Book" style="width: 250px;background-color:#f2cb2f">
                         </div>
 
                     </div>

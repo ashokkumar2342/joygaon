@@ -109,7 +109,7 @@
                             <span id="err"></span>
                         </div> --}}
                         <div class="col-lg-12 form-group text-center" style="margin-top: 30px">
-                          <input type="submit" class=" btn btn-info" value="Booking" style="width: 250px">
+                          <input type="submit" class=" btn btn-info" value="Book" style="width: 250px">
                         </div>   
                     </div>
                      
