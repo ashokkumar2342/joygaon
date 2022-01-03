@@ -44,12 +44,12 @@
       <div class="" style="background-color:#508e4c;height:55px">
         <div class="container" >
           <div >
-            <ul class="gt_hdr3_scl_icon" style="text-align: center;margin-top:13px;">
+            <ul class="gt_hdr3_scl_icon" style="text-align: center;margin-top:13px;font-size: 18px;">
               {{-- <li><a href="#" id="id1"><i class="fa fa-facebook"></i></a></li> --}}
               <a class="btn-xs" id="btn_1" href="{{ route('admin.login') }}" title="" style="color:#fff"><i class="fa fa-user"></i> Sign In </a>
               <a class="btn-xs" id="btn_2" href="{{ route('admin.register') }}" title="" style="color:#fff"> <i class="fa fa-user"></i> Register </a>
               <a class="btn-xs" id="btn_3" href="{{ route('front.mobile.form') }}" title="" style="color:#fff">Book Now </a>
-              <a  class="btn-xs" id="btn_4" href="{{ route('front.bivents.booking') }}" title="" style="color:#fff">Book For 31st Event</a>
+              {{-- <a  class="btn-xs" id="btn_4" href="{{ route('front.bivents.booking') }}" title="" style="color:#fff">Book For 31st Event</a> --}}
               <a  class="btn-xs" id="btn_4" href="{{ route('front.download.form') }}" title="" style="color:#fff"><i class="fa fa-download"></i> Download Ticket</a>
 
             </li>
@@ -74,7 +74,7 @@
           <ul class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <li><a  href="{{ route('front.index') }}">Home</a></li>
             <li><a  href="{{ route('front.mobile.form') }}">Book Now</a></li>
-            <li><a  href="{{ route('front.bivents.booking') }}">Book For 31st Event</a></li>
+            {{-- <li><a  href="{{ route('front.bivents.booking') }}">Book For 31st Event</a></li> --}}
             <li><a href="{{ route('front.about') }}">About</a></li>
             <li><a href="{{ route('front.gallery') }}">Gallery</a> 
             <li><a href="{{ route('front.price.list') }}">Price list</a></li> 
